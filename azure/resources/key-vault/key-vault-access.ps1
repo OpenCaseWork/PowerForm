@@ -1,0 +1,5 @@
+Class KeyVaultAccess : AzureResourceAccess {
+
+    KeyVaultAccess(){}
+
+}

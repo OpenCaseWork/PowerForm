@@ -1,0 +1,5 @@
+Class ResourceGroupAccess {
+
+    ResourceGroupAccess(){}
+
+}

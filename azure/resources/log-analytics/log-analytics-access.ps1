@@ -1,0 +1,5 @@
+Class LogAnalyticsAccess : AzureResourceAccess {
+
+    LogAnalyticsAccess(){}
+
+}

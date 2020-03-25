@@ -1,0 +1,3 @@
+Class AzureSecurityDefinition{
+    [string]$Name
+}
