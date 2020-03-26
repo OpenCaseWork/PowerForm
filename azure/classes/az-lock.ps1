@@ -3,7 +3,7 @@ Enum LockLevel {
     ReadOnly = 1
     None = 2
 }
-Class AzureLock{
+Class AzLock{
     [string]$Name
     [string]$Notes
     [LockLevel]$LockLevel

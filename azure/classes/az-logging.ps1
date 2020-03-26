@@ -9,7 +9,7 @@ Class EventHubLoggingInfo{
     [bool]$EnableRetention
     [int]$RetentionInDays
 }
-Class AzureLogging{
+Class AzLogging{
     [LogAnalyticsLoggingInfo]$LogAnalyticsInfo
     [EventHubLoggingInfo]$EventHubInfo
     [bool]$EnableLoggins

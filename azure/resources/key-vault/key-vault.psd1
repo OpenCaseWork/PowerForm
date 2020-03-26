@@ -9,7 +9,7 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-RootModule = 'log-analytics.psm1'
+RootModule = 'key-vault.psm1'
 
 # Version number of this module.
 ModuleVersion = '0.0.1'
@@ -52,7 +52,7 @@ Copyright = '(c) Zach Harris. All rights reserved.'
 
 # Modules that must be imported into the global environment prior to importing this module
 RequiredModules = @(
-    "..\..\azure-resource\module\azure-resource.psd1"
+    "..\base-az-resource\base-az-resource.psd1"
 )
 
 # Assemblies that must be loaded prior to importing this module
@@ -60,8 +60,9 @@ RequiredModules = @(
 
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
 ScriptsToProcess = @(
-    "..\log-analytics-access.ps1"
-    "..\log-analytics-definition.ps1"
+    ".\classes\key-vault-access.ps1"
+    ".\classes\key-vault-options.ps1"
+    ".\classes\key-vault-definition.ps1"
 )
 
 # Type files (.ps1xml) to be loaded when importing this module
@@ -74,7 +75,10 @@ ScriptsToProcess = @(
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = '*'
+FunctionsToExport = @(
+    "New-KeyVaultOptions"
+    "New-KeyVaultDefinition"
+)
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = '*'
