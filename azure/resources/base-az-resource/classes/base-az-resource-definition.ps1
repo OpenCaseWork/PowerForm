@@ -34,7 +34,7 @@ Class BaseAzResourceLoadedState{
 
     BaseAzResourceLoadedState(){}
 }
-Class BaseAzResourceDefinition : PowerFormResourceDefinition{
+Class BaseAzResourceDefinition : PfResourceDefinition{
     [BaseAzResourceAccess]$Access
     [BaseAzResourceBuildState]$BuildState
     [BaseAzResourceCloudState]$CloudState

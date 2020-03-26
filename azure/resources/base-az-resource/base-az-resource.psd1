@@ -58,7 +58,7 @@ Copyright = '(c) Zach Harris. All rights reserved.'
 
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
 ScriptsToProcess = @(
-    "..\..\..\classes\powerform\powerform-resource-definition.ps1"
+    "..\..\..\powerform\classes\pf-resource-definition.ps1"
     "..\..\classes\az-resource-type.ps1"
     "..\..\configuration\az-resource-types.ps1"
     "..\..\classes\az-lock.ps1"

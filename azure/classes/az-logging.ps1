@@ -1,9 +1,9 @@
 Class LogAnalyticsLoggingInfo{
-    [PowerFormResourceDefinition]$LogAnalyticsDefinition
+    [PfResourceDefinition]$LogAnalyticsDefinition
     [string]$WorkspaceId
 }
 Class EventHubLoggingInfo{
-    [PowerFormResourceDefinition]$EventHubDefinition
+    [PfResourceDefinition]$EventHubDefinition
     [string]$EventHubName
     [string]$AuthorizationRuleId
     [bool]$EnableRetention
