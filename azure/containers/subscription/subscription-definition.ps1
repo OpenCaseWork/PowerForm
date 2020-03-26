@@ -1,4 +1,5 @@
 Class SubscriptionOptions {
+    [string]$Name
     [hashtable]$Tags
     [AzureLock]$Lock
     [AzureLogging]$Logging
@@ -7,7 +8,6 @@ Class SubscriptionOptions {
     SubscriptionOptions(){}
 }
 Class SubscriptionBuildState{
-    [string]$Name
     [SubscriptionOptions]$Options
     [AzureSecurityDefinition]$Security
 
