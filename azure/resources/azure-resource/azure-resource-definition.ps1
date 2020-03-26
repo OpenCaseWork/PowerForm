@@ -10,8 +10,6 @@ Class AzureResourceOptions {
     [AzureLock]$Lock
     [AzureLogging]$Logging
     [bool]$PersistState=$true
-    [string]$ResourceGroupName
-    [string]$SubscriptionName
     AzureResourceOptions(){}
 }
 Class AzureResourceBuildState{
@@ -19,6 +17,7 @@ Class AzureResourceBuildState{
     [AzureResourceOptions]$Options
     [AzureResourceDependency[]]$Dependencies
     [AzureSecurityDefinition]$Security
+    [ResourceGroupDefinition]$ResourceGroupDefinition
 
     AzureResourceBuildState(){}
 }
@@ -31,7 +30,6 @@ Class AzureResourceCloudState{
 Class AzureResourceLoadedState{
     [string]$Id
     [string]$Name
-    [ResourceGroupDefinition]$ResourceGroupDefinition
     [string]$Scope
     [string]$IdentityId
 
@@ -47,6 +45,7 @@ Class AzureResourceDefinition : PowerFormResourceDefinition{
         $this.Access = (New-Object -TypeName "$($AzureResourceType.ClassPrefix)Access")
         $this.BuildState = (New-Object -TypeName "$($AzureResourceType.ClassPrefix)BuildState")
         $this.BuildState.Options = (New-Object -TypeName "$($AzureResourceType.ClassPrefix)Options")
+        $this.BuildState.ResourceGroupDefinition = $ResourceGroupDefinition
         $this.CloudState = (New-Object -TypeName "$($AzureResourceType.ClassPrefix)CloudState")
         $this.LoadedState = (New-Object -TypeName "$($AzureResourceType.ClassPrefix)LoadedState")
     }
@@ -54,6 +53,7 @@ Class AzureResourceDefinition : PowerFormResourceDefinition{
         $this.Access = (New-Object -TypeName "$($AzureResourceType.ClassPrefix)Access")
         $this.BuildState = (New-Object -TypeName "$($AzureResourceType.ClassPrefix)BuildState")
         $this.BuildState.Options = (New-Object -TypeName "$($AzureResourceType.ClassPrefix)Options")
+        $this.BuildState.ResourceGroupDefinition = [ResourceGroupDefinition]::new($SubscriptionName,$ResourceGroupName)
         $this.CloudState = (New-Object -TypeName "$($AzureResourceType.ClassPrefix)CloudState")
         $this.LoadedState = (New-Object -TypeName "$($AzureResourceType.ClassPrefix)LoadedState")
     }
@@ -61,14 +61,18 @@ Class AzureResourceDefinition : PowerFormResourceDefinition{
         $this.Access = (New-Object -TypeName "$($AzureResourceType.ClassPrefix)Access")
         $this.BuildState = (New-Object -TypeName "$($AzureResourceType.ClassPrefix)BuildState")
         $this.BuildState.Options = $AzureResourceOptions
+        $this.BuildState.ResourceGroupDefinition = $ResourceGroupDefinition
         $this.CloudState = (New-Object -TypeName "$($AzureResourceType.ClassPrefix)CloudState")
         $this.LoadedState = (New-Object -TypeName "$($AzureResourceType.ClassPrefix)LoadedState")
+        $this.ResourceGroupDefinition = $ResourceGroupDefinition
     }
     AzureResourceDefinition([string]$SubscriptionName, [string]$ResourceGroupName, [AzureResourceOptions]$AzureResourceOptions, [AzureResourceType]$AzureResourceType){
         $this.Access = (New-Object -TypeName "$($AzureResourceType.ClassPrefix)Access")
         $this.BuildState = (New-Object -TypeName "$($AzureResourceType.ClassPrefix)BuildState")
         $this.BuildState.Options = $AzureResourceOptions
+        $this.BuildState.ResourceGroupDefinition = [ResourceGroupDefinition]::new($SubscriptionName,$ResourceGroupName)
         $this.CloudState = (New-Object -TypeName "$($AzureResourceType.ClassPrefix)CloudState")
         $this.LoadedState = (New-Object -TypeName "$($AzureResourceType.ClassPrefix)LoadedState")
+        $this.ResourceGroupDefinition = [ResourceGroupDefinition]::new($SubscriptionName,$ResourceGroupName)
     }
 }
