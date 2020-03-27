@@ -3,8 +3,8 @@
 #$kv = [KeyVaultDefinition]::new("testsub","testrg")
 
 $manifest = @{
-    Path              = '.\azure\resources\log-analytics\log-analytics.psd1'
-    RootModule        = 'log-analytics.psm1' 
+    Path              = '.\azure\resources\pf-log-analytics\pf-log-analytics.psd1'
+    RootModule        = 'pf-log-analytics.psm1' 
     Author            = 'Zach Harris'
 }
 New-ModuleManifest @manifest
