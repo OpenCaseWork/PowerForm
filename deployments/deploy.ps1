@@ -1,22 +1,28 @@
 try{
-    Import-Module .\azure\az-context\az-context.psd1
+    Import-Module .\azure\az-cloud-context\az-cloud-context.psd1
+    Import-Module .\azure\resources\key-vault\key-vault.psd1
+    Import-Module .\powerform\pf-deployment-context\pf-deployment-context.psd1
+
+    Get-Command -Module key-vault
+    Get-Command -Module pf-deployment-context
     Get-Command -Module az-context
-    $az=New-AzContext -SubscriptionName "TestSub" -ResourceGroup "TestRg"
+
+    $deployContext = New-PfDeploymentContext
+
+    Set-AzCloudContext -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D"
 
     #Login-AzAccount
-    Import-Module .\azure\resources\key-vault\key-vault.psd1
-    Get-Command -Module key-vault
+
+    #Get-Command -Module key-vault
     $kvOptions = New-KeyVaultOptions
     $kv = New-KeyVaultDefinition -Options $kvOptions
 
+    $deployContext.ResourceDefinitions.Add($kv)
+    $deployContext.ResourceDefinitions
 
-    #Import-Module .\azure\resources\log-analytics\log-analytics.psd1
-    #get-command -Module log-analytics
     #$la = New-LogAnalyticsDefinition 
     #$la | gm
 
-    #Import-Module .\classes\powerform\module\powerform-resource.psd1
-    #$pf = [PowerFormResourceDefinition]::new()
 }
 catch{
     $test = $_.Exception.Message

@@ -13,3 +13,4 @@ Function New-LogAnalyticsDefinition
         [LogAnalyticsDefinition]::New()
     }
 }
+

@@ -1,5 +1,12 @@
 Function New-LogAnalyticsOptions
 {
-    [LogAnalyticsOptions]::New()
+    $context = Get-CurrentAzCloudContext
+    if($context)
+    {
+        [LogAnalyticsOptions]::New($context)
+    }
+    else {
+        [LogAnalyticsOptions]::New()
+    }
 }
 

@@ -5,12 +5,20 @@ Class BaseAzResourceDependency{
     BaseAzResourceDependency(){}
 }
 Class BaseAzResourceOptions {
+    [string]$Name
+    [string]$SubscriptionName
+    [string]$ResourceGroupName
     [hashtable]$Tags
     [int]$ResourceNumber=1
     [AzLock]$Lock
     [AzLogging]$Logging
     [bool]$PersistState=$true
+
     BaseAzResourceOptions(){}
+    BaseAzResourceOptions([AzCloudContext]$AzCloudContext){
+        $this.ResourceGroupName=$AzCloudContext.ResourceGroupName
+        $this.SubscriptionName=$AzCloudContext.SubscriptionName
+    }
 }
 Class BaseAzResourceBuildState{
     [string]$Name
@@ -21,37 +29,31 @@ Class BaseAzResourceBuildState{
     BaseAzResourceBuildState(){}
 }
 Class BaseAzResourceCloudState{
+    [string]$Id
+    [string]$Name
+    [string]$Scope
+    [string]$IdentityId
     [object]$CloudBaseObject
     [object]$CloudObject
 
     BaseAzResourceCloudState(){}
 }
-Class BaseAzResourceLoadedState{
-    [string]$Id
-    [string]$Name
-    [string]$Scope
-    [string]$IdentityId
 
-    BaseAzResourceLoadedState(){}
-}
 Class BaseAzResourceDefinition : PfResourceDefinition{
     [BaseAzResourceAccess]$Access
     [BaseAzResourceBuildState]$BuildState
     [BaseAzResourceCloudState]$CloudState
-    [BaseAzResourceLoadedState]$LoadedState
 
     BaseAzResourceDefinition([AzResourceType]$AzResourceType){
         $this.Access = (New-Object -TypeName "$($AzResourceType.ClassPrefix)Access")
         $this.BuildState = (New-Object -TypeName "$($AzResourceType.ClassPrefix)BuildState")
         $this.BuildState.Options = (New-Object -TypeName "$($AzResourceType.ClassPrefix)Options")
         $this.CloudState = (New-Object -TypeName "$($AzResourceType.ClassPrefix)CloudState")
-        $this.LoadedState = (New-Object -TypeName "$($AzResourceType.ClassPrefix)LoadedState")
     }
     BaseAzResourceDefinition([BaseAzResourceOptions]$BaseAzResourceOptions, [AzResourceType]$AzResourceType){
         $this.Access = (New-Object -TypeName "$($AzResourceType.ClassPrefix)Access")
         $this.BuildState = (New-Object -TypeName "$($AzResourceType.ClassPrefix)BuildState")
         $this.BuildState.Options = $BaseAzResourceOptions
         $this.CloudState = (New-Object -TypeName "$($AzResourceType.ClassPrefix)CloudState")
-        $this.LoadedState = (New-Object -TypeName "$($AzResourceType.ClassPrefix)LoadedState")
     }
 }

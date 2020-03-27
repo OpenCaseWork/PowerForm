@@ -37,4 +37,5 @@ Class KeyVaultOptions : BaseAzResourceOptions {
     [KeyVaultSecret[]]$SecretsToAdd
 
     KeyVaultOptions(){}
+    KeyVaultOptions([AzCloudContext]$AzCloudContext) : base([AzCloudContext]$AzCloudContext){}
 }

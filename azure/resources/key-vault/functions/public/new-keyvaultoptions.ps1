@@ -1,5 +1,12 @@
 Function New-KeyVaultOptions
 {
-    [KeyVaultOptions]::New()
+    $context = Get-CurrentAzCloudContext
+    if($context)
+    {
+        [KeyVaultOptions]::New($context)
+    }
+    else {
+        [KeyVaultOptions]::New()
+    }
 }
 

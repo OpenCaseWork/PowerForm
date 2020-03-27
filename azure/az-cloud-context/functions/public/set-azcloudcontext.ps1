@@ -1,4 +1,5 @@
-Function New-AzContext 
+$global:_currentAzCloudContext
+Function Set-AzCloudContext 
 {
     Param (
         [Parameter(Mandatory = $true)] 
@@ -6,7 +7,7 @@ Function New-AzContext
         [Parameter(Mandatory = $true)] 
         [string] $ResourceGroupName
     )   
-
-    [AzContext]::New($SubscriptionName,$ResourceGroupName)
+    
+    $global:_currentAzCloudContext = [AzCloudContext]::New($SubscriptionName,$ResourceGroupName)
 }
 
