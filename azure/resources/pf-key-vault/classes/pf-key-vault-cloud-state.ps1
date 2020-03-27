@@ -1,0 +1,3 @@
+Class PfKeyVaultCloudState : BaseAzResourceCloudState{
+    PfKeyVaultCloudState(){}
+}

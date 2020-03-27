@@ -9,7 +9,7 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-RootModule = 'az-cloud-context.psm1'
+RootModule = 'pf-azure-context.psm1'
 
 # Version number of this module.
 ModuleVersion = '0.0.1'
@@ -59,7 +59,7 @@ Copyright = '(c) Zach Harris. All rights reserved.'
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
 ScriptsToProcess = @(
     "..\..\powerform\classes\pf-cloud-context.ps1"
-    ".\classes\az-cloud-context.ps1"
+    ".\classes\pf-azure-context.ps1"
 )
 
 # Type files (.ps1xml) to be loaded when importing this module
@@ -73,8 +73,8 @@ ScriptsToProcess = @(
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport = @(
-    "Set-AzCloudContext",
-    "Get-CurrentAzCloudContext"
+    "Set-PfAzureContext",
+    "Get-CurrentPfAzureContext"
 )
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.

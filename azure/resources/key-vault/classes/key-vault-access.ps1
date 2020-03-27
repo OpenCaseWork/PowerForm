@@ -1,5 +1,0 @@
-Class KeyVaultAccess : BaseAzResourceAccess {
-
-    KeyVaultAccess(){}
-
-}

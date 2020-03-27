@@ -1,4 +1,4 @@
 Class PfDeploymentContext{
-    [System.Collections.ArrayList]$ResourceDefinitions=@()
+    [System.Collections.ArrayList]$Resources=@()
     PfDeploymentContext(){}
 }

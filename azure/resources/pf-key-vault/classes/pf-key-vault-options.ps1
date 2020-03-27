@@ -1,18 +1,18 @@
-Enum KeyVaultSku {
+Enum PfKeyVaultSku {
     Standard = 0
     Premium = 1
 }
-Enum KeyVaultAzureServicesSetting{
+Enum PfKeyVaultAzureServicesSetting{
     None = 0
     AzureServices = 1
 }
-Class KeyVaultSecret{
+Class PfKeyVaultSecret{
     [string]$Name
     [string]$Value
 
-    KeyVaultSecret(){}
+    PfKeyVaultSecret(){}
 }
-Class KeyVaultAccessPolicy{
+Class PfKeyVaultAccessPolicy{
     [BaseAzResourceDefinition]$ResourceDefinition
     #[AadObjectState]$AadObjectState
     [string]$ObjectId
@@ -21,21 +21,21 @@ Class KeyVaultAccessPolicy{
     [string[]]$PermissionsToCerts
     [string[]]$PermissionsToStorage
 
-    KeyVaultAccessPolicy(){}
+    PfKeyVaultAccessPolicy(){}
 }
-Class KeyVaultOptions : BaseAzResourceOptions {
+Class PfKeyVaultOptions : BaseAzResourceOptions {
     [IpAddress[]]$IpAddresses
-    [KeyVaultAccessPolicy[]]$AccessPolicies
+    [PfKeyVaultAccessPolicy[]]$AccessPolicies
     [bool]$EnableFirewall=$true
-    [KeyVaultAzureServicesSetting]$AzureServicesSetting=[KeyVaultAzureServicesSetting]::AzureServices
-    [KeyVaultSku]$Sku = [KeyVaultSku]::Premium
+    [PfKeyVaultAzureServicesSetting]$AzureServicesSetting=[PfKeyVaultAzureServicesSetting]::AzureServices
+    [PfKeyVaultSku]$Sku = [PfKeyVaultSku]::Premium
     [bool]$EnabledForDeployment = $true
     [bool]$EnabledForTemplateDeployment = $true
     [bool]$EnabledForDiskEncryption = $true
     [bool]$EnableSoftDelete = $false
     [bool]$EnablePurgProtection = $false
-    [KeyVaultSecret[]]$SecretsToAdd
+    [PfKeyVaultSecret[]]$SecretsToAdd
 
-    KeyVaultOptions(){}
-    KeyVaultOptions([AzCloudContext]$AzCloudContext) : base([AzCloudContext]$AzCloudContext){}
+    PfKeyVaultOptions(){}
+    PfKeyVaultOptions([PfAzureContext]$PfAzureContext) : base([PfAzureContext]$PfAzureContext){}
 }

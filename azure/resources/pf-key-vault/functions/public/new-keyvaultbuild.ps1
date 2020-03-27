@@ -1,16 +1,16 @@
-Function New-KeyVaultDefinition 
+Function New-PfKeyVaultBuild
 {
     Param (
         [Parameter(Mandatory = $false)] 
-        [KeyVaultOptions] $Options
+        [PfKeyVaultOptions] $Options
     )   
     # use this to get the parameter set name
     if($Options)
     {
-        [KeyVaultDefinition]::New($Options)
+        [PfKeyVaultBuildState]::New($Options)
     }
     else {
-        [KeyVaultDefinition]::New()
+        [PfKeyVaultBuildState]::New()
     }
 }
 

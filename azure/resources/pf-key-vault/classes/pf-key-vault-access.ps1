@@ -1,0 +1,5 @@
+Class PfKeyVaultAccess : BaseAzResourceAccess {
+
+    PfKeyVaultAccess(){}
+
+}
