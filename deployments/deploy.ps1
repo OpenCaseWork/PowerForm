@@ -1,27 +1,28 @@
 try{
-    Import-Module .\azure\az-cloud-context\az-cloud-context.psd1
-    Import-Module .\azure\resources\key-vault\key-vault.psd1
+    Import-Module .\azure\pf-azure-context\pf-azure-context.psd1
+    Import-Module .\azure\resources\pf-key-vault\pf-key-vault.psd1
+    Import-Module .\azure\resources\pf-log-analytics\pf-log-analytics.psd1
     Import-Module .\powerform\pf-deployment-context\pf-deployment-context.psd1
 
-    Get-Command -Module key-vault
+    Get-Command -Module pf-key-vault
+    Get-Command -Module pf-log-analytics
     Get-Command -Module pf-deployment-context
-    Get-Command -Module az-context
+    Get-Command -Module pf-azure-context
 
     $deployContext = New-PfDeploymentContext
 
-    Set-AzCloudContext -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D"
+    Set-PfAzureContext -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D"
 
     #Login-AzAccount
 
     #Get-Command -Module key-vault
-    $kvOptions = New-KeyVaultOptions
-    $kv = New-KeyVaultDefinition -Options $kvOptions
+    $kvOptions = New-PfKeyVaultOptions
+    $kv = New-PfKeyVaultBuild -Options $kvOptions
 
-    $deployContext.ResourceDefinitions.Add($kv)
-    $deployContext.ResourceDefinitions
+    $la = New-PfLogAnalyticsBuild
 
-    #$la = New-LogAnalyticsDefinition 
-    #$la | gm
+    $deployContext.Resources.AddRange(@($kv,$la))
+    $deployContext.Resources
 
 }
 catch{

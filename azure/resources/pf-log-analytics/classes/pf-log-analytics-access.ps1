@@ -1,0 +1,5 @@
+Class PfLogAnalyticsAccess : BaseAzResourceAccess {
+
+    PfLogAnalyticsAccess(){}
+
+}

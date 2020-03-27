@@ -5,13 +5,13 @@ Class AzResourceTypes{
         Abbreviation = "KV"
         DiagnosticCategoriesToLog = "AuditEvent"
         MetricCategoriesToLog = "AllMetrics"
-        ClassPrefix = "KeyVault"
+        ClassPrefix = "PfKeyVault"
     }
     static [AzResourceType]$LogAnalytics = @{
         Name = "Log Analytics"
         Abbreviation = "LA"
         DiagnosticCategoriesToLog = ""
         MetricCategoriesToLog = ""
-        ClassPrefix = "LogAnalytics"
+        ClassPrefix = "PfLogAnalytics"
     }
 }
