@@ -1,0 +1,3 @@
+Class AzSecurityDefinition{
+    [string]$Name
+}

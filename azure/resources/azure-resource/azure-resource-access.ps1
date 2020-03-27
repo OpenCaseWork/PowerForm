@@ -1,7 +1,0 @@
-Class AzureResourceAccess {
-
-    AzureResourceAccess(){}
-
-    
-
-}

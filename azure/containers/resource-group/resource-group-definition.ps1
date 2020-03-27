@@ -2,7 +2,6 @@ Class ResourceGroupOptions {
     [hashtable]$Tags
     [AzureLock]$Lock
     [AzureLogging]$Logging
-    [string]$SubscriptionName
     [bool]$PersistState=$true
 
     ResourceGroupOptions(){}
@@ -11,6 +10,7 @@ Class ResourceGroupBuildState{
     [string]$Name
     [ResourceGroupOptions]$Options
     [AzureSecurityDefinition]$Security
+    [SubscriptionDefinition]$SubscriptionDefinition
 
     ResourceGroupBuildState(){}
 }
@@ -24,7 +24,6 @@ Class ResourceGroupLoadedState{
     [string]$Id
     [string]$Name
     [string]$Scope
-    [SubscriptionDefinition]$SubscriptionDefinition
 
     ResourceGroupLoadedState(){}
 }
@@ -37,6 +36,7 @@ Class ResourceGroupDefinition{
     ResourceGroupDefinition([string]$SubscriptionName,[string]$ResourceGroupName){
         $this.Access = [ResourceGroupAccess]::new()
         $this.BuildState = [ResourceGroupBuildState]::new()
+        $this.BuildState.SubscriptionDefinition=[SubscriptionDefinition]::new($SubscriptionName)
         $this.CloudState = [ResourceGroupCloudState]::new()
         $this.LoadedState = [ResourceGroupLoadedState]::new()
     }
