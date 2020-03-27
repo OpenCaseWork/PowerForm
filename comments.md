@@ -1,3 +1,6 @@
+# New Comments
+-(ZH) I'm now thinking that when you are "Building" resources, you should be using only a build definition object.  Then once, it is deployed, it would return a PowerFormResource that contains your build defnition as well as the cloud definitions.  Thoughts on this?
+
 # Comments
 -liking the options input into new-definition; this looking solid 
    (ZH) me too
