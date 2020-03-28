@@ -1,5 +1,7 @@
 Class BaseAzResourceCloudState : PfResourceCloudState{
     [string]$Id
+    [string]$SubscriptionName
+    [string]$ResourceGroupName
     [string]$Name
     [string]$Scope
     [string]$IdentityId

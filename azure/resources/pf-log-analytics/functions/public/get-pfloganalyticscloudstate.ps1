@@ -1,4 +1,4 @@
-Function Get-PfKeyVaultCloudState
+Function Get-PfLogAnalyticsCloudState
 {
     Param (
         [Parameter(Mandatory = $false)] 
@@ -9,6 +9,6 @@ Function Get-PfKeyVaultCloudState
         [string] $ResourceGroupName
     )
 
-    return Get-BaseAzResourceCloudState -Name $Name -SubscriptionName $SubscriptionName -ResourceGroupName $ResourceGroupName -AzResourceType $([AzResourceTypes]::KeyVault)
+    return Get-BaseAzResourceCloudState -Name $Name -SubscriptionName $SubscriptionName -ResourceGroupName $ResourceGroupName -AzResourceType $([AzResourceTypes]::LogAnalytics)
 }
 

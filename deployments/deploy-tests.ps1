@@ -185,6 +185,29 @@ try{
     
     Deploy-PfDeploymentContext
 
+    ##############################################################################################################
+    #
+    #               Get resources with overrides of context
+    #
+    #############################################################################################################
+
+    #Shows how you can override the context values when getting a cloud state for a resource
+
+    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -Region "CentralUs"
+
+    #get with context values
+    $kv = Get-PfKeyVaultCloudState
+    $kv
+
+    $kv2 = Get-PfKeyVaultCloudState -Name "test"
+    $kv2
+
+    $kv3 = Get-PfKeyVaultCloudState -Name "test" -ResourceGroupName "DM"
+    $kv3
+
+    $kv4 = Get-PfKeyVaultCloudState -Name "test" -ResourceGroupName "DM" -SubscriptionName "testSub"
+    $kv4
+
 }
 catch{
     $test = $_.Exception.Message
