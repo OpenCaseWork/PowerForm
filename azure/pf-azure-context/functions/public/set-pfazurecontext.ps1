@@ -16,7 +16,7 @@ Function Set-PfAzureContext
         [string] $GroupAbbreviation,
         [Parameter(Mandatory = $true, ParameterSetName="All")] 
         [Parameter(Mandatory = $true, ParameterSetName="OrgInfo")] 
-        [string] $TeamAbbreviation,
+        [string] $Label,
         [Parameter(Mandatory = $true, ParameterSetName="All")] 
         [Parameter(Mandatory = $true, ParameterSetName="OrgInfo")] 
         [string] $EnvironmentLetter,
@@ -31,10 +31,10 @@ Function Set-PfAzureContext
             $global:_PfAzureContext= [PfAzureContext]::New($SubscriptionName,$ResourceGroupName,$Region)
         }
         "OrgInfo"{
-            $global:_PfAzureContext = [PfAzureContext]::New($CompanyAbbreviation,$GroupAbbreviation,$TeamAbbreviation,$EnvironmentLetter,$Region)
+            $global:_PfAzureContext = [PfAzureContext]::New($CompanyAbbreviation,$GroupAbbreviation,$Label,$EnvironmentLetter,$Region)
         }
         "All"{
-            $global:_PfAzureContext = [PfAzureContext]::New($SubscriptionName,$ResourceGroupName,$CompanyAbbreviation,$GroupAbbreviation,$TeamAbbreviation,$EnvironmentLetter,$Region)
+            $global:_PfAzureContext = [PfAzureContext]::New($SubscriptionName,$ResourceGroupName,$CompanyAbbreviation,$GroupAbbreviation,$Label,$EnvironmentLetter,$Region)
         }
     }
 }

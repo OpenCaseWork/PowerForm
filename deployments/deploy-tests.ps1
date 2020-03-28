@@ -24,7 +24,7 @@ try{
 
     New-PfDeploymentContext
 
-    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -TeamAbbreviation "ADM" -EnvironmentLetter "D" -Region "CentralUs"
+    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -Region "CentralUs"
 
     #name, az context built from deployment context params above
     $kv = New-PfKeyVaultBuild
@@ -44,12 +44,12 @@ try{
 
     New-PfDeploymentContext
 
-    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -TeamAbbreviation "ADM" -EnvironmentLetter "D" -Region "CentralUs"
+    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -Region "CentralUs"
 
     #name, az context built from deployment context params above
     $kv = New-PfKeyVaultBuild
 
-    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -TeamAbbreviation "DM" -EnvironmentLetter "D" -Region "CentralUs"
+    Update-PfAzureContext -Label "DM"
 
     #name, az context built from deployment context params above
     $la = New-PfLogAnalyticsBuild
@@ -66,13 +66,14 @@ try{
 
     New-PfDeploymentContext
 
-    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -TeamAbbreviation "ADM" -EnvironmentLetter "D" -Region "CentralUs"
+    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -Region "CentralUs"
 
     #name, az context built from deployment context params above
     $kv = New-PfKeyVaultBuild
     $kv.Options.Name = "testing"
-    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -TeamAbbreviation "DM" -EnvironmentLetter "D" -Region "CentralUs"
-
+    
+    Update-PfAzureContext -Label "DM"
+    
     #name, az context built from deployment context params above
     $la = New-PfLogAnalyticsBuild
     $la.Options.ResourceGroupName="NewRg"

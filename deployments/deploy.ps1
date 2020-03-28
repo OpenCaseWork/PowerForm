@@ -13,8 +13,8 @@ try{
     New-PfDeploymentContext
 
     #Set-PfAzureContext -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D" -Region "CentralUs" 
-    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -TeamAbbreviation "ADM" -EnvironmentLetter "D" -Region "CentralUs"
-    #Set-PfAzureContext  -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D" -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -TeamAbbreviation "ADM" -EnvironmentLetter "D" -Region "CentralUs"
+    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -Region "CentralUs"
+    #Set-PfAzureContext  -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D" -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -Region "CentralUs"
     #Login-AzAccount
 
     #Get-Command -Module key-vault
@@ -22,6 +22,8 @@ try{
     #$kvOptions.Name="KV-MYAEA-KKZH-ADM-C1-D01" 
     #$kv = New-PfKeyVaultBuild -Options $kvOptions
     $kv = New-PfKeyVaultBuild
+
+    Update-PfAzureContext -Label "DM"
 
     $la = New-PfLogAnalyticsBuild
 
