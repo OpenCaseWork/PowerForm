@@ -24,7 +24,7 @@ try{
 
     New-PfDeploymentContext
 
-    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -Region "CentralUs"
+    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -AzRegion $([AzRegions]::CentralUs)
 
     #name, az context built from deployment context params above
     $kv = New-PfKeyVaultBuild
@@ -44,7 +44,7 @@ try{
 
     New-PfDeploymentContext
 
-    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -Region "CentralUs"
+    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -AzRegion $([AzRegions]::CentralUs)
 
     #name, az context built from deployment context params above
     $kv = New-PfKeyVaultBuild
@@ -66,7 +66,7 @@ try{
 
     New-PfDeploymentContext
 
-    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -Region "CentralUs"
+    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -AzRegion $([AzRegions]::CentralUs)
 
     #name, az context built from deployment context params above
     $kv = New-PfKeyVaultBuild
@@ -90,7 +90,7 @@ try{
 
     New-PfDeploymentContext
 
-    Set-PfAzureContext -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D" -Region "CentralUs"
+    Set-PfAzureContext -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D" -AzRegion $([AzRegions]::CentralUs)
 
     $kv = New-PfKeyVaultBuild
     $kv.Options.Name="KV-MYAEA-KKZH-ADM-C1-D01" 
@@ -111,7 +111,7 @@ try{
 
     New-PfDeploymentContext
 
-    Set-PfAzureContext -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D" -Region "CentralUs"
+    Set-PfAzureContext -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D" -AzRegion $([AzRegions]::CentralUs)
 
     $kv = New-PfKeyVaultBuild
     $kv.Options.Name="KV-MYAEA-KKZH-ADM-C1-D01" 
@@ -146,7 +146,7 @@ try{
     #The thought is that you could pull a resource just by defining
     #the name and the context will be used to get the rg and sub to pull it from
  
-    Set-PfAzureContext -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D" -Region "CentralUs"
+    Set-PfAzureContext -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D" -AzRegion $([AzRegions]::CentralUs)
     $kv = Get-PfKeyVaultCloudState -Name "KV-MYAEA-KKZH-ADM-C1-D01"
     $kv
 
@@ -174,7 +174,7 @@ try{
 
     New-PfDeploymentContext
 
-    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -Region "CentralUs"
+    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -AzRegion $([AzRegions]::CentralUs)
 
     $kv = Get-PfKeyVaultCloudState
     $kv
@@ -193,7 +193,7 @@ try{
 
     #Shows how you can override the context values when getting a cloud state for a resource
 
-    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -Region "CentralUs"
+    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -AzRegion $([AzRegions]::CentralUs)
 
     #get with context values
     $kv = Get-PfKeyVaultCloudState

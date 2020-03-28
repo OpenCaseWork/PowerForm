@@ -2,7 +2,7 @@ Class BaseAzResourceOptions : PfResourceOptions {
     [string]$Name
     [string]$SubscriptionName
     [string]$ResourceGroupName
-    [string]$Region
+    [AzRegion]$AzRegion
     [hashtable]$Tags
     [int]$ResourceNumber=1
     [AzLock]$Lock
@@ -14,7 +14,7 @@ Class BaseAzResourceOptions : PfResourceOptions {
         $this.SetResourceGroupName([PfAzureContext]$PfAzureContext)
         $this.SetSubscriptionName([PfAzureContext]$PfAzureContext)
         $this.SetName([AzResourceType]$AzResourceType,[PfAzureContext]$PfAzureContext)
-        $this.Region=$PfAzureContext.Region
+        $this.AzRegion=$PfAzureContext.AzRegion
     }
     [void]SetResourceGroupName([PfAzureContext]$PfAzureContext){
         if(-not [string]::IsNullOrEmpty($PfAzureContext.ResourceGroupName)){

@@ -15,7 +15,7 @@ Function Update-PfAzureContext
         [Parameter(Mandatory = $false)]  
         [string] $EnvironmentLetter,
         [Parameter(Mandatory = $false)] 
-        [string] $Region
+        [AzRegion] $AzRegion
     )
 
     if(-not [string]::IsNullOrEmpty($SubscriptionName))
@@ -78,13 +78,13 @@ Function Update-PfAzureContext
         }
     }
 
-    if(-not [string]::IsNullOrEmpty($Region))
+    if($AzRegion)
     {
-        if([string]::IsNullOrEmpty($global:_PfAzureContext.Region)){
+        if([string]::IsNullOrEmpty($global:_PfAzureContext.AzRegion)){
             Write-Error("Cannot change context of Region because it was never initially set.")
         }
         else {
-            $global:_PfAzureContext.Region=$Region
+            $global:_PfAzureContext.AzRegion=$AzRegion
         }
     }
     

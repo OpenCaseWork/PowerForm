@@ -7,7 +7,7 @@ Class AzNamingStandards{
         return "$($PfAzureContext.CompanyAbbreviation)-$($PfAzureContext.GroupAbbreviation)-$($PfAzureContext.EnvironmentLetter)"
     }
     static [string]GetResourceName([AzResourceType]$AzResourceType,[PfAzureContext]$PfAzureContext){
-        #TODO: need to pass in resource number and find a way to abbreviate region
-        return "$($AzResourceType.Abbreviation)-$($PfAzureContext.CompanyAbbreviation)-$($PfAzureContext.GroupAbbreviation)-$($PfAzureContext.Label)-C1-$($PfAzureContext.EnvironmentLetter)01"
+        #TODO: need to pass in resource number
+        return "$($AzResourceType.Abbreviation)-$($PfAzureContext.CompanyAbbreviation)-$($PfAzureContext.GroupAbbreviation)-$($PfAzureContext.Label)-$($PfAzureContext.AzRegion.Abbreviation)-$($PfAzureContext.EnvironmentLetter)01"
     }
 }

@@ -58,6 +58,8 @@ Copyright = '(c) Zach Harris. All rights reserved.'
 
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
 ScriptsToProcess = @(
+    "..\..\azure\classes\az-region.ps1"
+    "..\..\azure\configuration\az-regions.ps1"
     "..\..\powerform\classes\pf-cloud-context.ps1"
     ".\classes\pf-azure-context.ps1"
     "..\..\azure\classes\az-resource-type.ps1"
