@@ -27,6 +27,8 @@ try{
 
     $la = New-PfLogAnalyticsBuild
 
+    $kv2 = Get-PfKeyVaultCloudState
+
     #$deployContext.Resources.AddRange(@($kv,$la))
   
     Deploy-PfDeploymentContext

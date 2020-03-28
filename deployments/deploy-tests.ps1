@@ -73,7 +73,7 @@ try{
     $kv.Options.Name = "testing"
     
     Update-PfAzureContext -Label "DM"
-    
+
     #name, az context built from deployment context params above
     $la = New-PfLogAnalyticsBuild
     $la.Options.ResourceGroupName="NewRg"
@@ -143,12 +143,12 @@ try{
     #
     #############################################################################################################
 
-    #Still need to write the get function, but the thought is that you could pull a resource just by defining
+    #The thought is that you could pull a resource just by defining
     #the name and the context will be used to get the rg and sub to pull it from
  
-    #Set-AzCloudContext -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D"
-    #$kv = Get-KeyVaultDefinition -Name "KV-MYAEA-KKZH-ADM-C1-D01"
-
+    Set-PfAzureContext -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D" -Region "CentralUs"
+    $kv = Get-PfKeyVaultCloudState -Name "KV-MYAEA-KKZH-ADM-C1-D01"
+    $kv
 
     ##############################################################################################################
     #
@@ -156,11 +156,34 @@ try{
     #
     #############################################################################################################
 
-    #Still need to write the get function, but the thought is that you could pull a resource without any 
+    #The thought is that you could pull a resource without any 
     #az context or deployment context.
     #And if you even had a context set, this would still load that resource from any rg or sub outside the context
     
-    #$kv = Get-KeyVaultDefinition -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D" -Name "KV-MYAEA-KKZH-ADM-C1-D01"
+    $kv = Get-PfKeyVaultCloudState -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D" -Name "KV-MYAEA-KKZH-ADM-C1-D01"
+    $kv
+
+     ##############################################################################################################
+    #
+    #               Get resources with context set with "enterprise standards"
+    #
+    #############################################################################################################
+
+    #Shows how you can use the get cloud state function with enterprise standards defined in context.
+    #Also shows how you can get a resource within a deployment context as well
+
+    New-PfDeploymentContext
+
+    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -Region "CentralUs"
+
+    $kv = Get-PfKeyVaultCloudState
+    $kv
+
+    #name, az context built from deployment context params above
+    $kv2 = New-PfKeyVaultBuild
+    $kv2.Options.Name = "testing"
+    
+    Deploy-PfDeploymentContext
 
 }
 catch{
