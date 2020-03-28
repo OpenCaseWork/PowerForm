@@ -1,6 +1,6 @@
-$global:_PfEnvironment 
+$global:_PfDeploymentContext
 Function New-PfDeploymentContext
 {
-    [PfDeploymentContext]::New()
+    $global:_PfDeploymentContext=[PfDeploymentContext]::New()
 }
 

@@ -1,0 +1,3 @@
+Class PfResourceAccess{
+    PfResourceAccess(){}
+}

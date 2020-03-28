@@ -37,5 +37,5 @@ Class PfKeyVaultOptions : BaseAzResourceOptions {
     [PfKeyVaultSecret[]]$SecretsToAdd
 
     PfKeyVaultOptions(){}
-    PfKeyVaultOptions([PfAzureContext]$PfAzureContext) : base([PfAzureContext]$PfAzureContext){}
+    PfKeyVaultOptions([PfAzureContext]$PfAzureContext) : base([PfAzureContext]$PfAzureContext, [AzResourceTypes]::KeyVault){}
 }

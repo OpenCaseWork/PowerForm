@@ -1,4 +1,4 @@
-Class BaseAzResourceCloudState{
+Class BaseAzResourceCloudState : PfResourceCloudState{
     [string]$Id
     [string]$Name
     [string]$Scope

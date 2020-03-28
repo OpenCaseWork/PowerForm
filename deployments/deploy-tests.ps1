@@ -1,13 +1,16 @@
 try{
-    Import-Module .\azure\az-cloud-context\az-cloud-context.psd1
-    Import-Module .\azure\resources\key-vault\key-vault.psd1
-    Import-Module .\azure\resources\log-analytics\log-analytics.psd1
-    Import-Module .\powerform\pf-deployment-context\pf-deployment-context.psd1
 
-    Get-Command -Module log-analytics
-    Get-Command -Module key-vault
-    Get-Command -Module pf-deployment-context
-    Get-Command -Module az-cloud-context
+    #shows how to import modules
+    Import-Module .\powerform\pf-deployment-context\pf-deployment-context.psd1
+    Import-Module .\azure\pf-azure-context\pf-azure-context.psd1
+    Import-Module .\azure\resources\pf-key-vault\pf-key-vault.psd1
+    Import-Module .\azure\resources\pf-log-analytics\pf-log-analytics.psd1
+
+    #shows what functions are exported from each module
+    Get-Command -Module pf-key-vault
+    Get-Command -Module pf-log-analytics
+    Get-Command -Module pf-deployment-context 
+    Get-Command -Module pf-azure-context
 
     ##############################################################################################################
     #
@@ -15,21 +18,65 @@ try{
     #
     #############################################################################################################
 
-    #Still need to build this. The thought behind this is that a user wants to deploy resources out with best practices/enterprise standards
+    #The thought behind this is that a user wants to deploy resources out with best practices/enterprise standards
     #baked into the module.  By defining the deploy context parameters, the names will be created, therefore it knows
     #the RG, Sub, Resources names.  All options are going to be the defaults, so just build the definitions and deploy
 
-    #$deployContext = New-PfDeploymentContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -TeamAbbreviation "ADM" -EnvironmentLetter "D"
+    New-PfDeploymentContext
+
+    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -TeamAbbreviation "ADM" -EnvironmentLetter "D" -Region "CentralUs"
 
     #name, az context built from deployment context params above
-    #$kv = New-KeyVaultDefinition
+    $kv = New-PfKeyVaultBuild
 
     #name, az context built from deployment context params above
-    #$la = New-LogAnalyticsDefinition
+    $la = New-PfLogAnalyticsBuild
 
-    #$deployContext.ResourceDefinitions.AddRange(@($kv,$la))
-    #$deployContext.Deploy()
+    Deploy-PfDeploymentContext
 
+     ##############################################################################################################
+    #
+    #               Switch Az Contexts in the middle of deployment context
+    #
+    #############################################################################################################
+
+    #Shows you can build a keyvault for the admin team, then switch context to the "DM" team and build a LA
+
+    New-PfDeploymentContext
+
+    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -TeamAbbreviation "ADM" -EnvironmentLetter "D" -Region "CentralUs"
+
+    #name, az context built from deployment context params above
+    $kv = New-PfKeyVaultBuild
+
+    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -TeamAbbreviation "DM" -EnvironmentLetter "D" -Region "CentralUs"
+
+    #name, az context built from deployment context params above
+    $la = New-PfLogAnalyticsBuild
+
+    Deploy-PfDeploymentContext
+
+    ##############################################################################################################
+    #
+    #               Override the "enterprise standards"
+    #
+    #############################################################################################################
+
+    #Shows how you can override the enterprise standards for any option such as name or resource group
+
+    New-PfDeploymentContext
+
+    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -TeamAbbreviation "ADM" -EnvironmentLetter "D" -Region "CentralUs"
+
+    #name, az context built from deployment context params above
+    $kv = New-PfKeyVaultBuild
+    $kv.Options.Name = "testing"
+    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -TeamAbbreviation "DM" -EnvironmentLetter "D" -Region "CentralUs"
+
+    #name, az context built from deployment context params above
+    $la = New-PfLogAnalyticsBuild
+    $la.Options.ResourceGroupName="NewRg"
+    Deploy-PfDeploymentContext
 
     ##############################################################################################################
     #
@@ -40,20 +87,17 @@ try{
     #Still need to write the deploy method, but the thought here is that you get the sub and rg from the
     #current context so all you need to do is define the name and other options
 
-    $deployContext = New-PfDeploymentContext
+    New-PfDeploymentContext
 
-    Set-AzCloudContext -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D"
+    Set-PfAzureContext -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D" -Region "CentralUs"
 
-    $kvOptions = New-KeyVaultOptions
-    $kvOptions.Name="KV-MYAEA-KKZH-ADM-C1-D01" 
-    $kv = New-KeyVaultDefinition -Options $kvOptions
+    $kv = New-PfKeyVaultBuild
+    $kv.Options.Name="KV-MYAEA-KKZH-ADM-C1-D01" 
 
-    $laOptions = New-LogAnalyticsOptions
-    $laOptions.Name="LA-MYAEA-KKZH-ADM-C1-D01" 
-    $la = New-LogAnalyticsDefinition -Options $laOptions
+    $la = New-PfLogAnalyticsBuild
+    $la.Options.Name="LA-MYAEA-KKZH-ADM-C1-D01" 
 
-    $deployContext.ResourceDefinitions.AddRange(@($kv,$la))
-    #$deployContext.Deploy()
+    Deploy-PfDeploymentContext
 
     ##############################################################################################################
     #
@@ -64,36 +108,15 @@ try{
     #Still need to write the deploy method, but the thought here is that you get the sub and rg from the
     #current context so all you need to do is define the name and other options
 
-    $deployContext2 = New-PfDeploymentContext
+    New-PfDeploymentContext
 
-    Set-AzCloudContext -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D"
+    Set-PfAzureContext -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D" -Region "CentralUs"
 
-    $kvOptions = New-KeyVaultOptions
-    $kvOptions.Name="KV-MYAEA-KKZH-ADM-C1-D01" 
-    $kv = New-KeyVaultDefinition -Options $kvOptions
+    $kv = New-PfKeyVaultBuild
+    $kv.Options.Name="KV-MYAEA-KKZH-ADM-C1-D01" 
 
-    $deployContext2.ResourceDefinitions.Add($kv)
-    #$deployContext2.Deploy()
+    Deploy-PfDeploymentContext
 
-
-
-    ##############################################################################################################
-    #
-    #               Deploy a single resource with context
-    #
-    #############################################################################################################
-
-    #Still need to write the deploy method, but the thought here is that you get the sub and rg from the
-    #current context so all you need to do is define the name and other options
-
-    Set-AzCloudContext -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D"
-
-    #Get-Command -Module key-vault
-    $kvOptions = New-KeyVaultOptions
-    $kvOptions.Name="KV-MYAEA-KKZH-ADM-C1-D01" 
-    $kv = New-KeyVaultDefinition -Options $kvOptions
-
-    #$kv.Access.Deploy()
 
     ##############################################################################################################
     #
@@ -104,15 +127,14 @@ try{
     #Still need to write the deploy method, but the thought here is that you define everything from options
     #so there is no need for az context or deployment context
 
-    $kvOptions = New-KeyVaultOptions
+    New-PfDeploymentContext
 
-    $kvOptions.Name="KV-MYAEA-KKZH-ADM-C1-D01" 
-    $kvOptions.SubscriptionName="MYAEA-KKZH-D" 
-    $kvOptions.ResourceGroupName="RG-MYAEA-KKZH-ADM-D"
+    $kv = New-PfKeyVaultBuild
+    $kv.Options.Name="KV-MYAEA-KKZH-ADM-C1-D01" 
+    $kv.Options.SubscriptionName="MYAEA-KKZH-D" 
+    $kv.Options.ResourceGroupName="RG-MYAEA-KKZH-ADM-D"
 
-    $kv = New-KeyVaultDefinition -Options $kvOptions
-
-    #$kv.Access.Deploy()
+    Deploy-PfDeploymentContext
 
     ##############################################################################################################
     #

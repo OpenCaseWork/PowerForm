@@ -1,9 +1,8 @@
 Function New-PfKeyVaultOptions
 {
-    $context = Get-CurrentPfAzureContext
-    if($context)
+    if($global:_PfAzureContext)
     {
-        [PfKeyVaultOptions]::New($context)
+        [PfKeyVaultOptions]::New($global:_PfAzureContext)
     }
     else {
         [PfKeyVaultOptions]::New()
