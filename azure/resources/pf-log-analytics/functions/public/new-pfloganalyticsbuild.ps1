@@ -1,5 +1,6 @@
 Function New-PfLogAnalyticsBuild
 {
+    <#
     Param (
         [Parameter(Mandatory = $false)] 
         [PfLogAnalyticsOptions] $Options
@@ -7,10 +8,22 @@ Function New-PfLogAnalyticsBuild
     # use this to get the parameter set name
     if($Options)
     {
-        [PfLogAnalyticsBuildState]::New($Options)
+        $la=[PfLogAnalyticsBuildState]::New($Options)
     }
     else {
-        [PfLogAnalyticsBuildState]::New()
+        $la=[PfLogAnalyticsBuildState]::New()
     }
+    $global:_PfDeploymentContext.Resources.Add($la) | Out-Null
+    return $la
+    #>
+    if($global:_PfAzureContext)
+    {
+        $la = [PfLogAnalyticsBuildState]::New($global:_PfAzureContext)
+    }
+    else{
+        $la = [PfLogAnalyticsBuildState]::New()
+    }
+    $global:_PfDeploymentContext.Resources.Add($la) | Out-Null
+    return $la
 }
 

@@ -1,5 +1,6 @@
 Function New-PfKeyVaultBuild
 {
+    <#
     Param (
         [Parameter(Mandatory = $false)] 
         [PfKeyVaultOptions] $Options
@@ -7,10 +8,24 @@ Function New-PfKeyVaultBuild
     # use this to get the parameter set name
     if($Options)
     {
-        [PfKeyVaultBuildState]::New($Options)
+        $kv = [PfKeyVaultBuildState]::New($Options)
     }
     else {
-        [PfKeyVaultBuildState]::New()
+        $kv = [PfKeyVaultBuildState]::New()
     }
+    $global:_PfDeploymentContext.Resources.Add($kv) | Out-Null
+    return $kv
+    #>
+
+    if($global:_PfAzureContext)
+    {
+        $kv = [PfKeyVaultBuildState]::New($global:_PfAzureContext)
+    }
+    else{
+        $kv = [PfKeyVaultBuildState]::New()
+    }
+    $global:_PfDeploymentContext.Resources.Add($kv) | Out-Null
+    return $kv
+    
 }
 

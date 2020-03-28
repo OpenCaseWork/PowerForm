@@ -1,9 +1,8 @@
 Function New-PfLogAnalyticsOptions
 {
-    $context = Get-CurrentPfAzureContext
-    if($context)
+    if($global:_PfAzureContext)
     {
-        [PfLogAnalyticsOptions]::New($context)
+        [PfLogAnalyticsOptions]::New($global:_PfAzureContext)
     }
     else {
         [PfLogAnalyticsOptions]::New()

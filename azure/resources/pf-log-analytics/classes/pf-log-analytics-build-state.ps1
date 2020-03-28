@@ -1,4 +1,4 @@
 Class PfLogAnalyticsBuildState : BaseAzResourceBuildState{
     PfLogAnalyticsBuildState() : base([AzResourceTypes]::LogAnalytics){}
-    PfLogAnalyticsBuildState([PfLogAnalyticsOptions]$PfLogAnalyticsOptions) : base([PfLogAnalyticsOptions]$PfLogAnalyticsOptions,[AzResourceTypes]::LogAnalytics){}
+    PfLogAnalyticsBuildState([PfAzureContext]$PfAzureContext) : base([PfAzureContext]$PfAzureContext,[AzResourceTypes]::LogAnalytics){}
 }

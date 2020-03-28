@@ -60,6 +60,9 @@ Copyright = '(c) Zach Harris. All rights reserved.'
 ScriptsToProcess = @(
     "..\..\powerform\classes\pf-cloud-context.ps1"
     ".\classes\pf-azure-context.ps1"
+    "..\..\azure\classes\az-resource-type.ps1"
+    "..\..\azure\configuration\az-resource-types.ps1"
+    "..\..\azure\configuration\az-naming-standards.ps1"
 )
 
 # Type files (.ps1xml) to be loaded when importing this module
@@ -73,8 +76,7 @@ ScriptsToProcess = @(
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport = @(
-    "Set-PfAzureContext",
-    "Get-CurrentPfAzureContext"
+    "Set-PfAzureContext"
 )
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
