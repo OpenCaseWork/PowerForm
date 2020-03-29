@@ -1,4 +1,4 @@
-Function New-PfLogAnalyticsBuild
+Function New-PfLogAnalytics
 {
     <#
     Param (

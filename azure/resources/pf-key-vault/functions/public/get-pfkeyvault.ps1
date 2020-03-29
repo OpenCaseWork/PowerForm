@@ -1,4 +1,4 @@
-Function Get-PfKeyVaultCloudState
+Function Get-PfKeyVault
 {
     Param (
         [Parameter(Mandatory = $false)] 
