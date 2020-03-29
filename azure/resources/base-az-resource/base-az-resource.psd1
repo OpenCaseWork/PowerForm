@@ -59,12 +59,6 @@ Copyright = '(c) Zach Harris. All rights reserved.'
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
 #TODO:Move these scripts to az-context
 ScriptsToProcess = @(
-    "..\..\..\powerform\classes\pf-resource-access.ps1"
-    "..\..\..\powerform\classes\pf-resource-build-state.ps1"
-    "..\..\..\powerform\classes\pf-resource-cloud-state.ps1"
-    "..\..\..\powerform\classes\pf-resource-options.ps1"
-    "..\..\..\powerform\classes\pf-resource-definition.ps1"
-    "..\..\..\powerform\classes\pf-dependency.ps1"
     "..\..\classes\az-lock.ps1"
     "..\..\classes\az-logging.ps1"
     "..\..\classes\az-security-definition.ps1"

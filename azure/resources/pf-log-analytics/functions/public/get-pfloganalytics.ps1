@@ -1,4 +1,4 @@
-Function Get-PfLogAnalyticsCloudState
+Function Get-PfLogAnalytics
 {
     Param (
         [Parameter(Mandatory = $false)] 

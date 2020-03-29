@@ -18,74 +18,15 @@ Function Update-PfAzureContext
         [AzRegion] $AzRegion
     )
 
-    if(-not [string]::IsNullOrEmpty($SubscriptionName))
-    {
-        if([string]::IsNullOrEmpty($global:_PfAzureContext.SubscriptionName)){
-            Write-Error("Cannot change context of SubscriptionName because it was never initially set.")
-        }
-        else {
-            $global:_PfAzureContext.SubscriptionName=$SubscriptionName
-        }
-    }
+    #get all parameters from this function
+    $parameterList = (Get-Command -Name Update-PfAzureContext).Parameters;
 
-    if(-not [string]::IsNullOrEmpty($ResourceGroupName))
-    {
-        if([string]::IsNullOrEmpty($global:_PfAzureContext.ResourceGroupName)){
-            Write-Error("Cannot change context of ResourceGroupName because it was never initially set.")
-        }
-        else {
-            $global:_PfAzureContext.ResourceGroupName=$ResourceGroupName
-        }
-    }
-
-    if(-not [string]::IsNullOrEmpty($CompanyAbbreviation))
-    {
-        if([string]::IsNullOrEmpty($global:_PfAzureContext.CompanyAbbreviation)){
-            Write-Error("Cannot change context of CompanyAbbreviation because it was never initially set.")
-        }
-        else {
-            $global:_PfAzureContext.CompanyAbbreviation=$CompanyAbbreviation
+    foreach ($parameter in $parameterList) {
+        # Grab all parameters that are not default
+        $vars = Get-Variable -Name $parameter.Values.Name -ErrorAction SilentlyContinue
+        #see what variables need to be set
+        foreach($var in $vars){
+            Set-PfAzureContextProperty($var)
         }
     }
-
-    if(-not [string]::IsNullOrEmpty($GroupAbbreviation))
-    {
-        if([string]::IsNullOrEmpty($global:_PfAzureContext.GroupAbbreviation)){
-            Write-Error("Cannot change context of GroupAbbreviation because it was never initially set.")
-        }
-        else {
-            $global:_PfAzureContext.GroupAbbreviation=$GroupAbbreviation
-        }
-    }
-
-    if(-not [string]::IsNullOrEmpty($Label))
-    {
-        if([string]::IsNullOrEmpty($global:_PfAzureContext.Label)){
-            Write-Error("Cannot change context of Label because it was never initially set.")
-        }
-        else {
-            $global:_PfAzureContext.Label=$Label
-        }
-    }
-
-    if(-not [string]::IsNullOrEmpty($EnvironmentLetter))
-    {
-        if([string]::IsNullOrEmpty($global:_PfAzureContext.EnvironmentLetter)){
-            Write-Error("Cannot change context of EnvironmentLetter because it was never initially set.")
-        }
-        else {
-            $global:_PfAzureContext.EnvironmentLetter=$EnvironmentLetter
-        }
-    }
-
-    if($AzRegion)
-    {
-        if([string]::IsNullOrEmpty($global:_PfAzureContext.AzRegion)){
-            Write-Error("Cannot change context of Region because it was never initially set.")
-        }
-        else {
-            $global:_PfAzureContext.AzRegion=$AzRegion
-        }
-    }
-    
 }
