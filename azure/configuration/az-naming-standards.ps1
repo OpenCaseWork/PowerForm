@@ -7,7 +7,9 @@ Class AzNamingStandards{
         return "$($PfAzureContext.CompanyAbbreviation)-$($PfAzureContext.GroupAbbreviation)-$($PfAzureContext.EnvironmentLetter)"
     }
     static [string]GetResourceName([AzResourceType]$AzResourceType,[PfAzureContext]$PfAzureContext){
-        #TODO: need to pass in resource number
         return "$($AzResourceType.Abbreviation)-$($PfAzureContext.CompanyAbbreviation)-$($PfAzureContext.GroupAbbreviation)-$($PfAzureContext.Label)-$($PfAzureContext.AzRegion.Abbreviation)-$($PfAzureContext.EnvironmentLetter)01"
+    }
+    static [string]GetResourceName([AzResourceType]$AzResourceType,[PfAzureContext]$PfAzureContext,[string]$ResourceNumber){
+        return "$($AzResourceType.Abbreviation)-$($PfAzureContext.CompanyAbbreviation)-$($PfAzureContext.GroupAbbreviation)-$($PfAzureContext.Label)-$($PfAzureContext.AzRegion.Abbreviation)-$($PfAzureContext.EnvironmentLetter)$($ResourceNumber)"
     }
 }

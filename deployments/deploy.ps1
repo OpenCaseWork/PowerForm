@@ -4,12 +4,6 @@ try{
     Import-Module .\azure\resources\pf-key-vault\pf-key-vault.psd1
     Import-Module .\azure\resources\pf-log-analytics\pf-log-analytics.psd1
 
-
-    Get-Command -Module pf-key-vault
-    Get-Command -Module pf-log-analytics
-    Get-Command -Module pf-deployment-context 
-    Get-Command -Module pf-azure-context
-
     New-PfDeploymentContext
 
     #Set-PfAzureContext -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D" -AzRegion $([AzRegions]::CentralUs)
@@ -17,22 +11,19 @@ try{
     #Set-PfAzureContext  -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D" -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -AzRegion $([AzRegions]::CentralUs)
     #Login-AzAccount
 
-    #Get-Command -Module key-vault
-    #$kvOptions = New-PfKeyVaultOptions
-    #$kvOptions.Name="KV-MYAEA-KKZH-ADM-C1-D01" 
-    #$kv = New-PfKeyVaultBuild -Options $kvOptions
-    $kv = New-PfKeyVaultBuild
+    $kv = New-PfKeyVault
 
-    Update-PfAzureContext -Label "DM"
+    Update-PfAzureContext -Label "DM" -AzRegion $([AzRegions]::EastUs2)
 
-    $la = New-PfLogAnalyticsBuild
+    $la = New-PfLogAnalytics
 
-    $kv2 = Get-PfKeyVaultCloudState
-    $la2 = Get-PfLogAnalyticsCloudState
-    $la3 = Get-PfLogAnalyticsCloudState -Name "Test" -ResourceGroup "Test"
-    #$deployContext.Resources.AddRange(@($kv,$la))
+    $kv2 = Get-PfKeyVault
+    $la2 = Get-PfLogAnalytics
+    $la3 = Get-PfLogAnalytics -Name "Test" -ResourceGroup "Test"
   
-    Deploy-PfDeploymentContext
+    $results = Deploy-PfDeploymentContext
+    $laDef = $results.GetByName($la.Options.Name)
+    $laDef
 
 }
 catch{

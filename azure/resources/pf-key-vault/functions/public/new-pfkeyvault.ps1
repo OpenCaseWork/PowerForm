@@ -1,4 +1,4 @@
-Function New-PfKeyVaultBuild
+Function New-PfKeyVault
 {
     if($global:_PfAzureContext)
     {

@@ -64,6 +64,13 @@ Copyright = '(c) Zach Harris. All rights reserved.'
 
 # Format files (.ps1xml) to be loaded when importing this module
 ScriptsToProcess = @(
+    "..\classes\pf-resource-access.ps1"
+    "..\classes\pf-resource-build-state.ps1"
+    "..\classes\pf-resource-cloud-state.ps1"
+    "..\classes\pf-resource-options.ps1"
+    "..\classes\pf-resource-definition.ps1"
+    "..\classes\pf-dependency.ps1"
+    "..\classes\pf-result-set.ps1"
     ".\classes\pf-deployment-context.ps1"
 )
 
