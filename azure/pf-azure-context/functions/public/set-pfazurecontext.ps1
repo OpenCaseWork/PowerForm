@@ -16,25 +16,25 @@ Function Set-PfAzureContext
         [string] $GroupAbbreviation,
         [Parameter(Mandatory = $true, ParameterSetName="All")] 
         [Parameter(Mandatory = $true, ParameterSetName="OrgInfo")] 
-        [string] $TeamAbbreviation,
+        [string] $Label,
         [Parameter(Mandatory = $true, ParameterSetName="All")] 
         [Parameter(Mandatory = $true, ParameterSetName="OrgInfo")] 
         [string] $EnvironmentLetter,
         [Parameter(Mandatory = $true, ParameterSetName="All")] 
         [Parameter(Mandatory = $true, ParameterSetName="AzureInfo")] 
         [Parameter(Mandatory = $true, ParameterSetName="OrgInfo")] 
-        [string] $Region
+        [AzRegion] $AzRegion
     )   
     switch ($PsCmdlet.ParameterSetName)
     {
         "AzureInfo"{
-            $global:_PfAzureContext= [PfAzureContext]::New($SubscriptionName,$ResourceGroupName,$Region)
+            $global:_PfAzureContext= [PfAzureContext]::New($SubscriptionName,$ResourceGroupName,$AzRegion)
         }
         "OrgInfo"{
-            $global:_PfAzureContext = [PfAzureContext]::New($CompanyAbbreviation,$GroupAbbreviation,$TeamAbbreviation,$EnvironmentLetter,$Region)
+            $global:_PfAzureContext = [PfAzureContext]::New($CompanyAbbreviation,$GroupAbbreviation,$Label,$EnvironmentLetter,$AzRegion)
         }
         "All"{
-            $global:_PfAzureContext = [PfAzureContext]::New($SubscriptionName,$ResourceGroupName,$CompanyAbbreviation,$GroupAbbreviation,$TeamAbbreviation,$EnvironmentLetter,$Region)
+            $global:_PfAzureContext = [PfAzureContext]::New($SubscriptionName,$ResourceGroupName,$CompanyAbbreviation,$GroupAbbreviation,$Label,$EnvironmentLetter,$AzRegion)
         }
     }
 }
