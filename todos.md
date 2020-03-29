@@ -2,6 +2,7 @@
 -So are you saying that we need to have a function then that would be "Import-PfEnvironmentConfig" and then take in a path to a json config file that we would then store in a variable? And then that config function need to be the first thing instantiated within a deployment script?
 
 -thinking probably worth scrubbing hashtables.
+    (ZH) I have to understand this more.  Every convert to json I use on hashtables works
 
 -Context should be able to take a Name also, arbitrary but we will key off of it for top level of state
    (ZH) I am not sure why we would need names for contexts.  My thinking is that it is only needed for deployment.  The context sets properties on the resource itself.  So after the resource is built from context, you can change those properties.  Maybe we are thinking of going two different directions here?
