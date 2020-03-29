@@ -1,4 +1,4 @@
-try{
+try {
     Import-Module .\powerform\pf-deployment-context\pf-deployment-context.psd1
     Import-Module .\azure\pf-azure-context\pf-azure-context.psd1
     Import-Module .\azure\resources\pf-key-vault\pf-key-vault.psd1
@@ -6,9 +6,9 @@ try{
 
     New-PfDeploymentContext
 
-    #Set-PfAzureContext -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D" -AzRegion $([AzRegions]::CentralUs)
-    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -AzRegion $([AzRegions]::CentralUs)
-    #Set-PfAzureContext  -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D" -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -AzRegion $([AzRegions]::CentralUs)
+    #Set-PfAzureContext -SubscriptionName "MYOCW-KKZH-D" -ResourceGroupName "RG-MYOCW-KKZH-ADM-D" -AzRegion $([AzRegions]::CentralUs)
+    Set-PfAzureContext -CompanyAbbreviation "MYOCW" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -AzRegion $([AzRegions]::CentralUs)
+    #Set-PfAzureContext  -SubscriptionName "MYOCW-KKZH-D" -ResourceGroupName "RG-MYOCW-KKZH-ADM-D" -CompanyAbbreviation "MYOCW" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -AzRegion $([AzRegions]::CentralUs)
     #Login-AzAccount
 
     $kv = New-PfKeyVault
@@ -26,6 +26,6 @@ try{
     $laDef
 
 }
-catch{
+catch {
     $test = $_.Exception.Message
 }
