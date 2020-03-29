@@ -13,7 +13,7 @@ try{
 
     $kv = New-PfKeyVault
 
-    Update-PfAzureContext -Label "DM"
+    Update-PfAzureContext -Label "DM" -AzRegion $([AzRegions]::EastUs2)
 
     $la = New-PfLogAnalytics
 
