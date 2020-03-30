@@ -1,3 +1,0 @@
-Class PfResourceDefinition{
-    PfResourceDefinition(){}
-}

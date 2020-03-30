@@ -35,7 +35,9 @@ Class PfKeyVaultOptions : BaseAzResourceOptions {
     [bool]$EnableSoftDelete = $false
     [bool]$EnablePurgProtection = $false
     [PfKeyVaultSecret[]]$SecretsToAdd
+    [string[]]$DiagnosticCategoriesToLog = "AuditEvent"
+    [string[]]$MetricCategoriesToLog = "AllMetrics"
 
     PfKeyVaultOptions(){}
-    PfKeyVaultOptions([PfAzureContext]$PfAzureContext) : base([PfAzureContext]$PfAzureContext, [AzResourceTypes]::KeyVault){}
+    PfKeyVaultOptions([PfAzureContext]$PfAzureContext) : base([PfAzureContext]$PfAzureContext){}
 }

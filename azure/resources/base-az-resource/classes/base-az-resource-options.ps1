@@ -1,4 +1,4 @@
-Class BaseAzResourceOptions : PfResourceOptions {
+Class BaseAzResourceOptions : PfResource {
     [string]$Name
     [string]$SubscriptionName
     [string]$ResourceGroupName
@@ -9,11 +9,11 @@ Class BaseAzResourceOptions : PfResourceOptions {
     [AzLogging]$Logging
     [bool]$PersistState=$true
 
-    BaseAzResourceOptions(){}
-    BaseAzResourceOptions([PfAzureContext]$PfAzureContext,[AzResourceType]$AzResourceType){
+    BaseAzResourceOptions() : base(){}
+    BaseAzResourceOptions([PfAzureContext]$PfAzureContext) : base(){
         $this.SetResourceGroupName([PfAzureContext]$PfAzureContext)
         $this.SetSubscriptionName([PfAzureContext]$PfAzureContext)
-        $this.SetName([AzResourceType]$AzResourceType,[PfAzureContext]$PfAzureContext)
+        $this.SetName([PfAzureContext]$PfAzureContext)
         $this.AzRegion=$PfAzureContext.AzRegion
     }
     [void]SetResourceGroupName([PfAzureContext]$PfAzureContext){
@@ -30,9 +30,9 @@ Class BaseAzResourceOptions : PfResourceOptions {
             $this.SubscriptionName=[AzNamingStandards]::GetSubscriptionName($PfAzureContext)
         }
     }
-    [void]SetName([AzResourceType]$AzResourceType,[PfAzureContext]$PfAzureContext){
+    [void]SetName([PfAzureContext]$PfAzureContext){
         if(-not [string]::IsNullOrEmpty($PfAzureContext.CompanyAbbreviation)){
-            $this.Name=[AzNamingStandards]::GetResourceName($AzResourceType,$PfAzureContext)
+            $this.Name=[AzNamingStandards]::GetResourceName($this.ClassPrefix,$PfAzureContext)
         }
     }
 }

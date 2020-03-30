@@ -1,19 +1,12 @@
-Class BaseAzResourceBuildState : PfResourceBuildState{
+Class BaseAzResourceBuildState : PfResource{
     [BaseAzResourceOptions]$Options
     [PfDependency[]]$Dependencies
     [AzSecurityDefinition]$Security
-    [AzResourceType]$AzResourceType
 
-    BaseAzResourceBuildState([AzResourceType]$AzResourceType){
-        $this.AzResourceType=$AzResourceType
-        $this.Options = (New-Object -TypeName "$($AzResourceType.ClassPrefix)Options")
+    BaseAzResourceBuildState() : base(){
+        $this.Options = (New-Object -TypeName "$($this.ClassPrefix)Options")
     }
-    BaseAzResourceBuildState([PfAzureContext]$PfAzureContext,[AzResourceType]$AzResourceType){
-        $this.AzResourceType=$AzResourceType
-        $this.Options = (New-Object -TypeName "$($AzResourceType.ClassPrefix)Options" -ArgumentList $PfAzureContext)
+    BaseAzResourceBuildState([PfAzureContext]$PfAzureContext) : base(){
+        $this.Options = (New-Object -TypeName "$($this.ClassPrefix)Options" -ArgumentList $PfAzureContext)
     }
-    <#BaseAzResourceBuildState([BaseAzResourceOptions]$BaseAzResourceOptions, [AzResourceType]$AzResourceType){
-        $this.AzResourceType=$AzResourceType
-        $this.Options = $BaseAzResourceOptions
-    }#>
 }

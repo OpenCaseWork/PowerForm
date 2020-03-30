@@ -51,17 +51,15 @@ Copyright = '(c) Zach Harris. All rights reserved.'
 # ProcessorArchitecture = ''
 
 # Modules that must be imported into the global environment prior to importing this module
-#RequiredModules = @()
+RequiredModules = @(
+   "..\..\pf-azure-context\pf-azure-context.psd1" 
+)
 
 # Assemblies that must be loaded prior to importing this module
 # RequiredAssemblies = @()
 
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
-#TODO:Move these scripts to az-context
 ScriptsToProcess = @(
-    "..\..\classes\az-lock.ps1"
-    "..\..\classes\az-logging.ps1"
-    "..\..\classes\az-security-definition.ps1"
     ".\classes\base-az-resource-options.ps1"
     ".\classes\base-az-resource-build-state.ps1"
     ".\classes\base-az-resource-cloud-state.ps1"

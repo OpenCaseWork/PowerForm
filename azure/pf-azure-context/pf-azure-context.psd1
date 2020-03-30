@@ -51,20 +51,24 @@ Copyright = '(c) Zach Harris. All rights reserved.'
 # ProcessorArchitecture = ''
 
 # Modules that must be imported into the global environment prior to importing this module
-# RequiredModules = @()
+RequiredModules = @(
+    "..\..\powerform\pf-deployment-context\pf-deployment-context.psd1"
+)
 
 # Assemblies that must be loaded prior to importing this module
 # RequiredAssemblies = @()
 
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
 ScriptsToProcess = @(
+    "..\..\azure\classes\az-lock.ps1"
+    "..\..\azure\classes\az-logging.ps1"
+    "..\..\azure\classes\az-security-definition.ps1"
     "..\..\azure\classes\az-region.ps1"
-    "..\..\azure\configuration\az-regions.ps1"
-    "..\..\powerform\classes\pf-cloud-context.ps1"
     ".\classes\pf-azure-context.ps1"
+    "..\..\azure\az-configuration\az-naming-standards.ps1"
     "..\..\azure\classes\az-resource-type.ps1"
-    "..\..\azure\configuration\az-resource-types.ps1"
-    "..\..\azure\configuration\az-naming-standards.ps1"
+    "..\..\azure\az-configuration\pf-az-configuration.ps1"
+
 )
 
 # Type files (.ps1xml) to be loaded when importing this module

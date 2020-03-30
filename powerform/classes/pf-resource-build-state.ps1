@@ -1,3 +1,0 @@
-Class PfResourceBuildState{
-    PfResourceBuildState(){}
-}

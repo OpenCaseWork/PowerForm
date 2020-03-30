@@ -1,5 +1,0 @@
-Class ResourceGroupAccess {
-
-    ResourceGroupAccess(){}
-
-}

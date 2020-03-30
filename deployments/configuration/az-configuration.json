@@ -1,0 +1,22 @@
+{
+    "Regions" : {
+        "CentralUs" : {
+            "Name" : "Central Us",
+            "Abbreviation" : "CU"
+        },
+        "EastUs2" : {
+            "Name" : "East Us 2",
+            "Abbreviation" : "EU2"
+        }
+    },
+    "ResourceTypes" : {
+        "PfKeyVault" : {
+            "Name" : "Key Vault",
+            "Abbreviation" : "KEY"
+        },
+        "PfLogAnalytics" : {
+            "Name" : "Log Analytics",
+            "Abbreviation" : "LOG"
+        }
+    }
+}

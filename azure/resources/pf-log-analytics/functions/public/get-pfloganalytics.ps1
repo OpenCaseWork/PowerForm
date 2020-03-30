@@ -9,6 +9,9 @@ Function Get-PfLogAnalytics
         [string] $ResourceGroupName
     )
 
-    return Get-BaseAzResourceCloudState -Name $Name -SubscriptionName $SubscriptionName -ResourceGroupName $ResourceGroupName -AzResourceType $([AzResourceTypes]::LogAnalytics)
+    return Get-BaseAzResourceCloudState -Name $Name `
+        -SubscriptionName $SubscriptionName `
+        -ResourceGroupName $ResourceGroupName `
+        -ClassPrefix "PfLogAnalytics"
 }
 
