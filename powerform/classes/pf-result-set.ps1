@@ -3,11 +3,11 @@ Class PfResultSet{
     
     PfResultSet(){}
 
-    [PfResourceDefinition]GetByName([string]$Name){
+    [PfResource]GetByName([string]$Name){
         $resourceDef = $this.ResourceDefinitions | Where { $_.CloudState.Name -eq $Name }
         return $resourceDef
     }
-    [void]Add([PfResourceDefinition]$ResourceDefiniton){
+    [void]Add([PfResource]$ResourceDefiniton){
         $this.ResourceDefinitions.Add($ResourceDefiniton)
     }
 }

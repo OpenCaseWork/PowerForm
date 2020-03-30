@@ -9,6 +9,9 @@ Function Get-PfKeyVault
         [string] $ResourceGroupName
     )
 
-    return Get-BaseAzResourceCloudState -Name $Name -SubscriptionName $SubscriptionName -ResourceGroupName $ResourceGroupName -AzResourceType $([AzResourceTypes]::KeyVault)
+    return Get-BaseAzResourceCloudState -Name $Name `
+        -SubscriptionName $SubscriptionName `
+        -ResourceGroupName $ResourceGroupName `
+        -ClassPrefix "PfKeyVault"
 }
 

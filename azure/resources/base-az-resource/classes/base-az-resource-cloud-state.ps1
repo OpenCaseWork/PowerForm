@@ -1,4 +1,4 @@
-Class BaseAzResourceCloudState : PfResourceCloudState{
+Class BaseAzResourceCloudState : PfResource{
     [string]$Id
     [string]$SubscriptionName
     [string]$ResourceGroupName
@@ -8,5 +8,5 @@ Class BaseAzResourceCloudState : PfResourceCloudState{
     [object]$CloudBaseObject
     [object]$CloudObject
 
-    BaseAzResourceCloudState(){}
+    BaseAzResourceCloudState() : base(){}
 }

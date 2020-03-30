@@ -8,12 +8,12 @@ Function Get-BaseAzResourceCloudState
         [Parameter(Mandatory = $false)] 
         [string] $ResourceGroupName,
         [Parameter(Mandatory = $true)] 
-        [AzResourceType] $AzResourceType
+        [string] $ClassPrefix
     )
 
     if([string]::IsNullOrEmpty($Name)){
         if(-not [string]::IsNullOrEmpty($global:_PfAzureContext.CompanyAbbreviation)){
-            $Name=[AzNamingStandards]::GetResourceName($AzResourceType,$global:_PfAzureContext)
+            $Name=[AzNamingStandards]::GetResourceName($ClassPrefix,$global:_PfAzureContext)
         }
         else{
             Write-Error("There is no resource Name or PfAzureContext provided.  Please provide a resource name.")
@@ -46,7 +46,7 @@ Function Get-BaseAzResourceCloudState
         }
     }
 
-    $access = (New-Object -TypeName "$($AzResourceType.ClassPrefix)Access")
+    $access = (New-Object -TypeName "$($ClassPrefix)Access")
     return $access.GetCloudState($Name,$SubscriptionName,$ResourceGroupName)
 }
 
