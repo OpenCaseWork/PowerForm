@@ -12,7 +12,7 @@ Function Get-BaseAzResourceCloudState
     )
 
     if([string]::IsNullOrEmpty($Name)){
-        if(-not [string]::IsNullOrEmpty($global:_PfAzureContext.CompanyAbbreviation)){
+        if($global:_PfAzureContext.CompanyInfo){
             $Name=[AzNamingStandards]::GetResourceName($ClassPrefix,$global:_PfAzureContext)
         }
         else{

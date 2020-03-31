@@ -3,20 +3,31 @@ try {
     Import-Module .\azure\resources\pf-key-vault\pf-key-vault.psd1
     Import-Module .\azure\resources\pf-log-analytics\pf-log-analytics.psd1
 
-    #$pfConfig = New-PfDeploymentContext
+    $pfConfig = New-PfDeploymentContext
     $currentDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-    $pfConfig = New-PfDeploymentContext -AzConfigFile "$($currentDir)\configuration\az-configuration.json"
+    #$pfConfig = New-PfDeploymentContext -AzConfigFile "$($currentDir)\config\az-config.json"
+    $pfConfig = New-PfDeploymentContext -GlobalConfigFile "$($currentDir)\config\global-config.json" -AzConfigFile "$($currentDir)\config\az-config.json"
 
+    Set-PfAzureContext -CompanyInfo $pfConfig.Global.CompanyInfo `
+        -Group $pfConfig.Global.Groups.Lurie `
+        -Label $pfConfig.Global.Labels.WebTeam `
+        -Environment $pfConfig.Global.Environments.Qa `
+        -AzRegion $pfConfig.Az.Regions.CentralUs
 
     #Set-PfAzureContext -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D" -AzRegion $pfConfig.Az.Regions.CentralUs
-    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -AzRegion $pfConfig.Az.Regions.CentralUs
+    <#Set-PfAzureContext -CompanyInfo $pfConfig.Global.CompanyInfo `
+        -Group $pfConfig.Global.Groups.Team1 `
+        -Label $pfConfig.Global.Labels.Networking `
+        -Environment $pfConfig.Global.Environments.Development `
+        -AzRegion $pfConfig.Az.Regions.CentralUs
+        #>
     #Set-PfAzureContext  -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D" -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -AzRegion $pfConfig.Az.Regions.CentralUs
 
     #Login-AzAccount
 
     $kv = New-PfKeyVault
 
-    Update-PfAzureContext -Label "DM" -AzRegion $pfConfig.Az.Regions.EastUs2
+    Update-PfAzureContext -Label $pfConfig.Global.Labels.SQL -AzRegion $pfConfig.Az.Regions.EastUs2
 
     $la = New-PfLogAnalytics
 
