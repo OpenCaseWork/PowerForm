@@ -23,11 +23,11 @@ try {
     #the RG, Sub, Resources names.  All options are going to be the defaults, so just build the definitions and deploy
 
     $pfContext = New-PfDeploymentContext
-    Set-PfAzureContext -CompanyInfo $pfConfig.Global.CompanyInfo `
-        -Group $pfConfig.Global.Groups.Team1 `
-        -Label $pfConfig.Global.Labels.Networking `
-        -Environment $pfConfig.Global.Environments.Development `
-        -AzRegion $pfConfig.Az.Regions.CentralUs
+    Set-PfAzureContext -CompanyInfo $pfContext.Global.CompanyInfo `
+        -Group $pfContext.Global.Groups.Team1 `
+        -Label $pfContext.Global.Labels.Networking `
+        -Environment $pfContext.Global.Environments.Development `
+        -AzRegion $pfContext.Az.Regions.CentralUs
 
     $kv = New-PfKeyVault
     $la = New-PfLogAnalytics
@@ -42,14 +42,14 @@ try {
     #Shows you can build a keyvault for the admin team, then switch context to the "DM" team and build a LA
 
     $pfContext = New-PfDeploymentContext
-    Set-PfAzureContext -CompanyInfo $pfConfig.Global.CompanyInfo `
-        -Group $pfConfig.Global.Groups.Team1 `
-        -Label $pfConfig.Global.Labels.Networking `
-        -Environment $pfConfig.Global.Environments.Development `
-        -AzRegion $pfConfig.Az.Regions.CentralUs
+    Set-PfAzureContext -CompanyInfo $pfContext.Global.CompanyInfo `
+        -Group $pfContext.Global.Groups.Team1 `
+        -Label $pfContext.Global.Labels.Networking `
+        -Environment $pfContext.Global.Environments.Development `
+        -AzRegion $pfContext.Az.Regions.CentralUs
 
     $kv = New-PfKeyVault
-    Update-PfAzureContext -Label "DM"
+    Update-PfAzureContext -Label $pfContext.Global.Labels.SQL
     $la = New-PfLogAnalytics
     $results = Deploy-PfDeploymentContext
 
@@ -62,15 +62,15 @@ try {
     #Shows how you can override the enterprise standards for any option such as name or resource group
 
     $pfContext = New-PfDeploymentContext
-    Set-PfAzureContext -CompanyInfo $pfConfig.Global.CompanyInfo `
-        -Group $pfConfig.Global.Groups.Team1 `
-        -Label $pfConfig.Global.Labels.Networking `
-        -Environment $pfConfig.Global.Environments.Development `
-        -AzRegion $pfConfig.Az.Regions.CentralUs
+    Set-PfAzureContext -CompanyInfo $pfContext.Global.CompanyInfo `
+        -Group $pfContext.Global.Groups.Team1 `
+        -Label $pfContext.Global.Labels.Networking `
+        -Environment $pfContext.Global.Environments.Development `
+        -AzRegion $pfContext.Az.Regions.CentralUs
         
     $kv = New-PfKeyVault
     $kv.Options.Name = "testing"
-    Update-PfAzureContext -Label "DM"
+    Update-PfAzureContext -Label $pfContext.Global.Labels.SQL
     $la = New-PfLogAnalytics
     $la.Options.ResourceGroupName = "NewRg"
     $results = Deploy-PfDeploymentContext
@@ -217,10 +217,67 @@ try {
     #
     #############################################################################################################
 
-    #Shows how you can deploy resources, get their definiton objects back and have them available for comparison or reference
+      #Shows how you can override azure config options in new-deploymentcontext
     $currentDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-    $pfConfig = New-PfDeploymentContext -AzConfigFile "$($currentDir)\configuration\az-configuration.json"
-    Set-PfAzureContext -CompanyAbbreviation "MYOCW" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -AzRegion $pfConfig.Az.Regions.CentralUs
+    $pfContext = New-PfDeploymentContext -AzConfigFile "$($currentDir)\config\az-config.json"
+    Set-PfAzureContext -CompanyInfo $pfContext.Global.CompanyInfo `
+        -Group $pfContext.Global.Groups.Team1 `
+        -Label $pfContext.Global.Labels.Networking `
+        -Environment $pfContext.Global.Environments.Development `
+        -AzRegion $pfContext.Az.Regions.CentralUs
+    $kv = New-PfKeyVault
+    $la = New-PfLogAnalytics
+    $results = Deploy-PfDeploymentContext
+    
+    $laDef = $results.GetByName($la.Options.Name)
+    if($laDef.CloudState.Name -eq $laDef.BuildState.Options.Name){
+        Write-Host("Name Should have azure override values: $($laDef.CloudState.Name)")
+    }
+
+     ############################################################################################################
+    #
+    #              Override PowerForm's Default Global Configuration
+    #
+    #############################################################################################################
+
+     #Shows how you can override global config options in new-deploymentcontext
+    $currentDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+    $pfContext = New-PfDeploymentContext -GlobalConfigFile "$($currentDir)\config\global-config.json"
+    
+    #notice the property changes on group, label, and environment.  These are custom object from config now
+    Set-PfAzureContext -CompanyInfo $pfConfig.Global.CompanyInfo `
+        -Group $pfConfig.Global.Groups.Lurie `
+        -Label $pfConfig.Global.Labels.WebTeam `
+        -Environment $pfConfig.Global.Environments.Qa `
+        -AzRegion $pfConfig.Az.Regions.CentralUs
+
+    $kv = New-PfKeyVault
+    $la = New-PfLogAnalytics
+    $results = Deploy-PfDeploymentContext
+    
+    $laDef = $results.GetByName($la.Options.Name)
+    if($laDef.CloudState.Name -eq $laDef.BuildState.Options.Name){
+        Write-Host("Name Should have global override values: $($laDef.CloudState.Name)")
+    }
+
+    ############################################################################################################
+    #
+    #              Override PowerForm's Default Global AND Azure Configuration
+    #
+    #############################################################################################################
+
+    #Shows how you can override config options in new-deploymentcontext
+
+    $currentDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+    $pfContext = New-PfDeploymentContext -GlobalConfigFile "$($currentDir)\config\global-config.json"  -AzConfigFile "$($currentDir)\config\az-config.json"
+    
+    #notice the property changes on group, label, and environment.  These are custom object from config now
+    Set-PfAzureContext -CompanyInfo $pfConfig.Global.CompanyInfo `
+        -Group $pfConfig.Global.Groups.Lurie `
+        -Label $pfConfig.Global.Labels.WebTeam `
+        -Environment $pfConfig.Global.Environments.Qa `
+        -AzRegion $pfConfig.Az.Regions.CentralUs
+
     $kv = New-PfKeyVault
     $la = New-PfLogAnalytics
     $results = Deploy-PfDeploymentContext
