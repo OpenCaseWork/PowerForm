@@ -23,7 +23,7 @@ try {
     #the RG, Sub, Resources names.  All options are going to be the defaults, so just build the definitions and deploy
 
     $pfContext = New-PfDeploymentContext
-    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -AzRegion $pfContext.Az.Regions.CentralUs
+    Set-PfAzureContext -CompanyAbbreviation "MYOCW" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -AzRegion $pfContext.Az.Regions.CentralUs
 
     $kv = New-PfKeyVault
     $la = New-PfLogAnalytics
@@ -38,7 +38,7 @@ try {
     #Shows you can build a keyvault for the admin team, then switch context to the "DM" team and build a LA
 
     $pfContext = New-PfDeploymentContext
-    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -AzRegion $pfContext.Az.Regions.CentralUs
+    Set-PfAzureContext -CompanyAbbreviation "MYOCW" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -AzRegion $pfContext.Az.Regions.CentralUs
 
     $kv = New-PfKeyVault
     Update-PfAzureContext -Label "DM"
@@ -54,7 +54,7 @@ try {
     #Shows how you can override the enterprise standards for any option such as name or resource group
 
     $pfContext = New-PfDeploymentContext
-    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -AzRegion $pfContext.Az.Regions.CentralUs
+    Set-PfAzureContext -CompanyAbbreviation "MYOCW" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -AzRegion $pfContext.Az.Regions.CentralUs
 
     $kv = New-PfKeyVault
     $kv.Options.Name = "testing"
@@ -74,7 +74,7 @@ try {
 
 
     $pfContext = New-PfDeploymentContext
-    Set-PfAzureContext -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D" -AzRegion $pfContext.Az.Regions.CentralUs
+    Set-PfAzureContext -SubscriptionName "MYOCW-KKZH-D" -ResourceGroupName "RG-MYOCW-KKZH-ADM-D" -AzRegion $pfContext.Az.Regions.CentralUs
 
     $kv = New-PfKeyVault
     $kv.Options.Name = "KV-MYOCW-KKZH-ADM-C1-D01" 
@@ -93,7 +93,7 @@ try {
 
 
     $pfContext = New-PfDeploymentContext
-    Set-PfAzureContext -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D" -AzRegion $pfContext.Az.Regions.CentralUs
+    Set-PfAzureContext -SubscriptionName "MYOCW-KKZH-D" -ResourceGroupName "RG-MYOCW-KKZH-ADM-D" -AzRegion $pfContext.Az.Regions.CentralUs
 
     $kv = New-PfKeyVault
     $kv.Options.Name = "KV-MYOCW-KKZH-ADM-C1-D01" 
@@ -127,8 +127,8 @@ try {
  
 
     $pfContext = New-PfDeploymentContext
-    Set-PfAzureContext -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D" -AzRegion $pfContext.Az.Regions.CentralUs
-    $kv = Get-PfKeyVault -Name "KV-MYAEA-KKZH-ADM-C1-D01"
+    Set-PfAzureContext -SubscriptionName "MYOCW-KKZH-D" -ResourceGroupName "RG-MYOCW-KKZH-ADM-D" -AzRegion $pfContext.Az.Regions.CentralUs
+    $kv = Get-PfKeyVault -Name "KV-MYOCW-KKZH-ADM-C1-D01"
 
     ##############################################################################################################
     #
@@ -153,7 +153,7 @@ try {
 
 
     $pfContext = New-PfDeploymentContext
-    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -AzRegion $pfContext.Az.Regions.CentralUs
+    Set-PfAzureContext -CompanyAbbreviation "MYOCW" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -AzRegion $pfContext.Az.Regions.CentralUs
 
     $kv = Get-PfKeyVault
     $kv2 = New-PfKeyVault
@@ -169,7 +169,7 @@ try {
     #Shows how you can override the context values when getting a cloud state for a resource
 
     $pfContext = New-PfDeploymentContext
-    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -AzRegion $pfContext.Az.Regions.CentralUs
+    Set-PfAzureContext -CompanyAbbreviation "MYOCW" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -AzRegion $pfContext.Az.Regions.CentralUs
 
     $kv = Get-PfKeyVault
     $kv2 = Get-PfKeyVault -Name "test"
@@ -186,7 +186,7 @@ try {
 
 
     $pfContext = New-PfDeploymentContext
-    Set-PfAzureContext -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D" -AzRegion $pfContext.Az.Regions.CentralUs
+    Set-PfAzureContext -SubscriptionName "MYOCW-KKZH-D" -ResourceGroupName "RG-MYOCW-KKZH-ADM-D" -AzRegion $pfContext.Az.Regions.CentralUs
 
     $kv = New-PfKeyVault
     $kv.Options.Name = "KV-MYOCW-KKZH-ADM-C1-D01" 
@@ -208,7 +208,7 @@ try {
     #Shows how you can deploy resources, get their definiton objects back and have them available for comparison or reference
     $currentDir = Split-Path -Parent $MyInvocation.MyCommand.Path
     $pfConfig = New-PfDeploymentContext -AzConfigFile "$($currentDir)\configuration\az-configuration.json"
-    Set-PfAzureContext -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -AzRegion $pfConfig.Az.Regions.CentralUs
+    Set-PfAzureContext -CompanyAbbreviation "MYOCW" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -AzRegion $pfConfig.Az.Regions.CentralUs
     $kv = New-PfKeyVault
     $la = New-PfLogAnalytics
     $results = Deploy-PfDeploymentContext
