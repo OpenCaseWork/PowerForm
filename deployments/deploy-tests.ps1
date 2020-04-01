@@ -2,15 +2,71 @@ try {
 
     #shows how to import modules
     Import-Module .\powerform\pf-deployment-context\pf-deployment-context.psd1
-    Import-Module .\azure\pf-azure-context\pf-azure-context.psd1
+    Import-Module .\azure\resource-containers\pf-subscription\pf-subscription.psd1
     Import-Module .\azure\resources\pf-key-vault\pf-key-vault.psd1
     Import-Module .\azure\resources\pf-log-analytics\pf-log-analytics.psd1
 
     #shows what functions are exported from each module
+    Get-Command -Module pf-subscription
     Get-Command -Module pf-key-vault
     Get-Command -Module pf-log-analytics
     Get-Command -Module pf-deployment-context 
     Get-Command -Module pf-azure-context
+
+    ##############################################################################################################
+    #
+    #               Creating a subscription through context
+    #
+    #############################################################################################################
+
+    #The thought here is that the subscription isn't created yet so we want to make sure it gets created
+    #before deploying any resources.  We are creating it with default name from azurecontext 
+
+    $pfContext = New-PfDeploymentContext
+    Set-PfAzureContext -CompanyInfo $pfContext.Global.CompanyInfo `
+        -Group $pfContext.Global.Groups.Team1 `
+        -Label $pfContext.Global.Labels.Networking `
+        -Environment $pfContext.Global.Environments.Development `
+        -AzRegion $pfContext.Az.Regions.CentralUs
+
+    $sub = New-PfSubscription
+
+    $kv = New-PfKeyVault
+    $la = New-PfLogAnalytics
+    $results = Deploy-PfDeploymentContext
+
+    ##############################################################################################################
+    #
+    #               Creating a subscription with name defined and adding resources to that sub
+    #               How to use an options object to bulk change options
+    #
+    #############################################################################################################
+
+    #This shows how you can use naming standards through context for everything but point to a subscription that does not 
+    #use the naming standards.  All resources would be added to that subscription only if you change the subscription
+    #name on the resources.  See how the keyvault below will be added to the testsub, but not the log anlaytics
+    $pfContext = New-PfDeploymentContext
+    Set-PfAzureContext -CompanyInfo $pfContext.Global.CompanyInfo `
+        -Group $pfContext.Global.Groups.Team1 `
+        -Label $pfContext.Global.Labels.Networking `
+        -Environment $pfContext.Global.Environments.Development `
+        -AzRegion $pfContext.Az.Regions.CentralUs
+
+    $subOptions = @{
+        Name="TestSub"
+        OwnerObjectId="67867-768-678678-678-768"
+        EnrollmentAccountObjectId="2342-2342-1234-1234123-324"
+        OfferType="MS-AZ-300"
+        PersistState=$false
+    }
+    $sub = New-PfSubscription
+    $sub.Options=$subOptions
+
+    $kv = New-PfKeyVault
+    $kv.Options.SubscriptionName = $sub.Options.Name
+
+    $la = New-PfLogAnalytics
+    $results = Deploy-PfDeploymentContext
 
     ##############################################################################################################
     #
@@ -165,7 +221,11 @@ try {
 
 
     $pfContext = New-PfDeploymentContext
-    Set-PfAzureContext -CompanyAbbreviation "MYOCW" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -AzRegion $pfContext.Az.Regions.CentralUs
+    Set-PfAzureContext -CompanyInfo $pfContext.Global.CompanyInfo `
+        -Group $pfContext.Global.Groups.Team1 `
+        -Label $pfContext.Global.Labels.Networking `
+        -Environment $pfContext.Global.Environments.Development `
+        -AzRegion $pfContext.Az.Regions.CentralUs
 
     $kv = Get-PfKeyVault
     $kv2 = New-PfKeyVault
@@ -181,8 +241,11 @@ try {
     #Shows how you can override the context values when getting a cloud state for a resource
 
     $pfContext = New-PfDeploymentContext
-    Set-PfAzureContext -CompanyAbbreviation "MYOCW" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -AzRegion $pfContext.Az.Regions.CentralUs
-
+    Set-PfAzureContext -CompanyInfo $pfContext.Global.CompanyInfo `
+        -Group $pfContext.Global.Groups.Team1 `
+        -Label $pfContext.Global.Labels.Networking `
+        -Environment $pfContext.Global.Environments.Development `
+        -AzRegion $pfContext.Az.Regions.CentralUs
     $kv = Get-PfKeyVault
     $kv2 = Get-PfKeyVault -Name "test"
     $kv3 = Get-PfKeyVault -Name "test" -ResourceGroupName "DM"
@@ -245,11 +308,11 @@ try {
     $pfContext = New-PfDeploymentContext -GlobalConfigFile "$($currentDir)\config\global-config.json"
     
     #notice the property changes on group, label, and environment.  These are custom object from config now
-    Set-PfAzureContext -CompanyInfo $pfConfig.Global.CompanyInfo `
-        -Group $pfConfig.Global.Groups.Lurie `
-        -Label $pfConfig.Global.Labels.WebTeam `
-        -Environment $pfConfig.Global.Environments.Qa `
-        -AzRegion $pfConfig.Az.Regions.CentralUs
+    Set-PfAzureContext -CompanyInfo $pfContext.Global.CompanyInfo `
+        -Group $pfContext.Global.Groups.Lurie `
+        -Label $pfContext.Global.Labels.WebTeam `
+        -Environment $pfContext.Global.Environments.Qa `
+        -AzRegion $pfContext.Az.Regions.CentralUs
 
     $kv = New-PfKeyVault
     $la = New-PfLogAnalytics
@@ -272,11 +335,11 @@ try {
     $pfContext = New-PfDeploymentContext -GlobalConfigFile "$($currentDir)\config\global-config.json"  -AzConfigFile "$($currentDir)\config\az-config.json"
     
     #notice the property changes on group, label, and environment.  These are custom object from config now
-    Set-PfAzureContext -CompanyInfo $pfConfig.Global.CompanyInfo `
-        -Group $pfConfig.Global.Groups.Lurie `
-        -Label $pfConfig.Global.Labels.WebTeam `
-        -Environment $pfConfig.Global.Environments.Qa `
-        -AzRegion $pfConfig.Az.Regions.CentralUs
+    Set-PfAzureContext -CompanyInfo $pfContext.Global.CompanyInfo `
+        -Group $pfContext.Global.Groups.Lurie `
+        -Label $pfContext.Global.Labels.WebTeam `
+        -Environment $pfContext.Global.Environments.Qa `
+        -AzRegion $pfContext.Az.Regions.CentralUs
 
     $kv = New-PfKeyVault
     $la = New-PfLogAnalytics

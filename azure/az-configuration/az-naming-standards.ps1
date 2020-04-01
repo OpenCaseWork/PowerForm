@@ -1,7 +1,7 @@
 #Todo: How do we allow overrides of configuration from deployment?
 Class AzNamingStandards{
     static [string]GetResourceGroupName([PfAzureContext]$PfAzureContext){
-        return "RG-$($PfAzureContext.CompanyInfo.Abbreviation)-$($PfAzureContext.GroupInfo.Abbreviation)-$($PfAzureContext.Label.Abbreviation)-$($PfAzureContext.Environment.Letter)"
+        return "RG-$($PfAzureContext.CompanyInfo.Abbreviation)-$($PfAzureContext.Group.Abbreviation)-$($PfAzureContext.Label.Abbreviation)-$($PfAzureContext.Environment.Letter)"
     }
     static [string]GetSubscriptionName([PfAzureContext]$PfAzureContext){
         return "$($PfAzureContext.CompanyInfo.Abbreviation)-$($PfAzureContext.Group.Abbreviation)-$($PfAzureContext.Environment.Letter)"

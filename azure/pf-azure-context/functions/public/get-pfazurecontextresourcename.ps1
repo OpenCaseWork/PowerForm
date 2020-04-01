@@ -8,13 +8,14 @@ Function Get-PfAzureContextResourceName
     )  
 
     if([string]::IsNullOrEmpty($Name)){
-        if(-not [string]::IsNullOrEmpty($global:_PfAzureContext.CompanyAbbreviation)){
+        if($global:_PfAzureContext.CompanyInfo){
             $Name=[AzNamingStandards]::GetResourceName($ClassPrefix,$global:_PfAzureContext)
         }
         else{
             Write-Error("There is no resource Name or PfAzureContext provided.  Please provide a resource name.")
         }
     }
+
 
     return $Name
 }
