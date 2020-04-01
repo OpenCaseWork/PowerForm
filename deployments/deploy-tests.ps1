@@ -3,6 +3,7 @@ try {
     #shows how to import modules
     Import-Module .\powerform\pf-deployment-context\pf-deployment-context.psd1
     Import-Module .\azure\resource-containers\pf-subscription\pf-subscription.psd1
+    Import-Module .\azure\resource-containers\pf-resource-group\pf-resource-group.psd1
     Import-Module .\azure\resources\pf-key-vault\pf-key-vault.psd1
     Import-Module .\azure\resources\pf-log-analytics\pf-log-analytics.psd1
 
@@ -37,6 +38,27 @@ try {
 
     ##############################################################################################################
     #
+    #               Getting a subscription through context or named value
+    #
+    #############################################################################################################
+
+    #Shows how to get subscriptions that are already in the cloud
+
+    $pfContext = New-PfDeploymentContext
+    Set-PfAzureContext -CompanyInfo $pfContext.Global.CompanyInfo `
+        -Group $pfContext.Global.Groups.Team1 `
+        -Label $pfContext.Global.Labels.Networking `
+        -Environment $pfContext.Global.Environments.Development `
+        -AzRegion $pfContext.Az.Regions.CentralUs
+
+    $sub = Get-PfSubscription
+
+    $sub2 = Get-PfSubscription -Name "Sub2"
+
+    $results = Deploy-PfDeploymentContext
+
+    ##############################################################################################################
+    #
     #               Creating a subscription with name defined and adding resources to that sub
     #               How to use an options object to bulk change options
     #
@@ -66,6 +88,55 @@ try {
     $kv.Options.SubscriptionName = $sub.Options.Name
 
     $la = New-PfLogAnalytics
+    $results = Deploy-PfDeploymentContext
+
+     ##############################################################################################################
+    #
+    #               Creating a resource group with context values
+    #
+    #############################################################################################################
+
+    #The thought here is that the resource group isn't created yet so we want to make sure it gets created
+    #before deploying any resources.  We are creating it with default name from azurecontext 
+
+    $pfContext = New-PfDeploymentContext
+    Set-PfAzureContext -CompanyInfo $pfContext.Global.CompanyInfo `
+        -Group $pfContext.Global.Groups.Team1 `
+        -Label $pfContext.Global.Labels.Networking `
+        -Environment $pfContext.Global.Environments.Development `
+        -AzRegion $pfContext.Az.Regions.CentralUs
+
+    $sub = New-PfSubscription
+    $rg = New-PfResourceGroup
+
+    $rg = New-PfResourceGroup
+    $rg.Options.Name="DiffereRG"
+
+    $kv = New-PfKeyVault
+    $la = New-PfLogAnalytics
+    $la.Options.ResourceGroupName=$rg.Options.Name
+
+    $results = Deploy-PfDeploymentContext
+
+    ##############################################################################################################
+    #
+    #               Getting a resource group through context or named value
+    #
+    #############################################################################################################
+
+    #Shows how to get resource groups that are already in the cloud
+
+    $pfContext = New-PfDeploymentContext
+    Set-PfAzureContext -CompanyInfo $pfContext.Global.CompanyInfo `
+        -Group $pfContext.Global.Groups.Team1 `
+        -Label $pfContext.Global.Labels.Networking `
+        -Environment $pfContext.Global.Environments.Development `
+        -AzRegion $pfContext.Az.Regions.CentralUs
+
+    $rg = Get-PfResourceGroup
+
+    $rg2 = Get-PfResourceGroup -Name "RG2"
+
     $results = Deploy-PfDeploymentContext
 
     ##############################################################################################################
