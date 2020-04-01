@@ -1,5 +1,7 @@
 try {
     Import-Module .\powerform\pf-deployment-context\pf-deployment-context.psd1
+    Import-Module .\azure\resource-containers\pf-subscription\pf-subscription.psd1
+    Import-Module .\azure\resource-containers\pf-resource-group\pf-resource-group.psd1
     Import-Module .\azure\resources\pf-key-vault\pf-key-vault.psd1
     Import-Module .\azure\resources\pf-log-analytics\pf-log-analytics.psd1
 
@@ -25,12 +27,17 @@ try {
 
     #Login-AzAccount
 
+    $sub = New-PfSubscription
+    $rg = New-PfResourceGroup
+
     $kv = New-PfKeyVault
 
     Update-PfAzureContext -Label $pfConfig.Global.Labels.SQL -AzRegion $pfConfig.Az.Regions.EastUs2
 
     $la = New-PfLogAnalytics
 
+    $sub2 = Get-PfSubscription
+    $rg2 = Get-PfResourceGroup
     $kv2 = Get-PfKeyVault
     $la2 = Get-PfLogAnalytics
     $la3 = Get-PfLogAnalytics -Name "Test" -ResourceGroup "Test"
