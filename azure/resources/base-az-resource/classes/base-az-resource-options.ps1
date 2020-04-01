@@ -31,7 +31,7 @@ Class BaseAzResourceOptions : PfResource {
         }
     }
     [void]SetName([PfAzureContext]$PfAzureContext){
-        if(-not [string]::IsNullOrEmpty($PfAzureContext.CompanyAbbreviation)){
+        if($PfAzureContext.CompanyInfo){
             $this.Name=[AzNamingStandards]::GetResourceName($this.ClassPrefix,$PfAzureContext)
         }
     }

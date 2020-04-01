@@ -7,13 +7,13 @@ Function Update-PfAzureContext
         [Parameter(Mandatory = $false)] 
         [string] $ResourceGroupName,
         [Parameter(Mandatory = $false)] 
-        [string] $CompanyAbbreviation,
+        [PfConfigCompanyInfo] $CompanyInfo,
         [Parameter(Mandatory = $false)] 
-        [string] $GroupAbbreviation,
+        [PfConfigGroup] $Group,
         [Parameter(Mandatory = $false)] 
-        [string] $Label,
+        [PfConfigLabel] $Label,
         [Parameter(Mandatory = $false)]  
-        [string] $EnvironmentLetter,
+        [PfConfigEnvironment] $Environment,
         [Parameter(Mandatory = $false)] 
         [AzRegion] $AzRegion
     )

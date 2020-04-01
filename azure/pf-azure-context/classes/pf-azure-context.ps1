@@ -2,29 +2,29 @@ Class PfAzureContext : PfCloudContext{
     [string]$SubscriptionName
     [string]$ResourceGroupName
     [AzRegion]$AzRegion
-    [string]$Label
-    [string]$CompanyAbbreviation
-    [string]$GroupAbbreviation
-    [string]$EnvironmentLetter
+    [PfConfigLabel]$Label
+    [PfConfigCompanyInfo]$CompanyInfo
+    [PfConfigGroup]$Group
+    [PfConfigEnvironment]$Environment
 
     PfAzureContext([string]$SubscriptionName,[string]$ResourceGroupName,[AzRegion]$AzRegion){
         $this.SubscriptionName=$SubscriptionName
         $this.ResourceGroupName=$ResourceGroupName
         $this.AzRegion=$AzRegion
     }
-    PfAzureContext([string]$CompanyAbbreviation,[string]$GroupAbbreviation,[string]$Label,[string]$EnvironmentLetter,[AzRegion]$AzRegion){
-        $this.CompanyAbbreviation=$CompanyAbbreviation
-        $this.GroupAbbreviation=$GroupAbbreviation
-        $this.EnvironmentLetter=$EnvironmentLetter
+    PfAzureContext([PfConfigCompanyInfo]$CompanyInfo,[PfConfigGroup]$Group,[PfConfigLabel]$Label,[PfConfigEnvironment]$Environment,[AzRegion]$AzRegion){
+        $this.CompanyInfo=$CompanyInfo
+        $this.Group=$Group
+        $this.Environment=$Environment
         $this.Label=$Label
         $this.AzRegion=$AzRegion
     }
-    PfAzureContext([string]$SubscriptionName,[string]$ResourceGroupName,[string]$CompanyAbbreviation,[string]$GroupAbbreviation,[string]$Label,[string]$EnvironmentLetter,[AzRegion]$AzRegion){
+    PfAzureContext([string]$SubscriptionName,[string]$ResourceGroupName,[PfConfigCompanyInfo]$CompanyInfo,[PfConfigGroup]$Group,[PfConfigLabel]$Label,[PfConfigEnvironment]$Environment,[AzRegion]$AzRegion){
         $this.SubscriptionName=$SubscriptionName
         $this.ResourceGroupName=$ResourceGroupName
-        $this.CompanyAbbreviation=$CompanyAbbreviation
-        $this.GroupAbbreviation=$GroupAbbreviation
-        $this.EnvironmentLetter=$EnvironmentLetter
+        $this.CompanyInfo=$CompanyInfo
+        $this.Group=$Group
+        $this.Environmentr=$Environment
         $this.Label=$Label
         $this.AzRegion=$AzRegion
     }

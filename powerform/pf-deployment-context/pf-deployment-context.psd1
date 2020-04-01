@@ -69,6 +69,12 @@ ScriptsToProcess = @(
     "..\classes\pf-cloud-configuration.ps1"
     "..\classes\pf-dependency.ps1"
     "..\classes\pf-result-set.ps1"
+    "..\classes\pf-config-object.ps1"
+    "..\classes\pf-config-company-info.ps1"
+    "..\classes\pf-config-environment.ps1"
+    "..\classes\pf-config-group.ps1"
+    "..\classes\pf-config-label.ps1"
+    "..\configuration\pf-global-configuration.ps1"
     "..\configuration\pf-configuration.ps1"
     ".\classes\pf-deployment-context.ps1"
 )
