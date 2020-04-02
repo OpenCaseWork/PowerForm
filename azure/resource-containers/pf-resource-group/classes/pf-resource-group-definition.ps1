@@ -1,4 +1,4 @@
-Class PfResourceGroupDefinition{
+Class PfResourceGroupDefinition : PfResourceContainer{
     [PfResourceGroupBuildState]$BuildState
     [PfResourceGroupCloudState]$CloudState
 

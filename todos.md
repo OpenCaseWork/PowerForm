@@ -18,3 +18,8 @@
 
 -Need a term for 'Related objects' the 'related object' basically just meaning state of a thing that is not specifically a 'resource dependency'. were talking about how to persist the RG/Sub link for resource and one option was treating these as something that is related to the current defined object. and then a 'type' could be 'resource' or 'rg' or whatever want to call it
 
+-Need to add a deployment plan which would show the order and dependencies of the deployed resources
+-Rename resultset to statecollection
+-Renaming "CloudState" to State
+-Rename "BuildState to Definition
+-Remove current defintion object that has cloudstate and buildstate in it

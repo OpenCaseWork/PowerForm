@@ -1,4 +1,4 @@
-Class PfSubscriptionAccess{
+Class PfSubscriptionAccess : PfResourceContainer{
     [PfSubscriptionBuildState]$SubscriptionBuildState
     
     PfSubscriptionAccess(){}

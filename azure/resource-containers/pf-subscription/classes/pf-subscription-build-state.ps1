@@ -1,4 +1,4 @@
-Class PfSubscriptionBuildState{
+Class PfSubscriptionBuildState : PfResourceContainer{
     [PfSubscriptionOptions]$Options
     [PfDependency[]]$Dependencies
     [AzSecurityDefinition]$Security

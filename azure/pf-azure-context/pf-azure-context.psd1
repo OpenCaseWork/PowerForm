@@ -84,6 +84,7 @@ ScriptsToProcess = @(
 FunctionsToExport = @(
     "Set-PfAzureContext"
     "Update-PfAzureContext"
+    "Get-PfAzureContextManagementGroupName"
     "Get-PfAzureContextSubscriptionName"
     "Get-PfAzureContextResourceGroupName"
     "Get-PfAzureContextResourceName"

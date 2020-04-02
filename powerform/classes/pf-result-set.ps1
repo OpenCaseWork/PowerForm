@@ -1,4 +1,5 @@
 Class PfResultSet{
+    [System.Collections.ArrayList]$ResourceContainerDefnitions=@()
     [System.Collections.ArrayList]$ResourceDefinitions=@()
     
     PfResultSet(){}
@@ -9,5 +10,8 @@ Class PfResultSet{
     }
     [void]Add([PfResource]$ResourceDefiniton){
         $this.ResourceDefinitions.Add($ResourceDefiniton)
+    }
+    [void]Add([PfResourceContainer]$ResourceContainerDefiniton){
+        $this.ResourceContainerDefnitions.Add($ResourceContainerDefiniton)
     }
 }

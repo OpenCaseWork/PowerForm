@@ -1,5 +1,6 @@
 try {
     Import-Module .\powerform\pf-deployment-context\pf-deployment-context.psd1
+    Import-Module .\azure\resource-containers\pf-management-group\pf-management-group.psd1
     Import-Module .\azure\resource-containers\pf-subscription\pf-subscription.psd1
     Import-Module .\azure\resource-containers\pf-resource-group\pf-resource-group.psd1
     Import-Module .\azure\resources\pf-key-vault\pf-key-vault.psd1
@@ -26,8 +27,15 @@ try {
     #Set-PfAzureContext  -SubscriptionName "MYAEA-KKZH-D" -ResourceGroupName "RG-MYAEA-KKZH-ADM-D" -CompanyAbbreviation "MYAEA" -GroupAbbreviation "KKZH" -Label "ADM" -EnvironmentLetter "D" -AzRegion $pfConfig.Az.Regions.CentralUs
 
     #Login-AzAccount
+    $rootMg = New-PfManagementGroup 
+    $getRootMg = Get-PfManagementGroup -Name $rootMg.Options.Name
+
+    $devMg = New-PfManagementGroup
+    $devMg.Options.Name="MG-OCW-Dev"
+    $devMg.Options.ParentManagementGroupName=$rootMg.Options.Name
 
     $sub = New-PfSubscription
+    $sub.Options.ManagementGroupName = $devMg
     $rg = New-PfResourceGroup
 
     $kv = New-PfKeyVault

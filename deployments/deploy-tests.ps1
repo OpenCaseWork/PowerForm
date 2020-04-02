@@ -2,6 +2,7 @@ try {
 
     #shows how to import modules
     Import-Module .\powerform\pf-deployment-context\pf-deployment-context.psd1
+    Import-Module .\azure\resource-containers\pf-management-group\pf-management-group.psd1
     Import-Module .\azure\resource-containers\pf-subscription\pf-subscription.psd1
     Import-Module .\azure\resource-containers\pf-resource-group\pf-resource-group.psd1
     Import-Module .\azure\resources\pf-key-vault\pf-key-vault.psd1
@@ -13,6 +14,60 @@ try {
     Get-Command -Module pf-log-analytics
     Get-Command -Module pf-deployment-context 
     Get-Command -Module pf-azure-context
+
+    ##############################################################################################################
+    #
+    #               Creating a Management Group through context and assigning to sub
+    #
+    #############################################################################################################
+
+    #The thought here is to let the context create the name for the MG then add a sub to that MG
+
+    $pfContext = New-PfDeploymentContext
+    Set-PfAzureContext -CompanyInfo $pfContext.Global.CompanyInfo `
+        -Group $pfContext.Global.Groups.Team1 `
+        -Label $pfContext.Global.Labels.Networking `
+        -Environment $pfContext.Global.Environments.Development `
+        -AzRegion $pfContext.Az.Regions.CentralUs
+
+    $mg = New-PfManagementGroup
+
+    $sub = New-PfSubscription
+    $sub.Options.ManagementGroupName = $mg.Options.Name
+
+    $kv = New-PfKeyVault
+    $la = New-PfLogAnalytics
+    $results = Deploy-PfDeploymentContext
+
+    ##############################################################################################################
+    #
+    #               Creating Nested Management Groups, Using Get MG, and adding subs to them
+    #
+    #############################################################################################################
+
+    #The thought here is that I build the default root MG, then add a nest MG under that root, then add a sub to that
+    #nested MG.  You could nest as many MGs together as needed.
+
+    $pfContext = New-PfDeploymentContext
+    Set-PfAzureContext -CompanyInfo $pfContext.Global.CompanyInfo `
+        -Group $pfContext.Global.Groups.Team1 `
+        -Label $pfContext.Global.Labels.Networking `
+        -Environment $pfContext.Global.Environments.Development `
+        -AzRegion $pfContext.Az.Regions.CentralUs
+
+    $rootMg = New-PfManagementGroup 
+    $getRootMg = Get-PfManagementGroup -Name $rootMg.Options.Name
+
+    $devMg = New-PfManagementGroup
+    $devMg.Options.Name="MG-OCW-Dev"
+    $devMg.Options.ParentManagementGroupName=$rootMg.Options.Name
+    
+    $sub = New-PfSubscription
+    $sub.Options.ManagementGroupName = $devMg.Options.Name
+
+    $kv = New-PfKeyVault
+    $la = New-PfLogAnalytics
+    $results = Deploy-PfDeploymentContext
 
     ##############################################################################################################
     #

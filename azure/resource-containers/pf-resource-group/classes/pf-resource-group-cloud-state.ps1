@@ -1,4 +1,4 @@
-Class PfResourceGroupCloudState{
+Class PfResourceGroupCloudState : PfResourceContainer{
     [string]$Id
     [string]$Name
     [string]$SubscriptionName

@@ -1,4 +1,4 @@
-Class PfSubscriptionDefinition{
+Class PfSubscriptionDefinition : PfResourceContainer{
     [PfSubscriptionBuildState]$BuildState
     [PfSubscriptionCloudState]$CloudState
 
