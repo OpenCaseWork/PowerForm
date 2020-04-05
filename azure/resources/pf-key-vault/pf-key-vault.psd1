@@ -61,10 +61,9 @@ RequiredModules = @(
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
 ScriptsToProcess = @(
     ".\classes\pf-key-vault-options.ps1"
-    ".\classes\pf-key-vault-build-state.ps1"
-    ".\classes\pf-key-vault-cloud-state.ps1"
-    ".\classes\pf-key-vault-access.ps1"
     ".\classes\pf-key-vault-definition.ps1"
+    ".\classes\pf-key-vault-state.ps1"
+    ".\classes\pf-key-vault-access.ps1"
 )
 
 # Type files (.ps1xml) to be loaded when importing this module

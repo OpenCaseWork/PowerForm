@@ -50,8 +50,8 @@ try {
     $la2 = Get-PfLogAnalytics
     $la3 = Get-PfLogAnalytics -Name "Test" -ResourceGroup "Test"
   
-    $results = Deploy-PfDeploymentContext
-    $laDef = $results.GetByName($la.Options.Name)
+    $stateCollection = Deploy-PfDeploymentContext
+    $laDef = $stateCollection.GetResourceByName($la.Options.Name)
     $laDef
 
 }

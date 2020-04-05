@@ -1,9 +1,9 @@
-Class PfManagementGroupCloudState : PfResourceContainer{
+Class PfSubscriptionState : PfResourceContainer{
     [string]$Id
     [string]$Name
     [string]$Scope
     [object]$CloudBaseObject
     [object]$CloudObject
 
-    PfManagementGroupCloudState(){}
+    PfSubscriptionState(){}
 }

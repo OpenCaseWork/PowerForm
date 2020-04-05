@@ -6,6 +6,6 @@ Function Get-PfSubscription{
 
     $contextSubscriptionName = Get-PfAzureContextSubscriptionName -Name $Name
     $access = (New-Object -TypeName "PfSubscriptionAccess")
-    return $access.GetCloudState($contextSubscriptionName)
+    return $access.GetState($contextSubscriptionName)
 }
 

@@ -61,10 +61,9 @@ RequiredModules = @(
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
 ScriptsToProcess = @(
     ".\classes\pf-log-analytics-options.ps1"
-    ".\classes\pf-log-analytics-build-state.ps1"
-    ".\classes\pf-log-analytics-cloud-state.ps1"
-    ".\classes\pf-log-analytics-access.ps1"
     ".\classes\pf-log-analytics-definition.ps1"
+    ".\classes\pf-log-analytics-state.ps1"
+    ".\classes\pf-log-analytics-access.ps1"
 )
 
 # Type files (.ps1xml) to be loaded when importing this module

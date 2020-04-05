@@ -1,10 +1,12 @@
 Class PfResourceGroupDefinition : PfResourceContainer{
-    [PfResourceGroupBuildState]$BuildState
-    [PfResourceGroupCloudState]$CloudState
+    [PfResourceGroupOptions]$Options
+    [PfDependency[]]$Dependencies
+    [AzSecurityDefinition]$Security
 
-    PfResourceGroupDefinition(){}
-    PfResourceGroupDefinition([PfResourceGroupBuildState]$BuildState,[PfResourceGroupCloudState]$CloudState){
-        $this.BuildState=$BuildState
-        $this.CloudState=$CloudState
+    PfResourceGroupDefinition() {
+        $this.Options = (New-Object -TypeName "PfResourceGroupOptions")
+    }
+    PfResourceGroupDefinition([PfAzureContext]$PfAzureContext){
+        $this.Options = (New-Object -TypeName "PfResourceGroupOptions" -ArgumentList $PfAzureContext)
     }
 }

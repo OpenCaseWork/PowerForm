@@ -1,5 +1,5 @@
 Function Deploy-PfDeploymentContext
 {
-    Deploy-PfDeploymentContextResources
+    Deploy-PfDeploymentContextDefinitions
 }
 

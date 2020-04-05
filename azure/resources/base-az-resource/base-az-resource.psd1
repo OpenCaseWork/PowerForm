@@ -61,10 +61,9 @@ RequiredModules = @(
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
 ScriptsToProcess = @(
     ".\classes\base-az-resource-options.ps1"
-    ".\classes\base-az-resource-build-state.ps1"
-    ".\classes\base-az-resource-cloud-state.ps1"
-    ".\classes\base-az-resource-access.ps1"
     ".\classes\base-az-resource-definition.ps1"
+    ".\classes\base-az-resource-state.ps1"
+    ".\classes\base-az-resource-access.ps1"
 )
 
 # Type files (.ps1xml) to be loaded when importing this module
@@ -78,7 +77,7 @@ ScriptsToProcess = @(
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport = @(
-    "Get-BaseAzResourceCloudState"
+    "Get-BaseAzResourceState"
 )
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.

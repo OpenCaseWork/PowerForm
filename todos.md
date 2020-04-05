@@ -11,7 +11,7 @@
     (ZH) We have the class objects after importing the module.  So we can easily add any access policies/aad groups to the AzSecurityDefinition object of the resources.  We will just need to create "new" functions to create an aadgroup object or access policy object.
 
 -another parm on New-KeyVaultDefinition?
-   (ZH) Was thinking you could just do something like a public function that is "Add-KeyVaultAccessPolicy" and would do something like $kv.BuildState.Security.AccessPolicies.Add($accessPolicy)
+   (ZH) Was thinking you could just do something like a public function that is "Add-KeyVaultAccessPolicy" and would do something like $kv.Definition.Security.AccessPolicies.Add($accessPolicy)
 
 -Same with dependencies - another parm just pass in array maybe
    (ZH) I think we build this into the "private" functions.  So when we call the "Add-KeyVaultAccessPolicy" function above, there is a private function that would "Add-Dependency" if a resource object was passed through
@@ -20,6 +20,6 @@
 
 -Need to add a deployment plan which would show the order and dependencies of the deployed resources
 -Rename resultset to statecollection
--Renaming "CloudState" to State
--Rename "BuildState to Definition
+-Renaming "State" to State
+-Rename "Definition to Definition
 -Remove current defintion object that has cloudstate and buildstate in it

@@ -61,10 +61,9 @@ RequiredModules = @(
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
 ScriptsToProcess = @(
     ".\classes\pf-resource-group-options.ps1"
-    ".\classes\pf-resource-group-build-state.ps1"
-    ".\classes\pf-resource-group-cloud-state.ps1"
-    ".\classes\pf-resource-group-access.ps1"
     ".\classes\pf-resource-group-definition.ps1"
+    ".\classes\pf-resource-group-state.ps1"
+    ".\classes\pf-resource-group-access.ps1"
 )
 
 # Type files (.ps1xml) to be loaded when importing this module

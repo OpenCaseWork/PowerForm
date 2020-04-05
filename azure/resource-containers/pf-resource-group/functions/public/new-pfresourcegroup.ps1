@@ -2,10 +2,10 @@ Function New-PfResourceGroup
 {
     if($global:_PfAzureContext)
     {
-        $rg = [PfResourceGroupBuildState]::New($global:_PfAzureContext)
+        $rg = [PfResourceGroupDefinition]::New($global:_PfAzureContext)
     }
     else{
-        $rg = [PfResourceGroupBuildState]::New()
+        $rg = [PfResourceGroupDefinition]::New()
     }
     $global:_PfDeploymentContext.ResourceContainers.Add($rg) | Out-Null
     return $rg

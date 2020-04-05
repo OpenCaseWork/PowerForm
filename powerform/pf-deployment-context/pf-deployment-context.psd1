@@ -69,7 +69,7 @@ ScriptsToProcess = @(
     "..\classes\pf-cloud-context.ps1"
     "..\classes\pf-cloud-configuration.ps1"
     "..\classes\pf-dependency.ps1"
-    "..\classes\pf-result-set.ps1"
+    "..\classes\pf-state-collection.ps1"
     "..\classes\pf-config-object.ps1"
     "..\classes\pf-config-company-info.ps1"
     "..\classes\pf-config-environment.ps1"

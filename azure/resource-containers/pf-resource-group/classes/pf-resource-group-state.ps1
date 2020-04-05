@@ -1,4 +1,4 @@
-Class PfResourceGroupCloudState : PfResourceContainer{
+Class PfResourceGroupState : PfResourceContainer{
     [string]$Id
     [string]$Name
     [string]$SubscriptionName
@@ -6,5 +6,5 @@ Class PfResourceGroupCloudState : PfResourceContainer{
     [object]$CloudBaseObject
     [object]$CloudObject
 
-    PfResourceGroupCloudState(){}
+    PfResourceGroupState(){}
 }

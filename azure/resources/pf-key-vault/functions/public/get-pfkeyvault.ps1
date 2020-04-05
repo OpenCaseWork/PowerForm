@@ -9,7 +9,7 @@ Function Get-PfKeyVault
         [string] $ResourceGroupName
     )
 
-    return Get-BaseAzResourceCloudState -Name $Name `
+    return Get-BaseAzResourceState -Name $Name `
         -SubscriptionName $SubscriptionName `
         -ResourceGroupName $ResourceGroupName `
         -ClassPrefix "PfKeyVault"

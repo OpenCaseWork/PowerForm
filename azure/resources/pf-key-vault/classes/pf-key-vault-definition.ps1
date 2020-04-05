@@ -1,5 +1,5 @@
 Class PfKeyVaultDefinition : BaseAzResourceDefinition{
 
     PfKeyVaultDefinition() : base(){}
-    PfKeyVaultDefinition([PfKeyVaultBuildState]$BuildState,[PfKeyVaultCloudState]$CloudState) : base([BaseAzResourceBuildState]$BuildState,[BaseAzResourceCloudState]$CloudState){}
+    PfKeyVaultDefinition([PfAzureContext]$PfAzureContext) : base([PfAzureContext]$PfAzureContext){}
 }

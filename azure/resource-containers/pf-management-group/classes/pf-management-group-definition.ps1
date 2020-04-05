@@ -1,10 +1,12 @@
 Class PfManagementGroupDefinition : PfResourceContainer{
-    [PfManagementGroupBuildState]$BuildState
-    [PfManagementGroupCloudState]$CloudState
+    [PfManagementGroupOptions]$Options
+    [PfDependency[]]$Dependencies
+    [AzSecurityDefinition]$Security
 
-    PfManagementGroupDefinition(){}
-    PfManagementGroupDefinition([PfManagementGroupBuildState]$BuildState,[PfManagementGroupCloudState]$CloudState){
-        $this.BuildState=$BuildState
-        $this.CloudState=$CloudState
+    PfManagementGroupDefinition() {
+        $this.Options = (New-Object -TypeName "PfManagementGroupOptions")
+    }
+    PfManagementGroupDefinition([PfAzureContext]$PfAzureContext){
+        $this.Options = (New-Object -TypeName "PfManagementGroupOptions" -ArgumentList $PfAzureContext)
     }
 }

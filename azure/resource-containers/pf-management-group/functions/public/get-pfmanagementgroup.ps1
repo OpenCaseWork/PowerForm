@@ -6,6 +6,6 @@ Function Get-PfManagementGroup{
 
     $contextManagementGroupName = Get-PfAzureContextManagementGroupName -Name $Name
     $access = (New-Object -TypeName "PfManagementGroupAccess")
-    return $access.GetCloudState($contextManagementGroupName)
+    return $access.GetState($contextManagementGroupName)
 }
 

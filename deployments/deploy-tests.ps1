@@ -37,7 +37,7 @@ try {
 
     $kv = New-PfKeyVault
     $la = New-PfLogAnalytics
-    $results = Deploy-PfDeploymentContext
+    $stateCollection = Deploy-PfDeploymentContext
 
     ##############################################################################################################
     #
@@ -67,7 +67,7 @@ try {
 
     $kv = New-PfKeyVault
     $la = New-PfLogAnalytics
-    $results = Deploy-PfDeploymentContext
+    $stateCollection = Deploy-PfDeploymentContext
 
     ##############################################################################################################
     #
@@ -89,7 +89,7 @@ try {
 
     $kv = New-PfKeyVault
     $la = New-PfLogAnalytics
-    $results = Deploy-PfDeploymentContext
+    $stateCollection = Deploy-PfDeploymentContext
 
     ##############################################################################################################
     #
@@ -110,7 +110,7 @@ try {
 
     $sub2 = Get-PfSubscription -Name "Sub2"
 
-    $results = Deploy-PfDeploymentContext
+    $stateCollection = Deploy-PfDeploymentContext
 
     ##############################################################################################################
     #
@@ -143,7 +143,7 @@ try {
     $kv.Options.SubscriptionName = $sub.Options.Name
 
     $la = New-PfLogAnalytics
-    $results = Deploy-PfDeploymentContext
+    $stateCollection = Deploy-PfDeploymentContext
 
      ##############################################################################################################
     #
@@ -171,7 +171,7 @@ try {
     $la = New-PfLogAnalytics
     $la.Options.ResourceGroupName=$rg.Options.Name
 
-    $results = Deploy-PfDeploymentContext
+    $stateCollection = Deploy-PfDeploymentContext
 
     ##############################################################################################################
     #
@@ -192,7 +192,7 @@ try {
 
     $rg2 = Get-PfResourceGroup -Name "RG2"
 
-    $results = Deploy-PfDeploymentContext
+    $stateCollection = Deploy-PfDeploymentContext
 
     ##############################################################################################################
     #
@@ -213,7 +213,7 @@ try {
 
     $kv = New-PfKeyVault
     $la = New-PfLogAnalytics
-    $results = Deploy-PfDeploymentContext
+    $stateCollection = Deploy-PfDeploymentContext
 
     ##############################################################################################################
     #
@@ -233,7 +233,7 @@ try {
     $kv = New-PfKeyVault
     Update-PfAzureContext -Label $pfContext.Global.Labels.SQL
     $la = New-PfLogAnalytics
-    $results = Deploy-PfDeploymentContext
+    $stateCollection = Deploy-PfDeploymentContext
 
     ##############################################################################################################
     #
@@ -255,7 +255,7 @@ try {
     Update-PfAzureContext -Label $pfContext.Global.Labels.SQL
     $la = New-PfLogAnalytics
     $la.Options.ResourceGroupName = "NewRg"
-    $results = Deploy-PfDeploymentContext
+    $stateCollection = Deploy-PfDeploymentContext
 
     ##############################################################################################################
     #
@@ -274,7 +274,7 @@ try {
     $kv.Options.Name = "KV-MYOCW-KKZH-ADM-C1-D01" 
     $la = New-PfLogAnalytics
     $la.Options.Name = "LA-MYOCW-KKZH-ADM-C1-D01" 
-    $results = Deploy-PfDeploymentContext
+    $stateCollection = Deploy-PfDeploymentContext
 
     ##############################################################################################################
     #
@@ -291,7 +291,7 @@ try {
 
     $kv = New-PfKeyVault
     $kv.Options.Name = "KV-MYOCW-KKZH-ADM-C1-D01" 
-    $results = Deploy-PfDeploymentContext
+    $stateCollection = Deploy-PfDeploymentContext
 
 
     ##############################################################################################################
@@ -308,7 +308,7 @@ try {
     $kv.Options.Name = "KV-MYOCW-KKZH-ADM-C1-D01" 
     $kv.Options.SubscriptionName = "MYOCW-KKZH-D" 
     $kv.Options.ResourceGroupName = "RG-MYOCW-KKZH-ADM-D"
-    $results = Deploy-PfDeploymentContext
+    $stateCollection = Deploy-PfDeploymentContext
 
     ##############################################################################################################
     #
@@ -356,7 +356,7 @@ try {
     $kv = Get-PfKeyVault
     $kv2 = New-PfKeyVault
     $kv2.Options.Name = "testing"
-    $results = Deploy-PfDeploymentContext
+    $stateCollection = Deploy-PfDeploymentContext
 
     ##############################################################################################################
     #
@@ -393,12 +393,9 @@ try {
     $kv.Options.Name = "KV-MYOCW-KKZH-ADM-C1-D01" 
     $la = New-PfLogAnalytics
     $la.Options.Name = "LA-MYOCW-KKZH-ADM-C1-D01" 
-    $results = Deploy-PfDeploymentContext
+    $stateCollection = Deploy-PfDeploymentContext
     
-    $laDef = $results.GetByName($la.Options.Name)
-    if ($laDef.CloudState.Name -eq $laDef.BuildState.Options.Name) {
-        Write-Host("Names check out...")
-    }
+    $laDef = $stateCollection.GetResourceByName($la.Options.Name)
 
     ############################################################################################################
     #
@@ -416,13 +413,11 @@ try {
         -AzRegion $pfContext.Az.Regions.CentralUs
     $kv = New-PfKeyVault
     $la = New-PfLogAnalytics
-    $results = Deploy-PfDeploymentContext
+    $stateCollection = Deploy-PfDeploymentContext
     
-    $laDef = $results.GetByName($la.Options.Name)
-    if($laDef.CloudState.Name -eq $laDef.BuildState.Options.Name){
-        Write-Host("Name Should have azure override values: $($laDef.CloudState.Name)")
-    }
-
+    $laDef = $stateCollection.GetResourceByName($la.Options.Name)
+    Write-Host("Name Should have azure override values: $($laDef.Name)")
+    
      ############################################################################################################
     #
     #              Override PowerForm's Default Global Configuration
@@ -442,12 +437,10 @@ try {
 
     $kv = New-PfKeyVault
     $la = New-PfLogAnalytics
-    $results = Deploy-PfDeploymentContext
+    $stateCollection = Deploy-PfDeploymentContext
     
-    $laDef = $results.GetByName($la.Options.Name)
-    if($laDef.CloudState.Name -eq $laDef.BuildState.Options.Name){
-        Write-Host("Name Should have global override values: $($laDef.CloudState.Name)")
-    }
+    $laDef = $stateCollection.GetResourceByName($la.Options.Name)
+    Write-Host("Name Should have global override values: $($laDef.Name)")
 
     ############################################################################################################
     #
@@ -469,12 +462,10 @@ try {
 
     $kv = New-PfKeyVault
     $la = New-PfLogAnalytics
-    $results = Deploy-PfDeploymentContext
+    $stateCollection = Deploy-PfDeploymentContext
     
-    $laDef = $results.GetByName($la.Options.Name)
-    if($laDef.CloudState.Name -eq $laDef.BuildState.Options.Name){
-        Write-Host("Name Should have override values: $($laDef.CloudState.Name)")
-    }
+    $laDef = $stateCollection.GetResourceByName($la.Options.Name)
+    Write-Host("Name Should have override values: $($laDef.Name)")
 
 }
 catch {

@@ -1,26 +1,26 @@
 Class PfResourceGroupAccess : PfResourceContainer{
-    [PfResourceGroupBuildState]$ResourceGroupBuildState
+    [PfResourceGroupDefinition]$ResourceGroupDefinition
     
     PfResourceGroupAccess(){}
-    PfResourceGroupAccess([PfResourceGroupBuildState]$ResourceGroupBuildState){
-        $this.ResourceGroupBuildState=$ResourceGroupBuildState
+    PfResourceGroupAccess([PfResourceGroupDefinition]$ResourceGroupDefinition){
+        $this.ResourceGroupDefinition=$ResourceGroupDefinition
     }
 
-    [PfResourceGroupCloudState]GetOrSet(){
-        Write-Host("Creating or Getting ResourceGroup: $($this.ResourceGroupBuildState.Options.Name)")
+    [PfResourceGroupState]GetOrSet(){
+        Write-Host("Creating or Getting ResourceGroup: $($this.ResourceGroupDefinition.Options.Name)")
         
-        $options = $this.ResourceGroupBuildState.Options | ConvertTo-Json
+        $options = $this.ResourceGroupDefinition.Options | ConvertTo-Json
         Write-Host("Options that would have been deployed for ResourceGroup: $options ")
 
-        $cloudState = [PfResourceGroupCloudState]::new()
-        $cloudState.Name=$this.ResourceGroupBuildState.Options.Name
-        return $cloudState
+        $state = [PfResourceGroupState]::new()
+        $state.Name=$this.ResourceGroupDefinition.Options.Name
+        return $state
     }
-    [PfResourceGroupCloudState]GetCloudState([string]$Name,[string]$SubscriptionName){
+    [PfResourceGroupState]GetState([string]$Name,[string]$SubscriptionName){
         Write-Host("Getting ResourceGroup Cloud State: $($Name)")
-        $cloudState = [PfResourceGroupCloudState]::new()
-        $cloudState.Name=$Name
-        $cloudState.SubscriptionName=$SubscriptionName
-        return $cloudState
+        $state = [PfResourceGroupState]::new()
+        $state.Name=$Name
+        $state.SubscriptionName=$SubscriptionName
+        return $state
     }
 }

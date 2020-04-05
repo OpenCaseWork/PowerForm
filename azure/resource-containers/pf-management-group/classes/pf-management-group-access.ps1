@@ -1,25 +1,25 @@
 Class PfManagementGroupAccess : PfResourceContainer{
-    [PfManagementGroupBuildState]$ManagementGroupBuildState
+    [PfManagementGroupDefinition]$ManagementGroupDefinition
     
     PfManagementGroupAccess(){}
-    PfManagementGroupAccess([PfManagementGroupBuildState]$ManagementGroupBuildState){
-        $this.ManagementGroupBuildState=$ManagementGroupBuildState
+    PfManagementGroupAccess([PfManagementGroupDefinition]$ManagementGroupDefinition){
+        $this.ManagementGroupDefinition=$ManagementGroupDefinition
     }
 
-    [PfManagementGroupCloudState]GetOrSet(){
-        Write-Host("Creating or Getting ManagementGroup: $($this.ManagementGroupBuildState.Options.Name)")
+    [PfManagementGroupState]GetOrSet(){
+        Write-Host("Creating or Getting ManagementGroup: $($this.ManagementGroupDefinition.Options.Name)")
         
-        $options = $this.ManagementGroupBuildState.Options | ConvertTo-Json
+        $options = $this.ManagementGroupDefinition.Options | ConvertTo-Json
         Write-Host("Options that would have been deployed for ManagementGroup: $options ")
 
-        $cloudState = [PfManagementGroupCloudState]::new()
-        $cloudState.Name=$this.ManagementGroupBuildState.Options.Name
-        return $cloudState
+        $state = [PfManagementGroupState]::new()
+        $state.Name=$this.ManagementGroupDefinition.Options.Name
+        return $state
     }
-    [PfManagementGroupCloudState]GetCloudState([string]$Name){
+    [PfManagementGroupState]GetState([string]$Name){
         Write-Host("Getting ManagementGroup Cloud State: $($Name)")
-        $cloudState = [PfManagementGroupCloudState]::new()
-        $cloudState.Name=$Name
-        return $cloudState
+        $state = [PfManagementGroupState]::new()
+        $state.Name=$Name
+        return $state
     }
 }
