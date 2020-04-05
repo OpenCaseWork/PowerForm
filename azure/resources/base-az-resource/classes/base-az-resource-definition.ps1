@@ -1,4 +1,4 @@
-Class BaseAzResourceDefinition : PfResource{
+Class BaseAzResourceDefinition : PfDefinition{
     [BaseAzResourceOptions]$Options
     [PfDependency[]]$Dependencies
     [AzSecurityDefinition]$Security

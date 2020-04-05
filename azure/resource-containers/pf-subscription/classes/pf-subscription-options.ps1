@@ -1,4 +1,4 @@
-Class PfSubscriptionOptions : PfResourceContainer {
+Class PfSubscriptionOptions : PfOptions {
     [string]$Name
     [string]$OwnerObjectId
     [string]$EnrollmentAccountObjectId

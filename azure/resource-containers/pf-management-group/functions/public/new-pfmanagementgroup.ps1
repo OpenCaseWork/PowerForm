@@ -1,14 +1,19 @@
 Function New-PfManagementGroup
 {
+    Param (
+        [Parameter(Mandatory = $false)] 
+        [PfDeploymentContext] $DeploymentContext
+    )
     if($global:_PfAzureContext)
     {
-        $sub = [PfManagementGroupDefinition]::New($global:_PfAzureContext)
+        $mg = [PfManagementGroupDefinition]::New($global:_PfAzureContext)
     }
     else{
-        $sub = [PfManagementGroupDefinition]::New()
+        $mg = [PfManagementGroupDefinition]::New()
     }
-    $global:_PfDeploymentContext.ResourceContainers.Add($sub) | Out-Null
-    return $sub
-    
+
+    Add-PfDeploymentContextDefinition -DeploymentContext $DeploymentContext -Definition $mg
+
+    return $mg
 }
 

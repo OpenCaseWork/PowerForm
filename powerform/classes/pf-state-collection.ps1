@@ -1,21 +1,14 @@
 Class PfStateCollection{
-    [System.Collections.ArrayList]$ResourceContainerStates=@()
-    [System.Collections.ArrayList]$ResourceStates=@()
+    [System.Collections.ArrayList]$States=@()
     
     PfStateCollection(){}
 
-    [PfResource]GetResourceByName([string]$Name){
+    [PfState]GetByName([string]$Name){
+        #todo:  Just an example for now, but this could return an arraylist if multiple with same name.  Need to handle
         $resourceState = $this.ResourceStates | Where { $_.Name -eq $Name }
         return $resourceState
     }
-    [PfResource]GetResourceContainerByName([string]$Name){
-        $resourceContainerState = $this.ResourceContainerStates | Where { $_.Name -eq $Name }
-        return $resourceContainerState
-    }
-    [void]Add([PfResource]$ResourceState){
-        $this.ResourceStates.Add($ResourceState)
-    }
-    [void]Add([PfResourceContainer]$ResourceContainerState){
-        $this.ResourceContainerStates.Add($ResourceContainerState)
+    [void]Add([PfState]$ResourceState){
+        $this.States.Add($ResourceState)
     }
 }

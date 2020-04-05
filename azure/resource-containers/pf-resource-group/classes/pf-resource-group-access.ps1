@@ -1,4 +1,4 @@
-Class PfResourceGroupAccess : PfResourceContainer{
+Class PfResourceGroupAccess : PfAccess{
     [PfResourceGroupDefinition]$ResourceGroupDefinition
     
     PfResourceGroupAccess(){}

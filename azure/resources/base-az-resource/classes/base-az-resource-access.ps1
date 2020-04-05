@@ -1,4 +1,4 @@
-Class BaseAzResourceAccess : PfResource{
+Class BaseAzResourceAccess : PfAccess{
     [BaseAzResourceDefinition]$ResourceDefinition
     
     BaseAzResourceAccess() : base(){}

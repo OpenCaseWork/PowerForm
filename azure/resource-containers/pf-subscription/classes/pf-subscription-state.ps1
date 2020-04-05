@@ -1,4 +1,4 @@
-Class PfSubscriptionState : PfResourceContainer{
+Class PfSubscriptionState : PfState{
     [string]$Id
     [string]$Name
     [string]$Scope

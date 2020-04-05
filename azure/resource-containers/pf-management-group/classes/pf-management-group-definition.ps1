@@ -1,4 +1,4 @@
-Class PfManagementGroupDefinition : PfResourceContainer{
+Class PfManagementGroupDefinition : PfDefinition{
     [PfManagementGroupOptions]$Options
     [PfDependency[]]$Dependencies
     [AzSecurityDefinition]$Security

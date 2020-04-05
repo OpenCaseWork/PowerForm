@@ -1,4 +1,4 @@
-Class PfManagementGroupState : PfResourceContainer{
+Class PfManagementGroupState : PfState{
     [string]$Id
     [string]$Name
     [string]$Scope

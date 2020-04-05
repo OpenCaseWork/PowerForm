@@ -1,4 +1,4 @@
-Class PfResourceGroupDefinition : PfResourceContainer{
+Class PfResourceGroupDefinition : PfDefinition{
     [PfResourceGroupOptions]$Options
     [PfDependency[]]$Dependencies
     [AzSecurityDefinition]$Security

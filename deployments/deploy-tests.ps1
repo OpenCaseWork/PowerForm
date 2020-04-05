@@ -24,11 +24,11 @@ try {
     #The thought here is to let the context create the name for the MG then add a sub to that MG
 
     $pfContext = New-PfDeploymentContext
-    Set-PfAzureContext -CompanyInfo $pfContext.Global.CompanyInfo `
-        -Group $pfContext.Global.Groups.Team1 `
-        -Label $pfContext.Global.Labels.Networking `
-        -Environment $pfContext.Global.Environments.Development `
-        -AzRegion $pfContext.Az.Regions.CentralUs
+    Set-PfAzureContext -CompanyInfo $pfContext.GlobalConfig.CompanyInfo `
+        -Group $pfContext.GlobalConfig.Groups.Team1 `
+        -Label $pfContext.GlobalConfig.Labels.Networking `
+        -Environment $pfContext.GlobalConfig.Environments.Development `
+        -AzRegion $pfContext.AzConfig.Regions.CentralUs
 
     $mg = New-PfManagementGroup
 
@@ -49,11 +49,11 @@ try {
     #nested MG.  You could nest as many MGs together as needed.
 
     $pfContext = New-PfDeploymentContext
-    Set-PfAzureContext -CompanyInfo $pfContext.Global.CompanyInfo `
-        -Group $pfContext.Global.Groups.Team1 `
-        -Label $pfContext.Global.Labels.Networking `
-        -Environment $pfContext.Global.Environments.Development `
-        -AzRegion $pfContext.Az.Regions.CentralUs
+    Set-PfAzureContext -CompanyInfo $pfContext.GlobalConfig.CompanyInfo `
+        -Group $pfContext.GlobalConfig.Groups.Team1 `
+        -Label $pfContext.GlobalConfig.Labels.Networking `
+        -Environment $pfContext.GlobalConfig.Environments.Development `
+        -AzRegion $pfContext.AzConfig.Regions.CentralUs
 
     $rootMg = New-PfManagementGroup 
     $getRootMg = Get-PfManagementGroup -Name $rootMg.Options.Name
@@ -79,11 +79,11 @@ try {
     #before deploying any resources.  We are creating it with default name from azurecontext 
 
     $pfContext = New-PfDeploymentContext
-    Set-PfAzureContext -CompanyInfo $pfContext.Global.CompanyInfo `
-        -Group $pfContext.Global.Groups.Team1 `
-        -Label $pfContext.Global.Labels.Networking `
-        -Environment $pfContext.Global.Environments.Development `
-        -AzRegion $pfContext.Az.Regions.CentralUs
+    Set-PfAzureContext -CompanyInfo $pfContext.GlobalConfig.CompanyInfo `
+        -Group $pfContext.GlobalConfig.Groups.Team1 `
+        -Label $pfContext.GlobalConfig.Labels.Networking `
+        -Environment $pfContext.GlobalConfig.Environments.Development `
+        -AzRegion $pfContext.AzConfig.Regions.CentralUs
 
     $sub = New-PfSubscription
 
@@ -100,11 +100,11 @@ try {
     #Shows how to get subscriptions that are already in the cloud
 
     $pfContext = New-PfDeploymentContext
-    Set-PfAzureContext -CompanyInfo $pfContext.Global.CompanyInfo `
-        -Group $pfContext.Global.Groups.Team1 `
-        -Label $pfContext.Global.Labels.Networking `
-        -Environment $pfContext.Global.Environments.Development `
-        -AzRegion $pfContext.Az.Regions.CentralUs
+    Set-PfAzureContext -CompanyInfo $pfContext.GlobalConfig.CompanyInfo `
+        -Group $pfContext.GlobalConfig.Groups.Team1 `
+        -Label $pfContext.GlobalConfig.Labels.Networking `
+        -Environment $pfContext.GlobalConfig.Environments.Development `
+        -AzRegion $pfContext.AzConfig.Regions.CentralUs
 
     $sub = Get-PfSubscription
 
@@ -123,11 +123,11 @@ try {
     #use the naming standards.  All resources would be added to that subscription only if you change the subscription
     #name on the resources.  See how the keyvault below will be added to the testsub, but not the log anlaytics
     $pfContext = New-PfDeploymentContext
-    Set-PfAzureContext -CompanyInfo $pfContext.Global.CompanyInfo `
-        -Group $pfContext.Global.Groups.Team1 `
-        -Label $pfContext.Global.Labels.Networking `
-        -Environment $pfContext.Global.Environments.Development `
-        -AzRegion $pfContext.Az.Regions.CentralUs
+    Set-PfAzureContext -CompanyInfo $pfContext.GlobalConfig.CompanyInfo `
+        -Group $pfContext.GlobalConfig.Groups.Team1 `
+        -Label $pfContext.GlobalConfig.Labels.Networking `
+        -Environment $pfContext.GlobalConfig.Environments.Development `
+        -AzRegion $pfContext.AzConfig.Regions.CentralUs
 
     $subOptions = @{
         Name="TestSub"
@@ -155,11 +155,11 @@ try {
     #before deploying any resources.  We are creating it with default name from azurecontext 
 
     $pfContext = New-PfDeploymentContext
-    Set-PfAzureContext -CompanyInfo $pfContext.Global.CompanyInfo `
-        -Group $pfContext.Global.Groups.Team1 `
-        -Label $pfContext.Global.Labels.Networking `
-        -Environment $pfContext.Global.Environments.Development `
-        -AzRegion $pfContext.Az.Regions.CentralUs
+    Set-PfAzureContext -CompanyInfo $pfContext.GlobalConfig.CompanyInfo `
+        -Group $pfContext.GlobalConfig.Groups.Team1 `
+        -Label $pfContext.GlobalConfig.Labels.Networking `
+        -Environment $pfContext.GlobalConfig.Environments.Development `
+        -AzRegion $pfContext.AzConfig.Regions.CentralUs
 
     $sub = New-PfSubscription
     $rg = New-PfResourceGroup
@@ -182,11 +182,11 @@ try {
     #Shows how to get resource groups that are already in the cloud
 
     $pfContext = New-PfDeploymentContext
-    Set-PfAzureContext -CompanyInfo $pfContext.Global.CompanyInfo `
-        -Group $pfContext.Global.Groups.Team1 `
-        -Label $pfContext.Global.Labels.Networking `
-        -Environment $pfContext.Global.Environments.Development `
-        -AzRegion $pfContext.Az.Regions.CentralUs
+    Set-PfAzureContext -CompanyInfo $pfContext.GlobalConfig.CompanyInfo `
+        -Group $pfContext.GlobalConfig.Groups.Team1 `
+        -Label $pfContext.GlobalConfig.Labels.Networking `
+        -Environment $pfContext.GlobalConfig.Environments.Development `
+        -AzRegion $pfContext.AzConfig.Regions.CentralUs
 
     $rg = Get-PfResourceGroup
 
@@ -205,11 +205,11 @@ try {
     #the RG, Sub, Resources names.  All options are going to be the defaults, so just build the definitions and deploy
 
     $pfContext = New-PfDeploymentContext
-    Set-PfAzureContext -CompanyInfo $pfContext.Global.CompanyInfo `
-        -Group $pfContext.Global.Groups.Team1 `
-        -Label $pfContext.Global.Labels.Networking `
-        -Environment $pfContext.Global.Environments.Development `
-        -AzRegion $pfContext.Az.Regions.CentralUs
+    Set-PfAzureContext -CompanyInfo $pfContext.GlobalConfig.CompanyInfo `
+        -Group $pfContext.GlobalConfig.Groups.Team1 `
+        -Label $pfContext.GlobalConfig.Labels.Networking `
+        -Environment $pfContext.GlobalConfig.Environments.Development `
+        -AzRegion $pfContext.AzConfig.Regions.CentralUs
 
     $kv = New-PfKeyVault
     $la = New-PfLogAnalytics
@@ -224,14 +224,14 @@ try {
     #Shows you can build a keyvault for the admin team, then switch context to the "DM" team and build a LA
 
     $pfContext = New-PfDeploymentContext
-    Set-PfAzureContext -CompanyInfo $pfContext.Global.CompanyInfo `
-        -Group $pfContext.Global.Groups.Team1 `
-        -Label $pfContext.Global.Labels.Networking `
-        -Environment $pfContext.Global.Environments.Development `
-        -AzRegion $pfContext.Az.Regions.CentralUs
+    Set-PfAzureContext -CompanyInfo $pfContext.GlobalConfig.CompanyInfo `
+        -Group $pfContext.GlobalConfig.Groups.Team1 `
+        -Label $pfContext.GlobalConfig.Labels.Networking `
+        -Environment $pfContext.GlobalConfig.Environments.Development `
+        -AzRegion $pfContext.AzConfig.Regions.CentralUs
 
     $kv = New-PfKeyVault
-    Update-PfAzureContext -Label $pfContext.Global.Labels.SQL
+    Update-PfAzureContext -Label $pfContext.GlobalConfig.Labels.SQL
     $la = New-PfLogAnalytics
     $stateCollection = Deploy-PfDeploymentContext
 
@@ -244,15 +244,15 @@ try {
     #Shows how you can override the enterprise standards for any option such as name or resource group
 
     $pfContext = New-PfDeploymentContext
-    Set-PfAzureContext -CompanyInfo $pfContext.Global.CompanyInfo `
-        -Group $pfContext.Global.Groups.Team1 `
-        -Label $pfContext.Global.Labels.Networking `
-        -Environment $pfContext.Global.Environments.Development `
-        -AzRegion $pfContext.Az.Regions.CentralUs
+    Set-PfAzureContext -CompanyInfo $pfContext.GlobalConfig.CompanyInfo `
+        -Group $pfContext.GlobalConfig.Groups.Team1 `
+        -Label $pfContext.GlobalConfig.Labels.Networking `
+        -Environment $pfContext.GlobalConfig.Environments.Development `
+        -AzRegion $pfContext.AzConfig.Regions.CentralUs
         
     $kv = New-PfKeyVault
     $kv.Options.Name = "testing"
-    Update-PfAzureContext -Label $pfContext.Global.Labels.SQL
+    Update-PfAzureContext -Label $pfContext.GlobalConfig.Labels.SQL
     $la = New-PfLogAnalytics
     $la.Options.ResourceGroupName = "NewRg"
     $stateCollection = Deploy-PfDeploymentContext
@@ -268,7 +268,7 @@ try {
 
 
     $pfContext = New-PfDeploymentContext
-    Set-PfAzureContext -SubscriptionName "MYOCW-TEST-D" -ResourceGroupName "RG-MYOCW-TEST-ADM-D" -AzRegion $pfContext.Az.Regions.CentralUs
+    Set-PfAzureContext -SubscriptionName "MYOCW-TEST-D" -ResourceGroupName "RG-MYOCW-TEST-ADM-D" -AzRegion $pfContext.AzConfig.Regions.CentralUs
 
     $kv = New-PfKeyVault
     $kv.Options.Name = "KV-MYOCW-KKZH-ADM-C1-D01" 
@@ -287,7 +287,7 @@ try {
 
 
     $pfContext = New-PfDeploymentContext
-    Set-PfAzureContext -SubscriptionName "MYOCW-KKZH-D" -ResourceGroupName "RG-MYOCW-KKZH-ADM-D" -AzRegion $pfContext.Az.Regions.CentralUs
+    Set-PfAzureContext -SubscriptionName "MYOCW-KKZH-D" -ResourceGroupName "RG-MYOCW-KKZH-ADM-D" -AzRegion $pfContext.AzConfig.Regions.CentralUs
 
     $kv = New-PfKeyVault
     $kv.Options.Name = "KV-MYOCW-KKZH-ADM-C1-D01" 
@@ -321,7 +321,7 @@ try {
  
 
     $pfContext = New-PfDeploymentContext
-    Set-PfAzureContext -SubscriptionName "MYOCW-KKZH-D" -ResourceGroupName "RG-MYOCW-KKZH-ADM-D" -AzRegion $pfContext.Az.Regions.CentralUs
+    Set-PfAzureContext -SubscriptionName "MYOCW-KKZH-D" -ResourceGroupName "RG-MYOCW-KKZH-ADM-D" -AzRegion $pfContext.AzConfig.Regions.CentralUs
     $kv = Get-PfKeyVault -Name "KV-MYOCW-KKZH-ADM-C1-D01"
 
     ##############################################################################################################
@@ -347,11 +347,11 @@ try {
 
 
     $pfContext = New-PfDeploymentContext
-    Set-PfAzureContext -CompanyInfo $pfContext.Global.CompanyInfo `
-        -Group $pfContext.Global.Groups.Team1 `
-        -Label $pfContext.Global.Labels.Networking `
-        -Environment $pfContext.Global.Environments.Development `
-        -AzRegion $pfContext.Az.Regions.CentralUs
+    Set-PfAzureContext -CompanyInfo $pfContext.GlobalConfig.CompanyInfo `
+        -Group $pfContext.GlobalConfig.Groups.Team1 `
+        -Label $pfContext.GlobalConfig.Labels.Networking `
+        -Environment $pfContext.GlobalConfig.Environments.Development `
+        -AzRegion $pfContext.AzConfig.Regions.CentralUs
 
     $kv = Get-PfKeyVault
     $kv2 = New-PfKeyVault
@@ -367,11 +367,11 @@ try {
     #Shows how you can override the context values when getting a cloud state for a resource
 
     $pfContext = New-PfDeploymentContext
-    Set-PfAzureContext -CompanyInfo $pfContext.Global.CompanyInfo `
-        -Group $pfContext.Global.Groups.Team1 `
-        -Label $pfContext.Global.Labels.Networking `
-        -Environment $pfContext.Global.Environments.Development `
-        -AzRegion $pfContext.Az.Regions.CentralUs
+    Set-PfAzureContext -CompanyInfo $pfContext.GlobalConfig.CompanyInfo `
+        -Group $pfContext.GlobalConfig.Groups.Team1 `
+        -Label $pfContext.GlobalConfig.Labels.Networking `
+        -Environment $pfContext.GlobalConfig.Environments.Development `
+        -AzRegion $pfContext.AzConfig.Regions.CentralUs
     $kv = Get-PfKeyVault
     $kv2 = Get-PfKeyVault -Name "test"
     $kv3 = Get-PfKeyVault -Name "test" -ResourceGroupName "DM"
@@ -387,7 +387,7 @@ try {
 
 
     $pfContext = New-PfDeploymentContext
-    Set-PfAzureContext -SubscriptionName "MYOCW-KKZH-D" -ResourceGroupName "RG-MYOCW-KKZH-ADM-D" -AzRegion $pfContext.Az.Regions.CentralUs
+    Set-PfAzureContext -SubscriptionName "MYOCW-KKZH-D" -ResourceGroupName "RG-MYOCW-KKZH-ADM-D" -AzRegion $pfContext.AzConfig.Regions.CentralUs
 
     $kv = New-PfKeyVault
     $kv.Options.Name = "KV-MYOCW-KKZH-ADM-C1-D01" 
@@ -395,7 +395,7 @@ try {
     $la.Options.Name = "LA-MYOCW-KKZH-ADM-C1-D01" 
     $stateCollection = Deploy-PfDeploymentContext
     
-    $laDef = $stateCollection.GetResourceByName($la.Options.Name)
+    $laDef = $stateCollection.GetByName($la.Options.Name)
 
     ############################################################################################################
     #
@@ -406,16 +406,16 @@ try {
       #Shows how you can override azure config options in new-deploymentcontext
     $currentDir = Split-Path -Parent $MyInvocation.MyCommand.Path
     $pfContext = New-PfDeploymentContext -AzConfigFile "$($currentDir)\config\az-config.json"
-    Set-PfAzureContext -CompanyInfo $pfContext.Global.CompanyInfo `
-        -Group $pfContext.Global.Groups.Team1 `
-        -Label $pfContext.Global.Labels.Networking `
-        -Environment $pfContext.Global.Environments.Development `
-        -AzRegion $pfContext.Az.Regions.CentralUs
+    Set-PfAzureContext -CompanyInfo $pfContext.GlobalConfig.CompanyInfo `
+        -Group $pfContext.GlobalConfig.Groups.Team1 `
+        -Label $pfContext.GlobalConfig.Labels.Networking `
+        -Environment $pfContext.GlobalConfig.Environments.Development `
+        -AzRegion $pfContext.AzConfig.Regions.CentralUs
     $kv = New-PfKeyVault
     $la = New-PfLogAnalytics
     $stateCollection = Deploy-PfDeploymentContext
     
-    $laDef = $stateCollection.GetResourceByName($la.Options.Name)
+    $laDef = $stateCollection.GetByName($la.Options.Name)
     Write-Host("Name Should have azure override values: $($laDef.Name)")
     
      ############################################################################################################
@@ -429,17 +429,17 @@ try {
     $pfContext = New-PfDeploymentContext -GlobalConfigFile "$($currentDir)\config\global-config.json"
     
     #notice the property changes on group, label, and environment.  These are custom object from config now
-    Set-PfAzureContext -CompanyInfo $pfContext.Global.CompanyInfo `
-        -Group $pfContext.Global.Groups.Lurie `
-        -Label $pfContext.Global.Labels.WebTeam `
-        -Environment $pfContext.Global.Environments.Qa `
-        -AzRegion $pfContext.Az.Regions.CentralUs
+    Set-PfAzureContext -CompanyInfo $pfContext.GlobalConfig.CompanyInfo `
+        -Group $pfContext.GlobalConfig.Groups.Lurie `
+        -Label $pfContext.GlobalConfig.Labels.WebTeam `
+        -Environment $pfContext.GlobalConfig.Environments.Qa `
+        -AzRegion $pfContext.AzConfig.Regions.CentralUs
 
     $kv = New-PfKeyVault
     $la = New-PfLogAnalytics
     $stateCollection = Deploy-PfDeploymentContext
     
-    $laDef = $stateCollection.GetResourceByName($la.Options.Name)
+    $laDef = $stateCollection.GetByName($la.Options.Name)
     Write-Host("Name Should have global override values: $($laDef.Name)")
 
     ############################################################################################################
@@ -454,17 +454,17 @@ try {
     $pfContext = New-PfDeploymentContext -GlobalConfigFile "$($currentDir)\config\global-config.json"  -AzConfigFile "$($currentDir)\config\az-config.json"
     
     #notice the property changes on group, label, and environment.  These are custom object from config now
-    Set-PfAzureContext -CompanyInfo $pfContext.Global.CompanyInfo `
-        -Group $pfContext.Global.Groups.Lurie `
-        -Label $pfContext.Global.Labels.WebTeam `
-        -Environment $pfContext.Global.Environments.Qa `
-        -AzRegion $pfContext.Az.Regions.CentralUs
+    Set-PfAzureContext -CompanyInfo $pfContext.GlobalConfig.CompanyInfo `
+        -Group $pfContext.GlobalConfig.Groups.Lurie `
+        -Label $pfContext.GlobalConfig.Labels.WebTeam `
+        -Environment $pfContext.GlobalConfig.Environments.Qa `
+        -AzRegion $pfContext.AzConfig.Regions.CentralUs
 
     $kv = New-PfKeyVault
     $la = New-PfLogAnalytics
     $stateCollection = Deploy-PfDeploymentContext
     
-    $laDef = $stateCollection.GetResourceByName($la.Options.Name)
+    $laDef = $stateCollection.GetByName($la.Options.Name)
     Write-Host("Name Should have override values: $($laDef.Name)")
 
 }

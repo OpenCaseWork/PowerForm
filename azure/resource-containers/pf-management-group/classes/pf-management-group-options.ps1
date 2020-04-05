@@ -1,4 +1,4 @@
-Class PfManagementGroupOptions : PfResourceContainer {
+Class PfManagementGroupOptions : PfOptions {
     [string]$Name
     [string]$ParentManagementGroupName
     [bool]$PersistState=$true

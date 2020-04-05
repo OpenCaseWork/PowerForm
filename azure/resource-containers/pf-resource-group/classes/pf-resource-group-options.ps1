@@ -1,4 +1,4 @@
-Class PfResourceGroupOptions : PfResourceContainer {
+Class PfResourceGroupOptions : PfOptions {
     [string]$Name
     [string]$SubscriptionName
     [AzRegion]$AzRegion

@@ -1,4 +1,4 @@
-Class BaseAzResourceOptions : PfResource {
+Class BaseAzResourceOptions : PfOptions {
     [string]$Name
     [string]$SubscriptionName
     [string]$ResourceGroupName

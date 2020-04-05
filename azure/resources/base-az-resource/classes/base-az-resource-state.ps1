@@ -1,4 +1,4 @@
-Class BaseAzResourceState : PfResource{
+Class BaseAzResourceState : PfState{
     [string]$Id
     [string]$SubscriptionName
     [string]$ResourceGroupName
