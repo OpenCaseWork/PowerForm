@@ -39,7 +39,9 @@ try {
     $rg = New-PfResourceGroup
 
     $kv = New-PfKeyVault
-
+    $kv.Options.Tags.Add("Group","TestGroup")
+    $kv.Options.Tags.Add("Label","TestLabel")
+    
     Update-PfAzureContext -Label $pfConfig.Global.Labels.SQL -AzRegion $pfConfig.Az.Regions.EastUs2
 
     $la = New-PfLogAnalytics
@@ -53,6 +55,8 @@ try {
     $stateCollection = Deploy-PfDeploymentContext
     $laDef = $stateCollection.GetResourceByName($la.Options.Name)
     $laDef
+    [hashtable]$ht = $kv.Options.Tags
+    $ht
 
 }
 catch {

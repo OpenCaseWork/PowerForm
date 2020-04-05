@@ -3,7 +3,7 @@ Class BaseAzResourceOptions : PfResource {
     [string]$SubscriptionName
     [string]$ResourceGroupName
     [AzRegion]$AzRegion
-    [hashtable]$Tags
+    [System.Collections.Generic.Dictionary[string,string]]$Tags = [System.Collections.Generic.Dictionary[string,string]]::new()
     [int]$ResourceNumber=1
     [AzLock]$Lock
     [AzLogging]$Logging

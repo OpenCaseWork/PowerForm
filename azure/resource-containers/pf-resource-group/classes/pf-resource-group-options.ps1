@@ -2,7 +2,7 @@ Class PfResourceGroupOptions : PfResourceContainer {
     [string]$Name
     [string]$SubscriptionName
     [AzRegion]$AzRegion
-    [hashtable]$Tags
+    [System.Collections.Generic.Dictionary[string,string]]$Tags = [System.Collections.Generic.Dictionary[string,string]]::new()
     [AzLock]$Lock
     [bool]$PersistState=$true
 
