@@ -1,5 +1,5 @@
 $global:_PfDeploymentContext
-$global:_PfConfiguration
+
 Function New-PfDeploymentContext
 {
     Param (
@@ -9,17 +9,17 @@ Function New-PfDeploymentContext
         [string] $AzConfigFile
     ) 
     
-    $global:_PfConfiguration=[PfConfiguration]::new()
+    $global:_PfDeploymentContext=[PfDeploymentContext]::New()
 
     if(-not [string]::IsNullOrEmpty($AzConfigFile)){
         $azConfig = Get-Content -Raw -Path $AzConfigFile | ConvertFrom-Json
         if($azConfig.ResourceTypes)
         {
-            $global:_PfConfiguration.Az.ResourceTypes=$azConfig.ResourceTypes
+            $global:_PfDeploymentContext.AzConfig.ResourceTypes=$azConfig.ResourceTypes
         }
         if($azConfig.Regions)
         {
-            $global:_PfConfiguration.Az.Regions=$azConfig.Regions
+            $global:_PfDeploymentContext.AzConfig.Regions=$azConfig.Regions
         }
     }
 
@@ -27,24 +27,22 @@ Function New-PfDeploymentContext
         $globalConfig = Get-Content -Raw -Path $GlobalConfigFile | ConvertFrom-Json
         if($globalConfig.CompanyInfo)
         {
-            $global:_PfConfiguration.Global.CompanyInfo=$globalConfig.CompanyInfo
+            $global:_PfDeploymentContext.GlobalConfig.CompanyInfo=$globalConfig.CompanyInfo
         }
         if($globalConfig.Environments)
         {
-            $global:_PfConfiguration.Global.Environments=$globalConfig.Environments
+            $global:_PfDeploymentContext.GlobalConfig.Environments=$globalConfig.Environments
         }
         if($globalConfig.Groups)
         {
-            $global:_PfConfiguration.Global.Groups=$globalConfig.Groups
+            $global:_PfDeploymentContext.GlobalConfig.Groups=$globalConfig.Groups
         }
         if($globalConfig.Labels)
         {
-            $global:_PfConfiguration.Global.Labels=$globalConfig.Labels
+            $global:_PfDeploymentContext.GlobalConfig.Labels=$globalConfig.Labels
         }
     }
 
-    $global:_PfDeploymentContext=[PfDeploymentContext]::New()
-
-    return $global:_PfConfiguration
+    return $global:_PfDeploymentContext
 }
 

@@ -1,13 +1,20 @@
 Function New-PfSubscription
 {
+    Param (
+        [Parameter(Mandatory = $false)] 
+        [PfDeploymentContext] $DeploymentContext
+    )
+
     if($global:_PfAzureContext)
     {
-        $sub = [PfSubscriptionBuildState]::New($global:_PfAzureContext)
+        $sub = [PfSubscriptionDefinition]::New($global:_PfAzureContext)
     }
     else{
-        $sub = [PfSubscriptionBuildState]::New()
+        $sub = [PfSubscriptionDefinition]::New()
     }
-    $global:_PfDeploymentContext.ResourceContainers.Add($sub) | Out-Null
+
+    Add-PfDeploymentContextDefinition -DeploymentContext $DeploymentContext -Definition $sub
+
     return $sub
     
 }

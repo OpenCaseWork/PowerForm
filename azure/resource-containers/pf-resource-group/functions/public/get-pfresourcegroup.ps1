@@ -10,6 +10,6 @@ Function Get-PfResourceGroup{
     $contextSubscriptionName = Get-PfAzureContextSubscriptionName -Name $SubscriptionName
 
     $access = (New-Object -TypeName "PfResourceGroupAccess")
-    return $access.GetCloudState($contextResourceGroupName,$contextSubscriptionName)
+    return $access.GetState($contextResourceGroupName,$contextSubscriptionName)
 }
 

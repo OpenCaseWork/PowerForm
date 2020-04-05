@@ -1,8 +1,8 @@
-Class BaseAzResourceAccess : PfResource{
-    [BaseAzResourceBuildState]$ResourceBuildState
+Class BaseAzResourceAccess : PfAccess{
+    [BaseAzResourceDefinition]$ResourceDefinition
     
     BaseAzResourceAccess() : base(){}
-    BaseAzResourceAccess([BaseAzResourceBuildState]$ResourceBuildState) : base(){
-        $this.ResourceBuildState=$ResourceBuildState
+    BaseAzResourceAccess([BaseAzResourceDefinition]$ResourceDefinition) : base(){
+        $this.ResourceDefinition=$ResourceDefinition
     }
 }

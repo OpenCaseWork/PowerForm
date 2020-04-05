@@ -1,25 +1,25 @@
-Class PfSubscriptionAccess{
-    [PfSubscriptionBuildState]$SubscriptionBuildState
+Class PfSubscriptionAccess : PfAccess{
+    [PfSubscriptionDefinition]$SubscriptionDefinition
     
     PfSubscriptionAccess(){}
-    PfSubscriptionAccess([PfSubscriptionBuildState]$SubscriptionBuildState){
-        $this.SubscriptionBuildState=$SubscriptionBuildState
+    PfSubscriptionAccess([PfSubscriptionDefinition]$SubscriptionDefinition){
+        $this.SubscriptionDefinition=$SubscriptionDefinition
     }
 
-    [PfSubscriptionCloudState]GetOrSet(){
-        Write-Host("Creating or Getting Subscription: $($this.SubscriptionBuildState.Options.Name)")
+    [PfSubscriptionState]GetOrSet(){
+        Write-Host("Creating or Getting Subscription: $($this.SubscriptionDefinition.Options.Name)")
         
-        $options = $this.SubscriptionBuildState.Options | ConvertTo-Json
+        $options = $this.SubscriptionDefinition.Options | ConvertTo-Json
         Write-Host("Options that would have been deployed for Subscription: $options ")
 
-        $cloudState = [PfSubscriptionCloudState]::new()
-        $cloudState.Name=$this.SubscriptionBuildState.Options.Name
-        return $cloudState
+        $state = [PfSubscriptionState]::new()
+        $state.Name=$this.SubscriptionDefinition.Options.Name
+        return $state
     }
-    [PfSubscriptionCloudState]GetCloudState([string]$Name){
+    [PfSubscriptionState]GetState([string]$Name){
         Write-Host("Getting Subscription Cloud State: $($Name)")
-        $cloudState = [PfSubscriptionCloudState]::new()
-        $cloudState.Name=$Name
-        return $cloudState
+        $state = [PfSubscriptionState]::new()
+        $state.Name=$Name
+        return $state
     }
 }

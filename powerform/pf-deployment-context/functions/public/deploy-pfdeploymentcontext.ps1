@@ -1,5 +1,9 @@
 Function Deploy-PfDeploymentContext
 {
-    Deploy-PfDeploymentContextResources
+    $stateCollection = [PfStateCollection]::new()
+    
+    $stateCollection.States = Deploy-PfDefinitions -PfDefinitions $global:_PfDeploymentContext.Definitions
+
+    return $stateCollection 
 }
 

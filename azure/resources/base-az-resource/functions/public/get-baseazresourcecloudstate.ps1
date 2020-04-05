@@ -1,4 +1,4 @@
-Function Get-BaseAzResourceCloudState
+Function Get-BaseAzResourceState
 {
     Param (
         [Parameter(Mandatory = $false)] 
@@ -17,6 +17,6 @@ Function Get-BaseAzResourceCloudState
     $contextResourceGroupName = Get-PfAzureContextResourceGroupName -Name $ResourceGroupName
    
     $access = (New-Object -TypeName "$($ClassPrefix)Access")
-    return $access.GetCloudState($contextResourceName,$contextSubscriptionName,$contextResourceGroupName)
+    return $access.GetState($contextResourceName,$contextSubscriptionName,$contextResourceGroupName)
 }
 

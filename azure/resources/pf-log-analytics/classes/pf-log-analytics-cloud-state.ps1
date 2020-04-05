@@ -1,4 +1,0 @@
-Class PfLogAnalyticsCloudState : BaseAzResourceCloudState{
-    
-    PfLogAnalyticsCloudState(){}
-}

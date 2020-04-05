@@ -1,10 +1,12 @@
-Class BaseAzResourceDefinition : PfResource{
-    [BaseAzResourceBuildState]$BuildState
-    [BaseAzResourceCloudState]$CloudState
+Class BaseAzResourceDefinition : PfDefinition{
+    [BaseAzResourceOptions]$Options
+    [PfDependency[]]$Dependencies
+    [AzSecurityDefinition]$Security
 
-    BaseAzResourceDefinition() : base(){}
-    BaseAzResourceDefinition([BaseAzResourceBuildState]$BuildState,[BaseAzResourceCloudState]$CloudState) : base(){
-        $this.BuildState=$BuildState
-        $this.CloudState=$CloudState
+    BaseAzResourceDefinition() : base(){
+        $this.Options = (New-Object -TypeName "$($this.ClassPrefix)Options")
+    }
+    BaseAzResourceDefinition([PfAzureContext]$PfAzureContext) : base(){
+        $this.Options = (New-Object -TypeName "$($this.ClassPrefix)Options" -ArgumentList $PfAzureContext)
     }
 }

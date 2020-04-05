@@ -1,27 +1,27 @@
 Class PfLogAnalyticsAccess : BaseAzResourceAccess {
 
     PfLogAnalyticsAccess() : base(){}
-    PfLogAnalyticsAccess([PfLogAnalyticsBuildState]$PfLogAnalyticsBuildState) : base([PfLogAnalyticsBuildState]$PfLogAnalyticsBuildState){}
+    PfLogAnalyticsAccess([PfLogAnalyticsDefinition]$PfLogAnalyticsDefinition) : base([PfLogAnalyticsDefinition]$PfLogAnalyticsDefinition){}
 
-    [PfLogAnalyticsCloudState]GetOrSet(){
-        Write-Host("Creating or Getting Log Analytics: $($this.ResourceBuildState.Options.Name)")
+    [PfLogAnalyticsState]GetOrSet(){
+        Write-Host("Creating or Getting Log Analytics: $($this.ResourceDefinition.Options.Name)")
         
-        $options = $this.ResourceBuildState.Options | ConvertTo-Json
+        $options = $this.ResourceDefinition.Options | ConvertTo-Json
         Write-Host("Options that would have been deployed for Log Analytics: $options ")
 
-        $cloudState = [PfLogAnalyticsCloudState]::new()
-        $cloudState.Name=$this.ResourceBuildState.Options.Name
-        $cloudState.SubscriptionName=$this.ResourceBuildState.Options.SubscriptionName
-        $cloudState.ResourceGroupName=$this.ResourceBuildState.Options.ResourceGroupName
-        return $cloudState
+        $state = [PfLogAnalyticsState]::new()
+        $state.Name=$this.ResourceDefinition.Options.Name
+        $state.SubscriptionName=$this.ResourceDefinition.Options.SubscriptionName
+        $state.ResourceGroupName=$this.ResourceDefinition.Options.ResourceGroupName
+        return $state
     }
-    [PfLogAnalyticsCloudState]GetCloudState([string]$Name,[string]$SubscriptionName,[string]$ResourceGroupName){
+    [PfLogAnalyticsState]GetState([string]$Name,[string]$SubscriptionName,[string]$ResourceGroupName){
         Write-Host("Getting Log Analytics Cloud State: $($Name)")
         
-        $cloudState = [PfLogAnalyticsCloudState]::new()
-        $cloudState.Name=$Name
-        $cloudState.SubscriptionName=$SubscriptionName
-        $cloudState.ResourceGroupName=$ResourceGroupName
-        return $cloudState
+        $state = [PfLogAnalyticsState]::new()
+        $state.Name=$Name
+        $state.SubscriptionName=$SubscriptionName
+        $state.ResourceGroupName=$ResourceGroupName
+        return $state
     }
 }

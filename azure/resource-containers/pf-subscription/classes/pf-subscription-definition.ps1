@@ -1,10 +1,12 @@
-Class PfSubscriptionDefinition{
-    [PfSubscriptionBuildState]$BuildState
-    [PfSubscriptionCloudState]$CloudState
+Class PfSubscriptionDefinition : PfDefinition{
+    [PfSubscriptionOptions]$Options
+    [PfDependency[]]$Dependencies
+    [AzSecurityDefinition]$Security
 
-    PfSubscriptionDefinition(){}
-    PfSubscriptionDefinition([PfSubscriptionBuildState]$BuildState,[PfSubscriptionCloudState]$CloudState){
-        $this.BuildState=$BuildState
-        $this.CloudState=$CloudState
+    PfSubscriptionDefinition() {
+        $this.Options = (New-Object -TypeName "PfSubscriptionOptions")
+    }
+    PfSubscriptionDefinition([PfAzureContext]$PfAzureContext){
+        $this.Options = (New-Object -TypeName "PfSubscriptionOptions" -ArgumentList $PfAzureContext)
     }
 }

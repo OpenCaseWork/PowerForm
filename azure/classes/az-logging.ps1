@@ -1,9 +1,9 @@
 Class LogAnalyticsLoggingInfo{
-    [PfResource]$LogAnalyticsDefinition
+    [PfDefinition]$LogAnalyticsDefinition
     [string]$WorkspaceId
 }
 Class EventHubLoggingInfo{
-    [PfResource]$EventHubDefinition
+    [PfDefinition]$EventHubDefinition
     [string]$EventHubName
     [string]$AuthorizationRuleId
     [bool]$EnableRetention

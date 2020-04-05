@@ -61,10 +61,9 @@ RequiredModules = @(
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
 ScriptsToProcess = @(
     ".\classes\pf-subscription-options.ps1"
-    ".\classes\pf-subscription-build-state.ps1"
-    ".\classes\pf-subscription-cloud-state.ps1"
-    ".\classes\pf-subscription-access.ps1"
     ".\classes\pf-subscription-definition.ps1"
+    ".\classes\pf-subscription-state.ps1"
+    ".\classes\pf-subscription-access.ps1"
 )
 
 # Type files (.ps1xml) to be loaded when importing this module

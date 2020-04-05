@@ -1,7 +1,8 @@
-Class PfSubscriptionOptions {
+Class PfSubscriptionOptions : PfOptions {
     [string]$Name
     [string]$OwnerObjectId
     [string]$EnrollmentAccountObjectId
+    [string]$ManagementGroupName
     [string]$OfferType
     [bool]$PersistState=$true
 
