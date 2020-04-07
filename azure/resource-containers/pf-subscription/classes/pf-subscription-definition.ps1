@@ -6,4 +6,7 @@ Class PfSubscriptionDefinition : BaseAzResourceContainerDefinition{
         $state = Deploy-PfSubscription -Definition $this
         return $state
     }
+    [void]Save(){
+        Save-PfSubscription -Definition $this
+    }
 }

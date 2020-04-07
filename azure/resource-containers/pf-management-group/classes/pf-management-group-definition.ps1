@@ -6,4 +6,7 @@ Class PfManagementGroupDefinition : BaseAzResourceContainerDefinition{
         $state = Deploy-PfManagementGroup -Definition $this
         return $state
     }
+    [void]Save(){
+        Save-PfManagementGroup -Definition $this
+    }
 }

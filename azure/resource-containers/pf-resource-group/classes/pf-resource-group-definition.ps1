@@ -6,4 +6,8 @@ Class PfResourceGroupDefinition : BaseAzResourceContainerDefinition{
         $state = Deploy-PfResourceGroup -Definition $this
         return $state
     }
+
+    [void]Save(){
+        Save-PfResourceGroup -Definition $this
+    }
 }

@@ -7,9 +7,7 @@ Function New-PfManagementGroup
     else{
         $def = [PfManagementGroupDefinition]::New()
     }
-
-    $global:_PfDeploymentContext.Definitions.Add($def) | Out-Null
-
+    
     return $def
 }
 

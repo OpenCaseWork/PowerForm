@@ -17,18 +17,23 @@
     Set-PfBuildContext -Name "LurieAdminComponentsDev"
     #Login-AzAccount
     $rootMg = New-PfManagementGroup
+    $rootMg.Save()
 
     $devMg = New-PfManagementGroup
     $devMg.Options.Name="MG-OCW-Dev"
-    $devMg.Options.ParentManagementGroupName=$rootMg.Options.Name
+    $devMg.Options.ParentManagementGroupDefinition=$rootMg
+    $devMg.Save()
+
 
     $sub = New-PfSubscription
-    $sub.Options.ManagementGroupName = $devMg.Options.Name
+    $sub.Options.ManagementGroupDefinition = $devMg
+    $Sub.Save()
 
     $getSub = Get-PfSubscription -Name $sub.Options.Name
 
     $rg = New-PfResourceGroup
-    $rg.Options.SubscriptionName = $sub.Options.Name
+    $rg.Options.SubscriptionDefinition = $sub
+    $rg.Save()
 
     $getRg = Get-PfResourceGroup -Name $rg.Options.Name
     
@@ -37,8 +42,6 @@
     $kv.Options.Tags.Add("Label","TestLabel")
 
     $getKv = Get-PfKeyVault -Name $kv.Options.Name
-  
-    Set-PfBuildContext -Name "LurieWebComponentsDev"
 
     $la = New-PfLogAnalytics
 

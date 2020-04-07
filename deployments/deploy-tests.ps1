@@ -72,9 +72,11 @@
 
     #The thought here is to let the context create the name for the MG then add a sub to that MG
     $mg = New-PfManagementGroup
+    $mg.Save()
 
     $sub = New-PfSubscription
-    $sub.Options.ManagementGroupName = $mg.Options.Name
+    $sub.Options.ManagementGroupDefinition = $mg
+    $sub.Save()
 
     $kv = New-PfKeyVault
     $la = New-PfLogAnalytics
@@ -90,14 +92,18 @@
     #nested MG.  You could nest as many MGs together as needed.
 
     $rootMg = New-PfManagementGroup 
+    $rootMg.Save()
+
     $getRootMg = Get-PfManagementGroup -Name $rootMg.Options.Name
 
     $devMg = New-PfManagementGroup
     $devMg.Options.Name="MG-OCW-Dev"
-    $devMg.Options.ParentManagementGroupName=$rootMg.Options.Name
+    $devMg.Options.ParentManagementGroupDefinition=$rootMg
+    $devMg.Save()
     
     $sub = New-PfSubscription
-    $sub.Options.ManagementGroupName = $devMg.Options.Name
+    $sub.Options.ManagementGroupDefinition = $devMg
+    $sub.Save()
 
     $kv = New-PfKeyVault
     $la = New-PfLogAnalytics
@@ -112,6 +118,7 @@
     #before deploying any resources.  We are creating it with default name from azurecontext 
 
     $sub = New-PfSubscription
+    $sub.Save()
 
     $kv = New-PfKeyVault
     $la = New-PfLogAnalytics
@@ -147,6 +154,7 @@
     }
     $sub = New-PfSubscription
     $sub.Options=$subOptions
+    $sub.Save()
 
     $kv = New-PfKeyVault
     $kv.Options.SubscriptionName = $sub.Options.Name
@@ -163,10 +171,13 @@
     #before deploying any resources.  We are creating it with default name from azurecontext 
 
     $sub = New-PfSubscription
+    $sub.Save()
     $rg = New-PfResourceGroup
+    $rg.Save()
 
     $rg = New-PfResourceGroup
     $rg.Options.Name="DiffereRG"
+    $rg.Save()
 
     $kv = New-PfKeyVault
     $la = New-PfLogAnalytics
@@ -180,7 +191,7 @@
 
     #Shows how to get resource groups that are already in the cloud
     $rg = Get-PfResourceGroup
-
+    
     $rg2 = Get-PfResourceGroup -Name "RG2"
 
     ##############################################################################################################

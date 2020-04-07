@@ -8,8 +8,6 @@ Function New-PfResourceGroup
         $def = [PfResourceGroupDefinition]::New()
     }
 
-    $global:_PfDeploymentContext.Definitions.Add($def) | Out-Null
-
     return $def
 }
 

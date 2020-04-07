@@ -7,9 +7,6 @@ Function New-PfSubscription
     else{
         $def = [PfSubscriptionDefinition]::New()
     }
-
-    $global:_PfDeploymentContext.Definitions.Add($def) | Out-Null
-
     return $def
 }
 
