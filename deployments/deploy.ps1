@@ -1,25 +1,11 @@
 #try {
     $VerbosePreference = "continue"
-    #Import-Module .\powerform\powerform-az.psd1
-    #Import-Module .\azure\resource-containers\base-az-resource-container\base-az-resource-container.psd1
-    #Import-Module .\azure\resource-containers\pf-management-group\pf-management-group.psd1
-    #Import-Module .\azure\resource-containers\pf-subscription\pf-subscription.psd1
-    #Import-Module .\azure\resource-containers\pf-resource-group\pf-resource-group.psd1
-    Import-Module .\azure\resources\pf-key-vault\pf-key-vault.psd1
-    Import-Module .\azure\resources\pf-log-analytics\pf-log-analytics.psd1
-    #Import-Module .\azure\resources\base-az-resource\base-az-resource.psd1
+    Import-Module .\azure\pf-azure.psd1
 
     $currentDir = Split-Path -Parent $MyInvocation.MyCommand.Path
     $pfConfig = Initialize-PowerForm -CustomConfigFile "$($currentDir)\config\custom-config.json"
 
     $pfContext = New-PfDeploymentContext -Name "OcwDevelopment"
-    
-    Add-PfBuildContext -Name "LurieWebComponentsDev" `
-        -Company $pfConfig.Companies.OpenCaseWork `
-        -Group $pfConfig.Groups.Lurie `
-        -Label $pfConfig.Labels.WebTeam `
-        -Environment $pfConfig.Environments.Development `
-        -Region $pfConfig.Regions.CentralUs
     
     Add-PfBuildContext -Name "LurieAdminComponentsDev" `
         -Company $pfConfig.Companies.OpenCaseWork `
@@ -31,8 +17,6 @@
     Set-PfBuildContext -Name "LurieAdminComponentsDev"
     #Login-AzAccount
     $rootMg = New-PfManagementGroup
-
-    $getRootMg = Get-PfManagementGroup -Name $rootMg.Options.Name
 
     $devMg = New-PfManagementGroup
     $devMg.Options.Name="MG-OCW-Dev"

@@ -1,8 +1,7 @@
 #try {
 
     #shows how to import modules
-    Import-Module .\azure\resources\pf-key-vault\pf-key-vault.psd1
-    Import-Module .\azure\resources\pf-log-analytics\pf-log-analytics.psd1
+    Import-Module .\azure\pf-azure.psd1
 
     #shows what functions are exported from each module
     Get-Command -Module pf-subscription

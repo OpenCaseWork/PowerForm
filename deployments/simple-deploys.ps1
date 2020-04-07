@@ -1,7 +1,6 @@
     
     #shows how to import modules
-    Import-Module .\azure\resources\pf-key-vault\pf-key-vault.psd1
-    Import-Module .\azure\resources\pf-log-analytics\pf-log-analytics.psd1
+    Import-Module .\azure\pf-azure.psd1
 
     #The purpose of this script is to show you can still work very simply with powerform and not have to get to overly complex
 
