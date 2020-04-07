@@ -1,5 +1,4 @@
 Class PfLogAnalyticsOptions : BaseAzResourceOptions {
-    
     PfLogAnalyticsOptions(){}
-    PfLogAnalyticsOptions([PfAzureContext]$PfAzureContext) : base([PfAzureContext]$PfAzureContext){}
+    PfLogAnalyticsOptions([PfBuildContext]$PfBuildContext) : base([PfBuildContext]$PfBuildContext){}
 }

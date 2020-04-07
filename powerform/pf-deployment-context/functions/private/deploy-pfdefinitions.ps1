@@ -8,8 +8,7 @@ Function Deploy-PfDefinitions
 
     if($PfDefinitions){
         Foreach($definition in $PfDefinitions){
-            $access = (New-Object -TypeName "$($definition.ClassPrefix)Access" -ArgumentList $definition)
-            $state = $access.GetOrSet()
+            $state = $definition.Deploy()
             
             $states.Add($state) | Out-Null
         }

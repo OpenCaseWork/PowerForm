@@ -1,12 +1,9 @@
-Class PfManagementGroupDefinition : PfDefinition{
-    [PfManagementGroupOptions]$Options
-    [PfDependency[]]$Dependencies
-    [AzSecurityDefinition]$Security
+Class PfManagementGroupDefinition : BaseAzResourceContainerDefinition{
+    PfManagementGroupDefinition() : base() {}
+    PfManagementGroupDefinition([PfBuildContext]$PfBuildContext) : base([PfBuildContext]$PfBuildContext){}
 
-    PfManagementGroupDefinition() {
-        $this.Options = (New-Object -TypeName "PfManagementGroupOptions")
-    }
-    PfManagementGroupDefinition([PfAzureContext]$PfAzureContext){
-        $this.Options = (New-Object -TypeName "PfManagementGroupOptions" -ArgumentList $PfAzureContext)
+    [PfManagementGroupState]Deploy(){
+        $state = Deploy-PfManagementGroup -Definition $this
+        return $state
     }
 }

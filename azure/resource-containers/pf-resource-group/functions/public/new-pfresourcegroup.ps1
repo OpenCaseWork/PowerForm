@@ -1,21 +1,15 @@
 Function New-PfResourceGroup
 {
-    Param (
-        [Parameter(Mandatory = $false)] 
-        [PfDeploymentContext] $DeploymentContext
-    )
-
-    if($global:_PfAzureContext)
+    if($global:_PfDeploymentContext.CurrentBuildContext)
     {
-        $rg = [PfResourceGroupDefinition]::New($global:_PfAzureContext)
+        $def = [PfResourceGroupDefinition]::New($global:_PfDeploymentContext.CurrentBuildContext)
     }
     else{
-        $rg = [PfResourceGroupDefinition]::New()
+        $def = [PfResourceGroupDefinition]::New()
     }
 
-    Add-PfDeploymentContextDefinition -DeploymentContext $DeploymentContext -Definition $rg
-    
-    return $rg
-    
+    $global:_PfDeploymentContext.Definitions.Add($def) | Out-Null
+
+    return $def
 }
 

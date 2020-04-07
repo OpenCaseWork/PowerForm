@@ -1,10 +1,4 @@
-Class PfResourceGroupState : PfState{
-    [string]$Id
-    [string]$Name
+Class PfResourceGroupState : BaseAzResourceContainerState{
     [string]$SubscriptionName
-    [string]$Scope
-    [object]$CloudBaseObject
-    [object]$CloudObject
-
     PfResourceGroupState(){}
 }

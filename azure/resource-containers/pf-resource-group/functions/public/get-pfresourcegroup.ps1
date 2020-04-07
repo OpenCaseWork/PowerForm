@@ -1,15 +1,15 @@
 Function Get-PfResourceGroup{
     Param (
         [Parameter(Mandatory = $false)] 
-        [string] $Name,
-        [Parameter(Mandatory = $false)] 
-        [string] $SubscriptionName
+        [string] $Name
     )
 
-    $contextResourceGroupName = Get-PfAzureContextResourceGroupName -Name $Name
-    $contextSubscriptionName = Get-PfAzureContextSubscriptionName -Name $SubscriptionName
+    if([string]::IsNullOrEmpty($Name)){
+        $Name = Get-PfAzResourceNameFromContext -ClassPrefix "PfResourceGroup" -PfBuildContext $global:_PfDeploymentContext.CurrentBuildContext
+    }
+   
+    $state = Get-PfAzResourceGroup -Name $Name
+    return $state
 
-    $access = (New-Object -TypeName "PfResourceGroupAccess")
-    return $access.GetState($contextResourceGroupName,$contextSubscriptionName)
 }
 

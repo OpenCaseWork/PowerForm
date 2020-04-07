@@ -1,21 +1,15 @@
 Function New-PfKeyVault
 {
-    Param (
-        [Parameter(Mandatory = $false)] 
-        [PfDeploymentContext] $DeploymentContext
-    )
-    
-    if($global:_PfAzureContext)
+    if($global:_PfDeploymentContext.CurrentBuildContext)
     {
-        $kv = [PfKeyVaultDefinition]::New($global:_PfAzureContext)
+        $def = [PfKeyVaultDefinition]::New($global:_PfDeploymentContext.CurrentBuildContext)
     }
     else{
-        $kv = [PfKeyVaultDefinition]::New()
+        $def = [PfKeyVaultDefinition]::New()
     }
 
-    Add-PfDeploymentContextDefinition -DeploymentContext $DeploymentContext -Definition $kv
+    $global:_PfDeploymentContext.Definitions.Add($def) | Out-Null
 
-    return $kv
-    
+    return $def
 }
 

@@ -1,5 +1,9 @@
 Class PfLogAnalyticsDefinition : BaseAzResourceDefinition{
+    PfLogAnalyticsDefinition() : base() {}
+    PfLogAnalyticsDefinition([PfBuildContext]$PfBuildContext) : base([PfBuildContext]$PfBuildContext){}
 
-    PfLogAnalyticsDefinition() : base(){}
-    PfLogAnalyticsDefinition([PfAzureContext]$PfAzureContext) : base([PfAzureContext]$PfAzureContext){}
+    [PfLogAnalyticsState]Deploy(){
+        $state = Deploy-PfLogAnalytics -Definition $this
+        return $state
+    }
 }

@@ -1,0 +1,77 @@
+{
+    "Environments" : {
+        "Development" : {
+            "Name" : "Development",
+            "Abbreviation" : "Dev",
+            "Letter" : "Dev"
+        },
+        "Qa" : {
+            "Name" : "QA",
+            "Abbreviation" : "QA",
+            "Letter" : "Q"
+        },
+        "Production" : {
+            "Name" : "Production",
+            "Abbreviation" : "Prod",
+            "Letter" : "P"
+        }
+    },
+    "Companies" : {
+        "OpenCaseWork" : {
+            "Name" : "Open Case Work",
+            "Abbreviation" : "OCW"
+        }
+    },
+    "Groups" : {
+        "Lurie" : {
+            "Name" : "Lurie Children's Chicago",
+            "Abbreviation" : "LCCH"
+        },
+        "GoodShephard" : {
+            "Name" : "Good Shephard Barrington",
+            "Abbreviation" : "GSBR"
+        }
+    },
+    "Labels" : {
+        "WebTeam" : {
+            "Name" : "Web Components",
+            "Abbreviation" : "WEB"
+        },
+        "AdminTeam" : {
+            "Name" : "Admin Components",
+            "Abbreviation" : "ADM"
+        }
+    },
+    "Regions" : {
+        "CentralUs" : {
+            "Name" : "Central Us",
+            "Abbreviation" : "CU"
+        },
+        "EastUs2" : {
+            "Name" : "East Us 2",
+            "Abbreviation" : "EU2"
+        }
+    },
+    "ResourceTypes" : {
+        "PfManagementGroup" : {
+            "Name" : "Management Group",
+            "Abbreviation" : "MAN"
+        },
+        "PfSubscription" : {
+            "Name" : "Subscription",
+            "Abbreviation" : "SCP"
+        },
+        "PfResourceGroup" : {
+            "Name" : "Resource Group",
+            "Abbreviation" : "RGR"
+        },
+        "PfKeyVault" : {
+            "Name" : "Key Vault",
+            "Abbreviation" : "KEY"
+        },
+        "PfLogAnalytics" : {
+            "Name" : "Log Analytics",
+            "Abbreviation" : "LOG"
+        }
+    }
+}

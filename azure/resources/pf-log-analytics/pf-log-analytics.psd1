@@ -61,9 +61,8 @@ RequiredModules = @(
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
 ScriptsToProcess = @(
     ".\classes\pf-log-analytics-options.ps1"
-    ".\classes\pf-log-analytics-definition.ps1"
     ".\classes\pf-log-analytics-state.ps1"
-    ".\classes\pf-log-analytics-access.ps1"
+    ".\classes\pf-log-analytics-definition.ps1"
 )
 
 # Type files (.ps1xml) to be loaded when importing this module
@@ -79,6 +78,7 @@ ScriptsToProcess = @(
 FunctionsToExport = @(
     "New-PfLogAnalytics"
     "Get-PfLogAnalytics"
+    "Deploy-PfLogAnalytics"
 )
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.

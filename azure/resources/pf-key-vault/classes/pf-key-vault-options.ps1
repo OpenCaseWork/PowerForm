@@ -39,5 +39,5 @@ Class PfKeyVaultOptions : BaseAzResourceOptions {
     [string[]]$MetricCategoriesToLog = "AllMetrics"
 
     PfKeyVaultOptions(){}
-    PfKeyVaultOptions([PfAzureContext]$PfAzureContext) : base([PfAzureContext]$PfAzureContext){}
+    PfKeyVaultOptions([PfBuildContext]$PfBuildContext) : base([PfBuildContext]$PfBuildContext){}
 }

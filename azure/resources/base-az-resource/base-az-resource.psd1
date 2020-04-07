@@ -52,7 +52,9 @@ Copyright = '(c) Zach Harris. All rights reserved.'
 
 # Modules that must be imported into the global environment prior to importing this module
 RequiredModules = @(
-   "..\..\pf-azure-context\pf-azure-context.psd1" 
+    "..\..\resource-containers\pf-management-group\pf-management-group.psd1"
+    "..\..\resource-containers\pf-subscription\pf-subscription.psd1"
+    "..\..\resource-containers\pf-resource-group\pf-resource-group.psd1"
 )
 
 # Assemblies that must be loaded prior to importing this module
@@ -61,9 +63,8 @@ RequiredModules = @(
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
 ScriptsToProcess = @(
     ".\classes\base-az-resource-options.ps1"
-    ".\classes\base-az-resource-definition.ps1"
     ".\classes\base-az-resource-state.ps1"
-    ".\classes\base-az-resource-access.ps1"
+    ".\classes\base-az-resource-definition.ps1"
 )
 
 # Type files (.ps1xml) to be loaded when importing this module

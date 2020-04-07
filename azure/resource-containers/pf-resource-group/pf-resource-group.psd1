@@ -51,9 +51,7 @@ Copyright = '(c) Zach Harris. All rights reserved.'
 # ProcessorArchitecture = ''
 
 # Modules that must be imported into the global environment prior to importing this module
-RequiredModules = @(
-   "..\..\pf-azure-context\pf-azure-context.psd1" 
-)
+#RequiredModules = @()
 
 # Assemblies that must be loaded prior to importing this module
 # RequiredAssemblies = @()
@@ -61,9 +59,8 @@ RequiredModules = @(
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
 ScriptsToProcess = @(
     ".\classes\pf-resource-group-options.ps1"
-    ".\classes\pf-resource-group-definition.ps1"
     ".\classes\pf-resource-group-state.ps1"
-    ".\classes\pf-resource-group-access.ps1"
+    ".\classes\pf-resource-group-definition.ps1"
 )
 
 # Type files (.ps1xml) to be loaded when importing this module
@@ -79,6 +76,7 @@ ScriptsToProcess = @(
 FunctionsToExport = @(
     "New-PfResourceGroup"
     "Get-PfResourceGroup"
+    "Deploy-PfResourceGroup"
 )
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.

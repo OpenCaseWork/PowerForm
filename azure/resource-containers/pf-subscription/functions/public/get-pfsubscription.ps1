@@ -4,8 +4,12 @@ Function Get-PfSubscription{
         [string] $Name
     )
 
-    $contextSubscriptionName = Get-PfAzureContextSubscriptionName -Name $Name
-    $access = (New-Object -TypeName "PfSubscriptionAccess")
-    return $access.GetState($contextSubscriptionName)
+    if([string]::IsNullOrEmpty($Name)){
+        $Name = Get-PfAzResourceNameFromContext -ClassPrefix "PfSubscription" -PfBuildContext $global:_PfDeploymentContext.CurrentBuildContext
+    }
+   
+    $state = Get-PfAzSubscription -Name $Name
+    return $state
+    
 }
 

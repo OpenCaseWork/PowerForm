@@ -4,8 +4,11 @@ Function Get-PfManagementGroup{
         [string] $Name
     )
 
-    $contextManagementGroupName = Get-PfAzureContextManagementGroupName -Name $Name
-    $access = (New-Object -TypeName "PfManagementGroupAccess")
-    return $access.GetState($contextManagementGroupName)
+    if([string]::IsNullOrEmpty($Name)){
+        $Name = Get-PfAzResourceNameFromContext -ClassPrefix "PfManagementGroup" -PfBuildContext $global:_PfDeploymentContext.CurrentBuildContext
+    }
+   
+    $state = Get-PfAzManagementGroup -Name $Name
+    return $state
 }
 

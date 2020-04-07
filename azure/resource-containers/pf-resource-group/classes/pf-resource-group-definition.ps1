@@ -1,12 +1,9 @@
-Class PfResourceGroupDefinition : PfDefinition{
-    [PfResourceGroupOptions]$Options
-    [PfDependency[]]$Dependencies
-    [AzSecurityDefinition]$Security
+Class PfResourceGroupDefinition : BaseAzResourceContainerDefinition{
+    PfResourceGroupDefinition() : base() {}
+    PfResourceGroupDefinition([PfBuildContext]$PfBuildContext) : base([PfBuildContext]$PfBuildContext){}
 
-    PfResourceGroupDefinition() {
-        $this.Options = (New-Object -TypeName "PfResourceGroupOptions")
-    }
-    PfResourceGroupDefinition([PfAzureContext]$PfAzureContext){
-        $this.Options = (New-Object -TypeName "PfResourceGroupOptions" -ArgumentList $PfAzureContext)
+    [PfResourceGroupState]Deploy(){
+        $state = Deploy-PfResourceGroup -Definition $this
+        return $state
     }
 }

@@ -1,12 +1,9 @@
-Class PfSubscriptionDefinition : PfDefinition{
-    [PfSubscriptionOptions]$Options
-    [PfDependency[]]$Dependencies
-    [AzSecurityDefinition]$Security
+Class PfSubscriptionDefinition : BaseAzResourceContainerDefinition{
+    PfSubscriptionDefinition() : base() {}
+    PfSubscriptionDefinition([PfBuildContext]$PfBuildContext) : base([PfBuildContext]$PfBuildContext){}
 
-    PfSubscriptionDefinition() {
-        $this.Options = (New-Object -TypeName "PfSubscriptionOptions")
-    }
-    PfSubscriptionDefinition([PfAzureContext]$PfAzureContext){
-        $this.Options = (New-Object -TypeName "PfSubscriptionOptions" -ArgumentList $PfAzureContext)
+    [PfSubscriptionState]Deploy(){
+        $state = Deploy-PfSubscription -Definition $this
+        return $state
     }
 }

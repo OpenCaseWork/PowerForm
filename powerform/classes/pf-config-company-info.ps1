@@ -1,1 +1,0 @@
-Class PfConfigCompanyInfo : PfConfigObject{}

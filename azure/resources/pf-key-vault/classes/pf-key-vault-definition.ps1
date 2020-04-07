@@ -1,5 +1,9 @@
 Class PfKeyVaultDefinition : BaseAzResourceDefinition{
+    PfKeyVaultDefinition() : base() {}
+    PfKeyVaultDefinition([PfBuildContext]$PfBuildContext) : base([PfBuildContext]$PfBuildContext){}
 
-    PfKeyVaultDefinition() : base(){}
-    PfKeyVaultDefinition([PfAzureContext]$PfAzureContext) : base([PfAzureContext]$PfAzureContext){}
+    [PfKeyVaultState]Deploy(){
+        $state = Deploy-PfKeyVault -Definition $this
+        return $state
+    }
 }

@@ -1,20 +1,15 @@
 Function New-PfLogAnalytics
 {
-    Param (
-        [Parameter(Mandatory = $false)] 
-        [PfDeploymentContext] $DeploymentContext
-    )
-
-    if($global:_PfAzureContext)
+    if($global:_PfDeploymentContext.CurrentBuildContext)
     {
-        $la = [PfLogAnalyticsDefinition]::New($global:_PfAzureContext)
+        $def = [PfLogAnalyticsDefinition]::New($global:_PfDeploymentContext.CurrentBuildContext)
     }
     else{
-        $la = [PfLogAnalyticsDefinition]::New()
+        $def = [PfLogAnalyticsDefinition]::New()
     }
 
-    Add-PfDeploymentContextDefinition -DeploymentContext $DeploymentContext -Definition $la
+    $global:_PfDeploymentContext.Definitions.Add($def) | Out-Null
 
-    return $la
+    return $def
 }
 
