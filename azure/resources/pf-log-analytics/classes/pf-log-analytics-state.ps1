@@ -1,4 +1,0 @@
-Class PfLogAnalyticsState : BaseAzResourceState{
-
-    PfLogAnalyticsState(){}
-}

@@ -1,6 +1,9 @@
 #try {
     $VerbosePreference = "continue"
-    Import-Module .\azure\pf-azure.psd1
+    Import-Module .\pf-azure\pf-azure.psd1
+    #Import-Module .\powerform\pf-deployment-context\pf-deployment-context.psd1
+    #Import-Module .\pf-azure\resources\pf-management-group\pf-management-group.psd1
+    #Import-Module .\pf-azure\pf-resource-az\pf-resource-az.psd1
 
     $currentDir = Split-Path -Parent $MyInvocation.MyCommand.Path
     $pfConfig = Initialize-PowerForm -CustomConfigFile "$($currentDir)\config\custom-config.json"
