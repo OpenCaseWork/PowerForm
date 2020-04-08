@@ -62,8 +62,8 @@ RequiredModules = @(
 ScriptsToProcess = @(
     "..\..\az-configuration\az-naming-standards.ps1"
     ".\classes\base-az-resource-container-options.ps1"
-    ".\classes\base-az-resource-container-definition.ps1"
     ".\classes\base-az-resource-container-state.ps1"
+    ".\classes\base-az-resource-container-definition.ps1"
 )
 
 # Type files (.ps1xml) to be loaded when importing this module
@@ -78,6 +78,8 @@ ScriptsToProcess = @(
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport = @(
     "Get-PfAzResourceNameFromContext"
+    "Save-BaseAzResourceContainer"
+    "Deploy-BaseAzResourceContainer"
 )
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.

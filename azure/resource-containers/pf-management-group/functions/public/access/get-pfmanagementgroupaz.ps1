@@ -1,4 +1,4 @@
-Function Get-PfAzManagementGroup{
+Function Get-PfManagementGroupAz{
     Param (
         [Parameter(Mandatory = $false)] 
         [string] $Name

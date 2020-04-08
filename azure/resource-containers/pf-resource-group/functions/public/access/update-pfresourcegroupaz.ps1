@@ -1,11 +1,12 @@
-Function New-PfAzResourceGroup{
+Function Update-PfResourceGroupAz{
     Param (
         [Parameter(Mandatory = $true)] 
         [PfResourceGroupOptions]$Options
     )
 
+  
     $json = $Options | ConvertTo-Json
-    Write-Host("Options that would have been deployed for ResourceGroup: $json ")
+    Write-Host("Options that would have been used for updating ResourceGroup: $json ")
 
     $state = [PfResourceGroupState]::new()
     $state.Name=$Options.Name

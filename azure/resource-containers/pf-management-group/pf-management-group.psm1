@@ -1,5 +1,5 @@
-$Public  = @( Get-ChildItem -Path $PSScriptRoot\functions\public\*.ps1 )
-$Private = @( Get-ChildItem -Path $PSScriptRoot\functions\private\*.ps1 )
+$Public  = @( Get-ChildItem -Path $PSScriptRoot\functions\public\*.ps1 -Recurse)
+$Private = @( Get-ChildItem -Path $PSScriptRoot\functions\private\*.ps1 -Recurse )
 
 foreach($import in @($Public + $Private))
 {

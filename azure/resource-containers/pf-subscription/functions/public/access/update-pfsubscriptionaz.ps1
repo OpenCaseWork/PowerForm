@@ -1,4 +1,4 @@
-Function Update-PfAzSubscription{
+Function Update-PfSubscriptionAz{
     Param (
         [Parameter(Mandatory = $true)] 
         [PfSubscriptionOptions]$Options

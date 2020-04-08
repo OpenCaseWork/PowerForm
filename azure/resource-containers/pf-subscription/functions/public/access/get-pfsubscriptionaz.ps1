@@ -1,4 +1,4 @@
-Function Get-PfAzSubscription{
+Function Get-PfSubscriptionAz{
     Param (
         [Parameter(Mandatory = $false)] 
         [string] $Name

@@ -1,6 +1,8 @@
 Class BaseAzResourceOptions : PfOptions {
     [string]$SubscriptionName
+    [BaseAzResourceContainerDefinition]$SubscriptionDefinition
     [string]$ResourceGroupName
+    [BaseAzResourceContainerDefinition]$ResourceGroupDefinition
     [PfConfigRegion]$Region
     [System.Collections.Generic.Dictionary[string,string]]$Tags = [System.Collections.Generic.Dictionary[string,string]]::new()
     [int]$ResourceNumber=1

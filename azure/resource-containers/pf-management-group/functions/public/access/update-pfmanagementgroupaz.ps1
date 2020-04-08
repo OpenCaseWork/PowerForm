@@ -1,11 +1,11 @@
-Function New-PfAzManagementGroup{
+Function Update-PfManagementGroupAz{
     Param (
         [Parameter(Mandatory = $true)] 
         [PfManagementGroupOptions]$Options
     )
 
     $json = $Options | ConvertTo-Json
-    Write-Host("Options that would have been deployed for ManagementGroup: $json ")
+    Write-Host("Options that would have been used for updating ManagementGroup: $json ")
 
     $state = [PfManagementGroupState]::new()
     $state.Name=$Options.Name

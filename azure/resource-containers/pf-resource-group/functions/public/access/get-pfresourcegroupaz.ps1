@@ -1,4 +1,4 @@
-Function Get-PfAzResourceGroup{
+Function Get-PfResourceGroupAz{
     Param (
         [Parameter(Mandatory = $false)] 
         [string] $Name

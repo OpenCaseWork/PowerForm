@@ -8,7 +8,7 @@ Function Get-PfSubscription{
         $Name = Get-PfAzResourceNameFromContext -ClassPrefix "PfSubscription" -PfBuildContext $global:_PfDeploymentContext.CurrentBuildContext
     }
    
-    $state = Get-PfAzSubscription -Name $Name
+    $state = Get-PfSubscriptionAz -Name $Name
     return $state
     
 }

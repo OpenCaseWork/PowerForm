@@ -19,6 +19,8 @@
     $rootMg = New-PfManagementGroup
     $rootMg.Save()
 
+    $getRootMg= Get-PfManagementGroup -Name $rootMg.Options.Name
+
     $devMg = New-PfManagementGroup
     $devMg.Options.Name="MG-OCW-Dev"
     $devMg.Options.ParentManagementGroupDefinition=$rootMg

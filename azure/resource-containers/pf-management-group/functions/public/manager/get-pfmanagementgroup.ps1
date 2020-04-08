@@ -8,7 +8,7 @@ Function Get-PfManagementGroup{
         $Name = Get-PfAzResourceNameFromContext -ClassPrefix "PfManagementGroup" -PfBuildContext $global:_PfDeploymentContext.CurrentBuildContext
     }
    
-    $state = Get-PfAzManagementGroup -Name $Name
+    $state = Get-PfManagementGroupAz -Name $Name
     return $state
 }
 
