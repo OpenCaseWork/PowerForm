@@ -9,7 +9,7 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-RootModule = 'pf-azure.psm1'
+RootModule = ''
 
 # Version number of this module.
 ModuleVersion = '0.0.1'
@@ -18,7 +18,7 @@ ModuleVersion = '0.0.1'
 # CompatiblePSEditions = @()
 
 # ID used to uniquely identify this module
-GUID = 'c5358da4-e3b8-4066-b97a-4c169ab9c823'
+GUID = '2f8a95f7-3eb1-43e3-b46a-e0dff246a6d9'
 
 # Author of this module
 Author = 'Zach Harris'
@@ -51,16 +51,24 @@ Copyright = '(c) Zach Harris. All rights reserved.'
 # ProcessorArchitecture = ''
 
 # Modules that must be imported into the global environment prior to importing this module
-# RequiredModules = @()
+RequiredModules = @(
+    "..\powerform.psd1"
+    "..\pf-deployment-context\pf-deployment-context.psd1"
+    "..\..\pf-azure\pf-azure.psd1"
+    "..\..\pf-azure\pf-resource-container-az\pf-resource-container-az.psd1"
+    "..\..\pf-azure\pf-resource-container-az\resource-containers\pf-management-group\pf-management-group.psd1"
+    "..\..\pf-azure\pf-resource-container-az\resource-containers\pf-resource-group\pf-resource-group.psd1"
+    "..\..\pf-azure\pf-resource-container-az\resource-containers\pf-subscription\pf-subscription.psd1"
+    "..\..\pf-azure\pf-resource-az\pf-resource-az.psd1"
+    "..\..\pf-azure\pf-resource-az\resources\pf-key-vault\pf-key-vault.psd1"
+    "..\..\pf-azure\pf-resource-az\resources\pf-log-analytics\pf-log-analytics.psd1"
+)
 
 # Assemblies that must be loaded prior to importing this module
 # RequiredAssemblies = @()
 
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
-ScriptsToProcess = @(
-    ".\configuration\az-naming-standards.ps1"
-    ".\classes\pf-azure-classes.ps1"
-)
+# ScriptsToProcess = @()
 
 # Type files (.ps1xml) to be loaded when importing this module
 # TypesToProcess = @()
@@ -69,7 +77,7 @@ ScriptsToProcess = @(
 # FormatsToProcess = @()
 
 # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
-# NestedModules = @()
+#NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 #FunctionsToExport = @()

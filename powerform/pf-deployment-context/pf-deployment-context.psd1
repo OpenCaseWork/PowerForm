@@ -64,46 +64,23 @@ Copyright = '(c) Zach Harris. All rights reserved.'
 
 # Format files (.ps1xml) to be loaded when importing this module
 ScriptsToProcess = @(
-    "..\classes\pf-dependency.ps1"
-    "..\classes\pf-resource-options.ps1"
-    "..\classes\pf-resource-state.ps1"
-    "..\classes\pf-resource-definition.ps1"
-    "..\classes\pf-cloud-context.ps1"
-    "..\classes\pf-cloud-configuration.ps1"
-    "..\classes\pf-state-collection.ps1"
-    "..\classes\pf-config-object.ps1"
-    "..\classes\pf-config-company.ps1"
-    "..\classes\pf-config-environment.ps1"
-    "..\classes\pf-config-group.ps1"
-    "..\classes\pf-config-label.ps1"
-    "..\classes\pf-config-region.ps1"
-    "..\configuration\pf-configuration.ps1"
-    ".\classes\pf-build-context.ps1"
-    ".\classes\pf-deployment-context.ps1"
+    ".\classes\pf-deployment-context-classes.ps1"
 )
 
 # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = @(
-    "Initialize-PowerForm"
-    "New-PfDeploymentContext"
-    "Deploy-PfDeploymentContext"
-    "Add-PfDeploymentContextDefinition"
-    "Add-PfBuildContext"
-    "Set-PfBuildContext"
-    "Update-PfBuildContext"
-)
+#FunctionsToExport = @()
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
-CmdletsToExport = '*'
+CmdletsToExport = @()
 
 # Variables to export from this module
-VariablesToExport = '*'
+VariablesToExport = @()
 
 # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
-AliasesToExport = '*'
+AliasesToExport = @()
 
 # DSC resources to export from this module
 # DscResourcesToExport = @()

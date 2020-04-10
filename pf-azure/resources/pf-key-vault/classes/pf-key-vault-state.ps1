@@ -1,4 +1,0 @@
-Class PfKeyVaultState : PfResourceStateAz{
-
-    PfKeyVaultState(){}
-}

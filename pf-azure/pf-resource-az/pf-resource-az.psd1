@@ -18,7 +18,7 @@ ModuleVersion = '0.0.1'
 # CompatiblePSEditions = @()
 
 # ID used to uniquely identify this module
-GUID = '391a82c3-de7a-4311-986f-427734293bfb'
+GUID = '78d336c1-e7ac-4a02-b995-1ff44462fbf0'
 
 # Author of this module
 Author = 'Zach Harris'
@@ -51,19 +51,14 @@ Copyright = '(c) Zach Harris. All rights reserved.'
 # ProcessorArchitecture = ''
 
 # Modules that must be imported into the global environment prior to importing this module
-RequiredModules = @(
-    "..\..\powerform\pf-deployment-context\pf-deployment-context.psd1"
-)
+# RequiredModules = @()
 
 # Assemblies that must be loaded prior to importing this module
 # RequiredAssemblies = @()
 
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
 ScriptsToProcess = @(
-    "..\pf-configuration-az\az-naming-standards.ps1"
-    ".\classes\pf-resource-options-az.ps1"
-    ".\classes\pf-resource-state-az.ps1"
-    ".\classes\pf-resource-definition-az.ps1"
+    ".\classes\pf-resource-classes-az.ps1"
 )
 
 # Type files (.ps1xml) to be loaded when importing this module
@@ -76,20 +71,16 @@ ScriptsToProcess = @(
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = @(
-    "Get-PfAzResourceNameFromContext"
-    "Save-PfResourceAz"
-    "Deploy-PfResourceAz"
-)
+#FunctionsToExport = @()
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
-CmdletsToExport = '*'
+CmdletsToExport = @()
 
 # Variables to export from this module
-VariablesToExport = '*'
+VariablesToExport = @()
 
 # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
-AliasesToExport = '*'
+AliasesToExport = @()
 
 # DSC resources to export from this module
 # DscResourcesToExport = @()

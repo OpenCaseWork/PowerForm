@@ -1,7 +1,9 @@
-$Public  = @( Get-ChildItem -Path $PSScriptRoot\functions\public\*.ps1)
-$Private = @( Get-ChildItem -Path $PSScriptRoot\functions\private\*.ps1)
+$Public  = @( Get-ChildItem -Path $PSScriptRoot\functions\public\*.ps1 -Recurse)
+$Private = @( Get-ChildItem -Path $PSScriptRoot\functions\private\*.ps1 -Recurse)
 
-foreach($import in @($Public + $Private))
+[System.Collections.ArrayList]$publicFunctions = @()
+
+foreach($import in $Private)
 {
     try
     {
@@ -12,3 +14,18 @@ foreach($import in @($Public + $Private))
         Write-Error -Message "Failed to import function $($import.fullname): $_"
     }
 }
+foreach($import in $Public)
+{
+    try
+    {
+        . $import.fullname
+        $publicFunctions.Add(($import.Name.Replace($import.Extension,"")))
+    }
+    catch
+    {
+        Write-Error -Message "Failed to import function $($import.fullname): $_"
+    }
+}
+
+
+Export-ModuleMember -Function $publicFunctions

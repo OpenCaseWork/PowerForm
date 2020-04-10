@@ -20,9 +20,9 @@
     #############################################################################################################
     #Shows the simple way to deploy a keyvault
 
-    $pfContext = New-PfDeploymentContext
+    $pfContext = New-PfDeployment
     $kv = New-PfKeyVault
     $kv.Options.Name = "KV-MYOCW-KKZH-ADM-C1-D01" 
     $kv.Options.SubscriptionName = "MYOCW-KKZH-D" 
     $kv.Options.ResourceGroupName = "RG-MYOCW-KKZH-ADM-D"
-    $stateCollection = Deploy-PfDeploymentContext
+    $stateCollection = Deploy-PfDeployment

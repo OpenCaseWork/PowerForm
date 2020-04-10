@@ -9,7 +9,7 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-RootModule = 'pf-azure.psm1'
+RootModule = 'pf-log-analytics.psm1'
 
 # Version number of this module.
 ModuleVersion = '0.0.1'
@@ -18,7 +18,7 @@ ModuleVersion = '0.0.1'
 # CompatiblePSEditions = @()
 
 # ID used to uniquely identify this module
-GUID = 'c5358da4-e3b8-4066-b97a-4c169ab9c823'
+GUID = 'f5865e17-3aae-40bb-a9a1-8f4e53f35bfb'
 
 # Author of this module
 Author = 'Zach Harris'
@@ -58,8 +58,7 @@ Copyright = '(c) Zach Harris. All rights reserved.'
 
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
 ScriptsToProcess = @(
-    ".\configuration\az-naming-standards.ps1"
-    ".\classes\pf-azure-classes.ps1"
+    ".\classes\pf-log-analytics-classes.ps1"
 )
 
 # Type files (.ps1xml) to be loaded when importing this module
@@ -72,7 +71,7 @@ ScriptsToProcess = @(
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-#FunctionsToExport = @()
+# FunctionsToExport = @()
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()

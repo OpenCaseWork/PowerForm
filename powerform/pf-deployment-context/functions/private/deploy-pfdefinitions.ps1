@@ -8,9 +8,14 @@ Function Deploy-PfDefinitions
 
     if($PfDefinitions){
         Foreach($definition in $PfDefinitions){
-            $state = $definition.Deploy()
-            
-            $states.Add($state) | Out-Null
+            if($definition.Platform -eq [PfPlatform]::Azure)
+            {
+                $state = Deploy-PfDefinitionAz -Definition $definition
+                $states.Add($state) | Out-Null
+            }
+            else{
+                Write-Error("Platform could not be found to deploy the definition to.")
+            }
         }
     }
     return ,$states 

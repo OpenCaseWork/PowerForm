@@ -1,14 +1,19 @@
 #try {
 
     #shows how to import modules
-    Import-Module .\azure\pf-azure.psd1
+    Import-Module .\powerform\modules\pf-az-module.psd1
+
+    #shows modules currently imported
+    Get-Module
 
     #shows what functions are exported from each module
+   <#
     Get-Command -Module pf-subscription
     Get-Command -Module pf-key-vault
     Get-Command -Module pf-log-analytics
     Get-Command -Module pf-deployment-context 
     Get-Command -Module pf-azure-context
+    #>
 
     ##############################################################################################################
     #
@@ -26,7 +31,7 @@
     #############################################################################################################
     #This command will create a deployment context to start adding build contexts and resources to
     
-    $pfContext = New-PfDeploymentContext -Name "DeployTests"
+    $pfContext = New-PfDeployment -Name "DeployTests"
 
     
     ##############################################################################################################
@@ -38,14 +43,14 @@
     #allows you to then switch between those build contexts during your deployment so you can change
     #default values/configuration to be used
     
-    Add-PfBuildContext -Name "LurieWebComponentsDev" `
+    Add-PfDeploymentBuild -Name "LurieWebComponentsDev" `
         -Company $pfConfig.Companies.OpenCaseWork `
         -Group $pfConfig.Groups.Lurie `
         -Label $pfConfig.Labels.WebTeam `
         -Environment $pfConfig.Environments.Development `
         -Region $pfConfig.Regions.CentralUs
     
-    Add-PfBuildContext -Name "GoodShepAdminComponentsQa" `
+    Add-PfDeploymentBuild -Name "GoodShepAdminComponentsQa" `
         -Company $pfConfig.Companies.OpenCaseWork `
         -Group $pfConfig.Groups.GoodShephard `
         -Label $pfConfig.Labels.AdminTeam `
@@ -62,7 +67,7 @@
     #ones already created, I can now just switch to the context of my choosing and any resources built will
     #be built under that context until I switch to a different build context or add another
 
-    Set-PfBuildContext -Name "LurieWebComponentsDev"
+    Set-PfDeploymentBuild -Name "LurieWebComponentsDev"
 
     ##############################################################################################################
     #
@@ -72,14 +77,18 @@
 
     #The thought here is to let the context create the name for the MG then add a sub to that MG
     $mg = New-PfManagementGroup
-    $mg.Save()
+    Add-PfDeploymentDefinition($mg)
 
     $sub = New-PfSubscription
     $sub.Options.ManagementGroupDefinition = $mg
-    $sub.Save()
+    Add-PfDeploymentDefinition($sub)
 
     $kv = New-PfKeyVault
+    Add-PfDeploymentDefinition($kv)
+
     $la = New-PfLogAnalytics
+    Add-PfDeploymentDefinition($la)
+
 
 
     ##############################################################################################################
@@ -92,21 +101,24 @@
     #nested MG.  You could nest as many MGs together as needed.
 
     $rootMg = New-PfManagementGroup 
-    $rootMg.Save()
+    Add-PfDeploymentDefinition($rootMg)
 
     $getRootMg = Get-PfManagementGroup -Name $rootMg.Options.Name
 
     $devMg = New-PfManagementGroup
     $devMg.Options.Name="MG-OCW-Dev"
     $devMg.Options.ParentManagementGroupDefinition=$rootMg
-    $devMg.Save()
+    Add-PfDeploymentDefinition($devMg)
     
     $sub = New-PfSubscription
     $sub.Options.ManagementGroupDefinition = $devMg
-    $sub.Save()
+    Add-PfDeploymentDefinition($sub)
 
     $kv = New-PfKeyVault
+    Add-PfDeploymentDefinition($kv)
+
     $la = New-PfLogAnalytics
+    Add-PfDeploymentDefinition($la)
 
     ##############################################################################################################
     #
@@ -118,10 +130,13 @@
     #before deploying any resources.  We are creating it with default name from azurecontext 
 
     $sub = New-PfSubscription
-    $sub.Save()
+    Add-PfDeploymentDefinition($sub)
 
     $kv = New-PfKeyVault
+    Add-PfDeploymentDefinition($kv)
+
     $la = New-PfLogAnalytics
+    Add-PfDeploymentDefinition($la)
 
     ##############################################################################################################
     #
@@ -154,12 +169,14 @@
     }
     $sub = New-PfSubscription
     $sub.Options=$subOptions
-    $sub.Save()
+    Add-PfDeploymentDefinition($sub)
 
     $kv = New-PfKeyVault
     $kv.Options.SubscriptionName = $sub.Options.Name
+    Add-PfDeploymentDefinition($kv)
 
     $la = New-PfLogAnalytics
+    Add-PfDeploymentDefinition($la)
 
      ##############################################################################################################
     #
@@ -171,17 +188,21 @@
     #before deploying any resources.  We are creating it with default name from azurecontext 
 
     $sub = New-PfSubscription
-    $sub.Save()
-    $rg = New-PfResourceGroup
-    $rg.Save()
+    Add-PfDeploymentDefinition($sub)
 
     $rg = New-PfResourceGroup
-    $rg.Options.Name="DiffereRG"
-    $rg.Save()
+    Add-PfDeploymentDefinition($rg)
+
+    $rg2 = New-PfResourceGroup
+    $rg2.Options.Name="DiffereRG"
+    Add-PfDeploymentDefinition($rg2)
 
     $kv = New-PfKeyVault
+    Add-PfDeploymentDefinition($kv)
+    
     $la = New-PfLogAnalytics
     $la.Options.ResourceGroupName=$rg.Options.Name
+    Add-PfDeploymentDefinition($la)
 
     ##############################################################################################################
     #
@@ -205,12 +226,18 @@
     #the RG, Sub, Resources names.  All options are going to be the defaults, so just build the definitions and deploy
 
     $kv = New-PfKeyVault
-    $la = New-PfLogAnalytics
+    Add-PfDeploymentDefinition($kv)
 
-    Set-PfBuildContext -Name "GoodShepAdminComponentsQa"
+    $la = New-PfLogAnalytics
+    Add-PfDeploymentDefinition($la)
+
+    Set-PfDeploymentBuild -Name "GoodShepAdminComponentsQa"
 
     $kv2 = New-PfKeyVault
+    Add-PfDeploymentDefinition($kv2)
+
     $la2 = New-PfLogAnalytics
+    Add-PfDeploymentDefinition($la2)
 
     ##############################################################################################################
     #
@@ -221,13 +248,15 @@
     #Shows you can build a keyvault for the admin team, then switch context to the "DM" team and build a LA
 
     $kv = New-PfKeyVault
+    Add-PfDeploymentDefinition($kv)
 
-    Set-PfBuildContext -Name "LurieWebComponentsDev"
+    Set-PfDeploymentBuild -Name "LurieWebComponentsDev"
 
     $la = New-PfLogAnalytics
+    Add-PfDeploymentDefinition($la)
 
     #Anything after this will be good shepard build context again
-    Set-PfBuildContext -Name "GoodShepAdminComponentsQa"
+    Set-PfDeploymentBuild -Name "GoodShepAdminComponentsQa"
     
 
     ##############################################################################################################
@@ -240,9 +269,13 @@
         
     $kv = New-PfKeyVault
     $kv.Options.Name = "testing"
-    Set-PfBuildContext -Name "LurieWebComponentsDev"
+    Add-PfDeploymentDefinition($kv)
+
+    Set-PfDeploymentBuild -Name "LurieWebComponentsDev"
+
     $la = New-PfLogAnalytics
     $la.Options.ResourceGroupName = "NewRg"
+    Add-PfDeploymentDefinition($la)
 
     ##############################################################################################################
     #
@@ -255,8 +288,11 @@
 
     $kv = New-PfKeyVault
     $kv.Options.Name = "KV-MYOCW-KKZH-ADM-C1-D01" 
+    Add-PfDeploymentDefinition($kv)
+
     $la = New-PfLogAnalytics
     $la.Options.Name = "LA-MYOCW-KKZH-ADM-C1-D01" 
+    Add-PfDeploymentDefinition($la)
 
     ##############################################################################################################
     #
@@ -269,6 +305,7 @@
 
     $kv = New-PfKeyVault
     $kv.Options.Name = "KV-MYOCW-KKZH-ADM-C1-D01" 
+    Add-PfDeploymentDefinition($kv)
 
 
     ##############################################################################################################
@@ -284,6 +321,7 @@
     $kv.Options.Name = "KV-MYOCW-KKZH-ADM-C1-D01" 
     $kv.Options.SubscriptionName = "MYOCW-KKZH-D" 
     $kv.Options.ResourceGroupName = "RG-MYOCW-KKZH-ADM-D"
+    Add-PfDeploymentDefinition($kv)
 
     ##############################################################################################################
     #
@@ -318,8 +356,10 @@
     #Also shows how you can get a resource within a deployment context as well
 
     $kv = Get-PfKeyVault
+
     $kv2 = New-PfKeyVault
     $kv2.Options.Name = "testing"
+    Add-PfDeploymentDefinition($kv2)
 
     ##############################################################################################################
     #
@@ -344,8 +384,11 @@
 
     $kv = New-PfKeyVault
     $kv.Options.Name = "KV-MYOCW-KKZH-ADM-C1-D01" 
+    Add-PfDeploymentDefinition($kv)
+
     $la = New-PfLogAnalytics
     $la.Options.Name = "LA-MYOCW-KKZH-ADM-C1-D01" 
+    Add-PfDeploymentDefinition($la)
 
 
     ############################################################################################################
@@ -356,8 +399,12 @@
 
 
     $kv = New-PfKeyVault
+    Add-PfDeploymentDefinition($kv)
+
     $la = New-PfLogAnalytics
-    $stateCollection = Deploy-PfDeploymentContext
+    Add-PfDeploymentDefinition($la)
+
+    $stateCollection = Deploy-PfDeployment
     
     $laDef = $stateCollection.GetByName($la.Options.Name)
     Write-Host("Name Should have override values: $($laDef.Name)")

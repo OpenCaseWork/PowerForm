@@ -1,54 +1,59 @@
 #try {
     $VerbosePreference = "continue"
-    Import-Module .\pf-azure\pf-azure.psd1
-    #Import-Module .\powerform\pf-deployment-context\pf-deployment-context.psd1
-    #Import-Module .\pf-azure\resources\pf-management-group\pf-management-group.psd1
-    #Import-Module .\pf-azure\pf-resource-az\pf-resource-az.psd1
+    #$ErrorActionPreference = "Stop"
+    Import-Module .\powerform\modules\pf-az-module.psd1
+
+    Get-Module
+    #Get-Command -Module pf-az-module
 
     $currentDir = Split-Path -Parent $MyInvocation.MyCommand.Path
     $pfConfig = Initialize-PowerForm -CustomConfigFile "$($currentDir)\config\custom-config.json"
 
-    $pfContext = New-PfDeploymentContext -Name "OcwDevelopment"
+    $pfDeployment = New-PfDeployment -Name "OcwDevelopment"
     
-    Add-PfBuildContext -Name "LurieAdminComponentsDev" `
+    Add-PfDeploymentBuild -Name "LurieAdminComponentsDev" `
         -Company $pfConfig.Companies.OpenCaseWork `
         -Group $pfConfig.Groups.Lurie `
         -Label $pfConfig.Labels.AdminTeam `
         -Environment $pfConfig.Environments.Development `
         -Region $pfConfig.Regions.CentralUs
     
-    Set-PfBuildContext -Name "LurieAdminComponentsDev"
+    Set-PfDeploymentBuild -Name "LurieAdminComponentsDev"
     #Login-AzAccount
     $rootMg = New-PfManagementGroup
-    $rootMg.Save()
+    Add-PfDeploymentDefinition($rootMg)
 
     $getRootMg= Get-PfManagementGroup -Name $rootMg.Options.Name
 
     $devMg = New-PfManagementGroup
     $devMg.Options.Name="MG-OCW-Dev"
     $devMg.Options.ParentManagementGroupDefinition=$rootMg
-    $devMg.Save()
+    Add-PfDeploymentDefinition($devMg)
 
 
     $sub = New-PfSubscription
     $sub.Options.ManagementGroupDefinition = $devMg
-    $Sub.Save()
+    Add-PfDeploymentDefinition($sub)
+
 
     $getSub = Get-PfSubscription -Name $sub.Options.Name
 
     $rg = New-PfResourceGroup
     $rg.Options.SubscriptionDefinition = $sub
-    $rg.Save()
+    Add-PfDeploymentDefinition($rg)
+
 
     $getRg = Get-PfResourceGroup -Name $rg.Options.Name
     
     $kv = New-PfKeyVault
     $kv.Options.Tags.Add("Group","TestGroup")
     $kv.Options.Tags.Add("Label","TestLabel")
+    Add-PfDeploymentDefinition($kv)
 
     $getKv = Get-PfKeyVault -Name $kv.Options.Name
 
     $la = New-PfLogAnalytics
+    Add-PfDeploymentDefinition($la)
 
     $sub2 = Get-PfSubscription
     $rg2 = Get-PfResourceGroup
@@ -58,18 +63,15 @@
 
 
     
-    $stateCollection = Deploy-PfDeploymentContext
+    $stateCollection = Deploy-PfDeployment
     $stateCollection 
 
     $laDef = $stateCollection.GetByName($la.Options.Name)
     $laDef
     [hashtable]$ht = $kv.Options.Tags
     $ht
-    #>
-
-<#
-}
+    
+<#}
 catch {
     $test = $_.Exception.Message
-}
-#>
+}#>
