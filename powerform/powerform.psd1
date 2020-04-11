@@ -9,7 +9,7 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-RootModule = 'pf-deployment-context.psm1'
+RootModule = 'powerform.psm1'
 
 # Version number of this module.
 ModuleVersion = '0.0.1'
@@ -18,7 +18,7 @@ ModuleVersion = '0.0.1'
 # CompatiblePSEditions = @()
 
 # ID used to uniquely identify this module
-GUID = '0366a99e-a3a7-4510-a493-6eb5c066753b'
+GUID = '5297d1aa-2c52-4f1e-b77c-c0048510791f'
 
 # Author of this module
 Author = 'Zach Harris'
@@ -57,15 +57,16 @@ Copyright = '(c) Zach Harris. All rights reserved.'
 # RequiredAssemblies = @()
 
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
-# ScriptsToProcess = @()
+ScriptsToProcess = @(
+    ".\classes\pf-classes.ps1"
+    ".\configuration\pf-configuration.ps1"
+)
 
 # Type files (.ps1xml) to be loaded when importing this module
 # TypesToProcess = @()
 
 # Format files (.ps1xml) to be loaded when importing this module
-ScriptsToProcess = @(
-    ".\classes\pf-deployment-context-classes.ps1"
-)
+#ScriptsToProcess = @()
 
 # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
 # NestedModules = @()
